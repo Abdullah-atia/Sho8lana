@@ -1,23 +1,30 @@
-// Filename - App.js
-
 import React from "react";
-import Navbar from "./components/Navbar/Navbar";
+import Nav from "./components/Navbar/Navbar2";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
-import Signin from "./pages/Signin/Signin";
 import NotFound from "./pages/NotFound/NotFound";
-import Signup from "./pages/Signup/Signup";
+import Signup from "./pages/Signup/Signup2";
+import Signin from "./pages/Signin/Signin2";
+import { Toaster } from "react-hot-toast";
+import  Task  from "./pages/Task/Task";
+
+
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Nav />
+      <Toaster 
+       position="bottom-right"
+       reverseOrder={false}/>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route index element={<Home />} />
+        <Route path="/job" element={<Home />} />
+        <Route path="job/:id" element={<Task />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/Signin" element={<Signin />} />
-        <Route path="/Signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
