@@ -1,61 +1,73 @@
-// Navigation.js
-import React from "react";
-import { Link } from "react-router-dom";
-// import styles from './Navbar.module.css'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+"use client";
+import React, { useState } from "react";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "./NavMenu";
+import { cn } from "../../utils/cn.ts";
 
-function Navigation() {
+export default function Navbar() {
   return (
-
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="/">Logo</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/profile">Profile</Nav.Link>
-            {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
-            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-          <Nav>
-            {/* <Nav.Link compponent= {Link} to="/Signup" >Signup</Nav.Link> */}
-            <Nav.Link href="/signup" >Signup</Nav.Link>
-
-            <Nav.Link eventKey={2} href="/signin">
-              Signin
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
-    //       <Link to="/">Home</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/Profile">Profile</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/Signin">Signin</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/Signup">Signup</Link>
-    //     </li>
-    //   </ul>
-    // </nav>
+    <div className="relative w-full flex items-center justify-center ">
+      <Nav className="top-2" />
+    </div>
   );
 }
 
-export default Navigation;
+function Nav({ className }) {
+  const [active, setActive] = useState(null);
+  return (
+    <div
+      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
+    >
+      
+      <Menu setActive={setActive}>
+      <img className={cn("ml-0	mr-auto", className)} src="./logo.svg" width={30}
+        height={30} alt="logo" />
+        {/* <MenuItem setActive={setActive} item={<img src="./logo.svg" width={40}
+        height={40} alt="logo" />}></MenuItem> */}
+        <MenuItem setActive={setActive} active={active} item="Services">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/web-dev">Web Development</HoveredLink>
+            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
+            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
+            <HoveredLink href="/branding">Branding</HoveredLink>
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Products">
+          <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+            <ProductItem
+              title="Algochurn"
+              href="https://algochurn.com"
+              src="https://assets.aceternity.com/demos/algochurn.webp"
+              description="Prepare for tech interviews like never before."
+            />
+            <ProductItem
+              title="Tailwind Master Kit"
+              href="https://tailwindmasterkit.com"
+              src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
+              description="Production ready Tailwind css components for your next project"
+            />
+            <ProductItem
+              title="Moonbeam"
+              href="https://gomoonbeam.com"
+              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
+              description="Never write from scratch again. Go from idea to blog in minutes."
+            />
+            <ProductItem
+              title="Rogue"
+              href="https://userogue.com"
+              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
+              description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
+            />
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="test">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/hobby">Hobby</HoveredLink>
+            <HoveredLink href="/individual">Individual</HoveredLink>
+            <HoveredLink href="/team">Team</HoveredLink>
+            <HoveredLink href="/enterprise">Enterprise</HoveredLink>
+          </div>
+        </MenuItem>
+      </Menu>
+    </div>
+  );
+}
