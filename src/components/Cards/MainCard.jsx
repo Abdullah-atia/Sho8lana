@@ -23,9 +23,9 @@ function MainCard() {
   }, []);
 
   return (
-    <div className="rounded-lg" style={{ padding: "8rem", margin: "0 auto" }}>
+    <div className="" style={{ padding: "8rem", margin: "0 auto" }}>
       <div
-        className="flex justify-between rounded-lg shadow md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="d-flex justify-content-between rounded"
         style={{
           backgroundColor: "var(--green-300)",
           fontFamily: "var(--main-font-family)",
@@ -34,12 +34,12 @@ function MainCard() {
         }}
       >
         <div
-          className="p-5 leading-normal text-white items-start"
+          className="p-5  align-items-start  text-light"
           data-aos="fade-up"
         >
           Explore New Life
           <h5
-            className="text-2xl font-bold tracking-tight text-white dark:text-white mb-4 mt-2"
+            className="text-2xl fw-bold tracking-tight text-white dark:text-white mb-4 mt-2"
             style={{
               fontSize: " 40px",
               lineHeight: "40px",
@@ -49,7 +49,7 @@ function MainCard() {
             Don’t just find. Be found put your CV in front of great employers
           </h5>
           <p
-            className="mb-3 font-normal text-white dark:text-gray-400"
+            className="mb-3 text-light"
             style={{
               lineHeight: "40px",
               width: "700px",
@@ -59,12 +59,12 @@ function MainCard() {
             the majority have suffered alteration in some form, by injected
             humour, or randomised words.
           </p>
-          <div className="flex gap-2 item-end" style={{ fontSize: "24px" }}>
+          <div className="d-flex gap-2 align-items-end" style={{ color:"black",fontSize: "24px" }}>
             <MiniCard countUpRef = {countUpRef} >
-              <h3 className="cta-counter-title fw-bold ">
+              <h3 className="cta-counter-title fw-bold">
                 <span
                   className="counter"
-                  style={{ fontWeight: "700px", fontSize: "40px" }}
+                  style={{ color:"black", fontWeight: "700px", fontSize: "32px" }}
                 >
                   {isVisible && (
           <CountUp start={0} end={950} duration={3} />
@@ -72,7 +72,7 @@ function MainCard() {
                 </span>
                 <span>M+</span>
               </h3>
-              <p className="cta-counter-desc fw-bold text-gray-500 text-sm">
+              <p className="cta-counter-desc fw-bold text-secondary ">
                 Total Freelancers
               </p>
             </MiniCard>
@@ -80,13 +80,13 @@ function MainCard() {
               <h3 className="cta-counter-title fw-bold  ">
                 <span
                   className="counter"
-                  style={{ fontWeight: "700px", fontSize: "40px" }}
+                  style={{color:"black", fontWeight: "700px", fontSize: "32px" }}
                 >
                   <CountUp  end={120} duration={8}/>
                 </span>
                 <span>M+</span>
               </h3>
-              <p className="cta-counter-desc fw-bold text-gray-500 text-sm">
+              <p className="cta-counter-desc fw-bold text-secondary">
                 Total Freelancers
               </p>
             </MiniCard>
@@ -94,20 +94,20 @@ function MainCard() {
               <h3 className="cta-counter-title fw-bold ">
                 <span
                   className="counter"
-                  style={{ fontWeight: "700px", fontSize: "40px" }}
+                  style={{ fontWeight: "700px", fontSize: "32px" }}
                 >
                   <CountUp  end={32} duration={8}/>
                 </span>
                 <span>M+</span>
               </h3>
-              <p className="cta-counter-desc fw-bold text-gray-500 text-sm">
+              <p className="cta-counter-desc fw-bold text-secondary">
                 Total Freelancers
               </p>
             </MiniCard>
           </div>
         </div>
         <img
-          className="object-cover rounded-t-lg p-4 md:rounded-none md:rounded-s-lg"
+          className="object-cover rounded p-4 md-2"
           src="./assets/images/cta-img.png"
           alt=""
           width={519.328}

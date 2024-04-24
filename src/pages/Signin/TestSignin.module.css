@@ -1,0 +1,14 @@
+.button{
+  color: #eee;
+    background-color: var(--lime-300);
+    padding: 16px 32px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+
+}

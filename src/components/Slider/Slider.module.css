@@ -1,0 +1,44 @@
+.category {
+    
+  font-size: 18px;
+  color: var(--dark-300);
+  display: block;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+}
+.subTitle {
+  font-family: var(--main-font-family);
+  color: var(--dark-300);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 60px;
+  margin-bottom: 10px;
+}
+.desc {
+  font-size: 18px;
+  color: var(--dark-200);
+  margin-bottom: 10px;
+}
+
+/* wdssa */
+.fwSemibold{
+  font-weight: 600 !important;
+}
+.featureCategoryDesc{
+  color: var(--dark-200);
+}
+
+.featureCategoryLink a {
+  font-size: 18px;
+  color: var(--dark-300);
+  display: block;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.featureCategoryCard:hover {
+  border-color: var(--lime-300);
+}

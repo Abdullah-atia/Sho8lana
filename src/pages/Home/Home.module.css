@@ -1,16 +1,32 @@
-@import url('https://fonts.cdnfonts.com/css/proxima-nova-condensed');
-
+@import url("https://fonts.cdnfonts.com/css/proxima-nova-condensed");
 
 .main {
-  /* background: url("../../../public/Images/hero-bg-1.png") no-repeat center
-    center / cover; */
-    background-color: #d2d6e2;
+  background: url("../../../public/Images/hero-bg-1.png") no-repeat center
+    center / cover;
 }
-.title{
-    font-family: 'Proxima Nova Condensed', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-.slide {}
-.mySwiper{
+.title {
+  font-family: var(--main-font-family);
+  font-weight: 800;
+  font-style: normal;
+  color: var(--white);
+}
+.title span {
+  color: var(--lime-300);
+}
+
+
+
+.bar {
+  outline: none;
+}
+.bar:focus {
+  border: none;
+  outline: none;
+}
+.second {
+  background-color: var(--off-white);
+  padding: 8rem;
+}
+.thired{
+  padding: 8rem;
 }

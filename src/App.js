@@ -1,34 +1,44 @@
-import React from "react";
-import Navbar from "./components/Navbar/Navbar";
+import React, { useEffect } from "react";
+import Nav from './components/Navbar/Nav'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
-import Signup from "./pages/Signup/Signup2";
-import Signin from "./pages/Signin/Signin2";
-import CardHoverEffectDemo from "./pages/Cards/projects"
+import TestSignin from "./pages/Signin/TestSignin";
+import TestSignup from "./pages/Signup/TestSignup";
 import { Toaster } from "react-hot-toast";
-import  Task  from "./pages/Task/Task";
-
-
+import Task from "./pages/Task/Task";
+import Services from "./pages/MServices/Services";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Footer from "./components/Footer/Footer";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      disable: "mobile",
+      offset: 200,
+      duration: 600,
+      easing: "ease",
+      delay: 800,
+    });
+    // AOS.refresh();
+  }, []);
   return (
     <BrowserRouter>
-      <Navbar />
-      <Toaster 
-       position="bottom-right"
-       reverseOrder={false}/>
+      <Nav />
+      <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/job" element={<Home />} />
-        <Route path="/cards" element={<CardHoverEffectDemo />} />
+        <Route path="/service" element={<Services />} />
         <Route path="job/:id" element={<Task />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<TestSignin />} />
+        <Route path="/signup" element={<TestSignup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
