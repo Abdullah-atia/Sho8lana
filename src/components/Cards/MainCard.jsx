@@ -23,7 +23,7 @@ function MainCard() {
   }, []);
 
   return (
-    <div className="" style={{ padding: "8rem", margin: "0 auto" }}>
+    <div >
       <div
         className="d-flex justify-content-between rounded"
         style={{

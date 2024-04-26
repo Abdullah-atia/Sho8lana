@@ -1,9 +1,7 @@
 import styles from "./card.module.css";
 function BusinessCard() {
   return (
-    <div
-      className={`${styles.business} d-flex rounded position-relative p-5`}
-    >
+    <div>
       <div data-aos="fade-up">
         <h2 className={`${styles.title} mb-4`}
         >Find the talent needed to get your business growing.</h2>

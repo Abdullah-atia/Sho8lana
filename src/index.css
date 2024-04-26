@@ -32,7 +32,8 @@ h1,h2,h3,h4,h5,h6{
 button {
     border: 0;
     background: none;
-    font-family: var(--main-font-family)
+    font-family: var(--main-font-family);
+    
 
 }
 a {
@@ -330,9 +331,7 @@ img, svg {
     z-index: 200;
   
 }
-.navbar-toggler:focus{
-    box-shadow: none;
-}
+
 
 @media screen and (max-width: 1199px){
     .headerPrimary {
@@ -402,6 +401,7 @@ img, svg {
         padding: 0 10px;
         font-size: 16px;
     }
+   
     
 }
 
@@ -541,4 +541,116 @@ img, svg {
     line-height: 1;
     font-size: 16px;
     color: var(--white);
+}
+
+
+.fwSemibold{
+    font-weight: 600 !important;
+}
+.featureCategoryDesc{
+    color: var(--dark-200);
+}
+
+.featureCategoryLink{
+    font-size: 18px;
+    color: var(--dark-300) !important;
+    display: block;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.featureCategoryCard:hover {
+    border-color: var(--lime-300) !important;
+}
+
+a{
+     text-decoration: none !important;
+}
+.secondaryNavContainer{
+    margin-top: -30px;
+}
+.featureCategoryCard{
+    border-radius: 16px;
+    padding: 40px 32px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+    height: 230px;
+}
+
+/* services */
+
+.viewCardImg{
+    border-radius: 12px;
+}
+.serviceCard{
+    border-radius: 16px;
+    padding: 8px;
+    transition: all 0.3 ease-in-out;
+    border: 1px solid transparent;
+    box-shadow: 0 0 30px 5px rgba(0, 0, 0, .06);
+}
+.serviceCard:hover {
+    border-color: var(--lime-300);
+}
+.serviceCardBtn{
+    position: absolute;
+    background-color: var(--white);
+    color: var(--lime-300);
+    width: 40px;
+    height: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: 16px;
+    right: 16px;
+
+}
+.serviceCardPrice{
+    color: var(--lime-300);
+    font-size: 20px;
+
+}
+.serviceCardContent{
+  padding:20px 12px 12px
+}
+.serviceRating{
+    font-size: 16px;
+    color: var(--dark-200);
+    line-height:1;
+}
+
+.serviceTitle{
+    line-height: 1.4;
+    padding: 12px 0;
+    color: var(--dark-300) ;
+    font-size: 18px;
+}
+
+
+
+.serviceTitle a {
+   
+    color: var(--dark-300) ;
+
+}
+
+.serviceCardOwner{
+    padding-top: 16px;
+    border-top: 1px solid #edebe7;
+    gap: 12px;
+}
+
+.serviceCardOwnerImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+
+}
+.serviceCardOwnerName{
+    font-size: 18px;
+    color: var(--dark-300);
+    line-height: 1;
 }

@@ -60,10 +60,10 @@ function Categories() {
         swipeable
       >
         <div className="" style={{width: "216px",  marginRight: "24px"}} >
-            <div className="featureCategoryCard bg-white hover:boreder-2 border-green-500">
+            <div className="featureCategoryCard bg-white">
               <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
-              <h3 className={styles.fwSemibold}>
-                <a className={styles.featureCategoryLink} href="#">Design &amp; Creative</a>
+              <h3  className={styles.fwSemibold}>
+                <a className='featureCategoryLink' href="#">Design &amp; Creative</a>
               </h3>
               <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
             </div>
