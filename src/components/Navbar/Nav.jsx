@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function Nav() {
   return (
@@ -6,16 +8,16 @@ function Nav() {
 <header className="headerPrimary">
   <div className="container">
     <nav className="navbar navbar-expand-xl justify-content-between">
-      <a href="index.html">
+      <Link to ="index.html">
         <img height={50} width={40} src="./logo.svg" alt="" />
-      </a>
+      </Link>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav mx-auto">
           <li className="d-block d-xl-none">
             <div className="logo">
-              <a href="index.html">
+              <Link to ="index.html">
                 <img src="./logo.svg" alt="" />
-              </a>
+              </Link>
             </div>
           </li>
           <li className="nav-item dropdown">
@@ -33,21 +35,21 @@ function Nav() {
               <div className="d-flex flex-column flex-xl-row">
                 <ul className='list-unstyled'>
                   <li>
-                    <a href="index.html" className="dropdown-item">
+                    <Link to ="index.html" className="dropdown-item">
                       <span>Home Main</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="index-2.html" className="dropdown-item">
+                    <Link to ="index-2.html" className="dropdown-item">
                       <span>Home Two</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
             </div>
           </li>
           <li className="nav-item dropdown">
-            <a
+            <Link
               className="nav-link dropdown-toggle"
               href="#"
               role="button"
@@ -56,14 +58,14 @@ function Nav() {
               aria-expanded="false"
             >
               Freelancer
-            </a>
+            </Link>
             <div className="dropdown-menu">
               <div className="d-flex flex-column flex-xl-row">
                 <ul className='list-unstyled'>
                   <li>
-                    <a href="freelancers.html" className="dropdown-item">
+                    <Link to ="freelancers.html" className="dropdown-item">
                       <span>Freelancers</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a
@@ -78,9 +80,9 @@ function Nav() {
             </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="about.html">
+            <Link classNamea="nav-link" href="about.html">
               About Us
-            </a>
+            </Link>
           </li>
           <li className="nav-item dropdown">
             <a
@@ -95,74 +97,74 @@ function Nav() {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="services.html" className="dropdown-item">
+                <Link to ="services.html" className="dropdown-item">
                   <span>Services</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="service-details.html" className="dropdown-item">
+                <Link to ="service-details.html" className="dropdown-item">
                   <span>Service Details</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="job-posts.html" className="dropdown-item">
+                <Link to ="job-posts.html" className="dropdown-item">
                   <span>Job Post</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="job-details.html" className="dropdown-item">
+                <Link to ="job-details.html" className="dropdown-item">
                   <span>Job Details</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="seller-dashboard.html" className="dropdown-item">
+                <Link to ="seller-dashboard.html" className="dropdown-item">
                   <span>Seller Dashboard</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="buyer-dashboard.html" className="dropdown-item">
+                <Link to ="buyer-dashboard.html" className="dropdown-item">
                   <span>Buyer Dashboard</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="buyer-details.html" className="dropdown-item">
+                <Link to ="buyer-details.html" className="dropdown-item">
                   <span>Buyer Details</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="terms-conditions.html" className="dropdown-item">
+                <Link to ="terms-conditions.html" className="dropdown-item">
                   <span>Terms and Policy</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="faqs.html" className="dropdown-item">
+                <Link to ="faqs.html" className="dropdown-item">
                   <span>Faq</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="privacy-policy.html" className="dropdown-item">
+                <Link to ="privacy-policy.html" className="dropdown-item">
                   <span>Privacy and Policy</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="price.html" className="dropdown-item">
+                <Link to ="price.html" className="dropdown-item">
                   <span>Pricing</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="404.html" className="dropdown-item">
+                <Link to ="404.html" className="dropdown-item">
                   <span>404 Page</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="signin.html" className="dropdown-item">
+                <Link to ="signin.html" className="dropdown-item">
                   <span>Signin Page</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="signup.html" className="dropdown-item">
+                <Link to ="signup.html" className="dropdown-item">
                   <span>Signup Page</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
@@ -179,26 +181,26 @@ function Nav() {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a href="blogs.html" className="dropdown-item">
+                <Link to ="blogs.html" className="dropdown-item">
                   <span>Blog</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="blog-details.html" className="dropdown-item">
+                <Link to ="blog-details.html" className="dropdown-item">
                   <span>Blog Details</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="contact.html">
+            <Link className="nav-link" href="contact.html">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="d-flex align-items-center gap-4 mt-4">
           <div className="d-flex d-lg-none">
-            <a href="signin.html" className="headerBtn">
+            <Link to ="signin.html" className="headerBtn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={13}
@@ -214,13 +216,13 @@ function Nav() {
                 />
               </svg>
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div className="navbar-right d-flex align-items-center gap-4">
         <div className="align-items-center d-none d-lg-flex">
-          <a href="" className="headerBtn">
+          <Link to ="" className="headerBtn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={13}
@@ -236,7 +238,7 @@ function Nav() {
               ></path>
             </svg>
             Login
-          </a>
+          </Link>
         </div>
         <button
           className="navbar-toggler d-block d-xl-none"
@@ -255,42 +257,42 @@ function Nav() {
 </header>
 <div className="d-none d-xl-block secondaryNavWrapper">
   <div className="container">
-    <div className="position-relative">
+    {/* <div className="position-relative">
       <nav className="secondaryNavContainer bg-white position-absolute w-100 start-0 z-3 border-top ">
         <ul className="secondaryNav d-flex justify-content-between align-items-center list-unstyled">
           <li>
-            <a href="#">Technology</a>
+            <Link to ="#">Technology</Link>
           </li>
           <li>
-            <a href="#">Graphics</a>
+            <Link to ="#">Graphics</Link>
           </li>
           <li>
-            <a href="#">Marketing</a>
+            <Link to ="#">Marketing</Link>
           </li>
           <li>
-            <a href="#">Writing</a>
+            <Link to ="#">Writing</Link>
           </li>
           <li>
-            <a href="#">Translation</a>
+            <Link to ="#">Translation</Link>
           </li>
           <li>
-            <a href="#">Animation</a>
+            <Link to ="#">Animation</Link>
           </li>
           <li>
-            <a href="#">Audio</a>
+            <Link to ="#">Audio</Link>
           </li>
           <li>
-            <a href="#">Branding</a>
+            <Link to ="#">Branding</Link>
           </li>
           <li>
-            <a href="#">Website</a>
+            <Link to ="#">Website</Link>
           </li>
           <li>
-            <a href="#">Programming</a>
+            <Link to ="#">Programming</Link>
           </li>
         </ul>
       </nav>
-    </div>
+    </div> */}
   </div>
 </div>
 </>

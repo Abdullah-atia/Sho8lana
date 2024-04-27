@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import styles from './TestSignin.module.css'
+import { AdminContext } from "../../Context/AdminContext";
+// import { useAdmin } from "../../Context/AdminContext";
+import {  useNavigate } from "react-router-dom";
+import { Token } from "@mui/icons-material";
+
+
 function TestSignin() {
+  // const is = useAdmin()
+  const {isAdmin, setIsAdmin}= useContext(AdminContext)
+  const nav = useNavigate()
   const {
     register,
     handleSubmit,
@@ -27,9 +35,24 @@ function TestSignin() {
       console.log(data);
       const responseData = await response.json();
       if (responseData?.isSuccess === true) {
-        console.log(responseData)
+        localStorage.setItem("autoToken", responseData.result.token )
+        
+        if (responseData.result.role === 'Admin'){
+          localStorage.setItem("Admin",responseData.result.role )
+        // localStorage.setItem("adminToken", responseData.result.token )
+
+          setIsAdmin(true)
+          console.log("Admin")
+          nav("/admin")
+        }
+          else{
+            console.log(responseData)
+        nav("/Profile")
         console.log("teeeeeeeeeeeeeeet");
         toast("helllllllllllllo");
+          }
+        
+        
       }
       else{
         

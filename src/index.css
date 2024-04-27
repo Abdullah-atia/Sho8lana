@@ -542,3 +542,10 @@ img, svg {
     font-size: 16px;
     color: var(--white);
 }
+/* .main{
+    background-color: var(--off-white);
+} */
+/* .Item:hover{
+    background-color: var(--lime-300) !important;
+    color: red;
+} */
