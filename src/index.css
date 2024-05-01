@@ -26,6 +26,12 @@ h1,h2,h3,h4,h5,h6{
     font-family: var(--main-font-family)
 
 }
+.bgOffWhite {
+    background-color: var(--off-white);
+}
+.fw600 {
+    font-weight: 600 !important;
+}
 button {
     border: 0;
     background: none;
@@ -837,4 +843,91 @@ a{
     overflow: hidden;
     position: relative;
     white-space: nowrap;
+}
+/* profile */
+
+.jobTypeBadge {
+    left: 20px;
+}
+.jobTypeBadgeTertiary {
+    background-color: var(--dark-50);
+    color: var(--dark-300);
+}
+
+.jobTypeBadgeSecondary {
+    background-color: var(--lime-300);
+    color: var(--white);
+}
+
+.jobTypeBadgeSecondary, .jobTypeBadgeTertiary {
+    display: inline;
+    line-height: 1;
+    border-radius: 30px;
+    padding: 4px 3px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
+.textDark300 {
+    color: var(--dark-300);
+}
+
+.textDark200 {
+    color: var(--dark-200);
+}
+.freelancerTab .tabBtn {
+    border: 1px solid var(--lime-300);
+    padding: 14px 28px;
+    border-radius: 30px;
+    color: var(--dark-300);
+}
+
+.freelancerTab .tabBtn.active {
+    background-color: var(--lime-300);
+    color: var(--white);
+}
+
+.singleSkill {
+    background-color: #f7f5f0;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+.portfolioCard {
+    border-radius: 16px;
+    background-color: var(--white);
+    box-shadow: 0px 0px 30px 5px rgba(0, 0, 0, 0.06);
+    position: relative;
+    width: 100%;
+}
+.portfolioCardOverlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    border-radius: 16px;
+    transform: scale(0.3);
+    transition: all 0.5s ease-in-out;
+    background-color: rgba(6, 19, 28, 0.5);
+}
+
+.portfolioCard:hover .portfolioCardOverlay {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.portfolioCardIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
