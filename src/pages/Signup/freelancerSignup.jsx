@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-function TestSignup() {
+import { Link, useNavigate } from "react-router-dom";
+function FreelancerSignup() {
+  const nav = useNavigate()
   const {
     register,
     handleSubmit,
@@ -12,10 +14,36 @@ function TestSignup() {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:5140/api/Account/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(data);
+      const responseData = await response.json();
+      if (responseData?.isSuccess === true) {
+
+        nav("/signin")
+        }
+      
+          }
+
+    catch (error) {
+      toast(error)
+      // console.error(error);
+    }
+  };
+  
     return (
-        <div>
+        
             <>
   <div className="headerLogin">
     <div className="container">
@@ -49,12 +77,12 @@ function TestSignup() {
         <div className="row justify-content-center">
           <div className="col-auto">
             <div className="d-flex align-items-center gap-3">
-              <a href="#" className="w-form-btn">
+              <Link to="/freesignup" className="wbtnsecondarylg" style={{textDecoration: "none"}}>
                 Freelancer
-              </a>
-              <a href="#" className="w-form-btn-outline">
+              </Link>
+              <Link to="/clientsignup" className="text-dark" style={{textDecoration: "none"}}>
                 Client
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -66,7 +94,7 @@ function TestSignup() {
               <h2 className="sectionTitle mb-2">Sign Up</h2>
               <p className="sectionDesc">Welcome to Work Zone</p>
             </div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="formcontainer">
                 <div className="row gy-3">
                   <div className="forminput col-12">
@@ -78,81 +106,64 @@ function TestSignup() {
                     <input
                       type="text"
                       id="name"
-                      placeholder=" Name"
+                      name="name"
+                      placeholder="Name"
                       className="form-control shadow-none"
+                      {...register("name", {
+                        required: "Name is required",
+                      })}
                     />
+                    {errors?.name && <span>{errors.name.message}</span>}
+                    
                   </div>
-                  <div className="forminput col-lg-6">
-                    <label htmlFor="phone" className="formlabel">
-                      Phone <span className="textlime300">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="phone"
-                      placeholder={"01403817190"}
-                      className="form-control shadow-none"
-                    />
-                  </div>
-                  <div className="forminput col-lg-6">
-                    <label htmlFor="phone" className="formlabel">
-                      Email <span className="textlime300">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="email"
-                      placeholder="demo@email.com"
-                      className="form-control shadow-none"
-                    />
-                  </div>
-                  <div className="forminput col-lg-6">
-                    <label htmlFor="country" className="formlabel">
-                      Country <span className="textlime300">*</span>
-                    </label>
-                    <select
-                      className="form-select shadow-none"
-                      name="country"
-                      id="country"
-                    >
-                      <option value={1}>Select Country</option>
-                      <option value={2}>Germany</option>
-                      <option value={3}>China</option>
-                    </select>
-                  </div>
-                  <div className="forminput col-lg-6">
-                    <label htmlFor="city" className="formlabel">
-                      City <span className="textlime300">*</span>
-                    </label>
-                    <select
-                      className="form-select shadow-none"
-                      name="country"
-                      id="country"
-                    >
-                      <option value={1}>Select City</option>
-                      <option value={2}>Berlin</option>
-                      <option value={3}>Beijing</option>
-                    </select>
-                  </div>
+      
                   <div className="forminput col-lg-12">
-                    <label htmlFor="email" className="formlabel">
+                    <label htmlFor="phone" className="formlabel">
                       Email <span className="textlime300">*</span>
                     </label>
                     <input
                       type="email"
                       id="email"
-                      placeholder="Email"
+                      naem="name"
+                      placeholder="demo@email.com"
                       className="form-control shadow-none"
+                      {...register("email", {
+                        required: "Email is required",
+                      })}
                     />
+                    {errors?.email && <span>{errors.email.message}</span>}
+                  </div>
+                  
+                 
+                  <div className="forminput col-lg-12">
+                    <label htmlFor="email" className="formlabel">
+                    Password <span className="textlime300">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      id="email"
+                      placeholder="****"
+                      className="form-control shadow-none"
+                      {...register("password", {
+                        required: "password is required",
+                      })}
+                    />
+                    {errors?.password && <span>{errors.password.message}</span>}
                   </div>
                   <div className="forminput col-lg-12">
                     <label htmlFor="password" className="formlabel">
-                      Password <span className="textlime300">*</span>
+                      ConfirmPassword <span className="textlime300">*</span>
                     </label>
                     <input
-                      type="text"
-                      id="password"
+                      type="password"
+                      id="confirmPassword"
                       placeholder="****"
                       className="form-control shadow-none"
+                      {...register("confirmPassword", {
+                        required: "confirmPassword is required",
+                      })}
                     />
+                    {errors?.confirmPassword && <span>{errors.confirmPassword.message}</span>}
                   </div>
                 </div>
                 <div className="d-grid mt-4">
@@ -162,7 +173,7 @@ function TestSignup() {
             </form>
             <div className="mt-4">
               <p className="text-center formtext">
-                Already have an account ?<a href=""> Login </a>
+                Already have an account ?<Link to="" > Login </Link>
               </p>
             </div>
           </div>
@@ -176,8 +187,7 @@ function TestSignup() {
     </div>
   </div>
 </>
-        </div>
     )
 }
 
-export default TestSignup
+export default FreelancerSignup

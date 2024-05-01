@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
+
 function Nav() {
   return (
       <>
@@ -220,7 +221,7 @@ function Nav() {
           </div>
         </div>
       </div>
-      <div className="navbar-right d-flex align-items-center gap-4">
+      <div className="navbar-right d-flex align-items-center gap-4 ">
         <div className="align-items-center d-none d-lg-flex">
           <Link to ="" className="headerBtn">
             <svg
@@ -241,7 +242,7 @@ function Nav() {
           </Link>
         </div>
         <button
-          className="navbar-toggler d-block d-xl-none"
+          className="navbar-toggler d-block d-xl-none shadow-none border-0 "
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"

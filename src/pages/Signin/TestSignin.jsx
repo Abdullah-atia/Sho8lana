@@ -3,12 +3,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AdminContext } from "../../Context/AdminContext";
 // import { useAdmin } from "../../Context/AdminContext";
-import {  useNavigate } from "react-router-dom";
-import { Token } from "@mui/icons-material";
+import {  useNavigate, Link } from "react-router-dom";
 
 
 function TestSignin() {
-  // const is = useAdmin()
   const {isAdmin, setIsAdmin}= useContext(AdminContext)
   const nav = useNavigate()
   const {
@@ -39,17 +37,16 @@ function TestSignin() {
         
         if (responseData.result.role === 'Admin'){
           localStorage.setItem("Admin",responseData.result.role )
-        // localStorage.setItem("adminToken", responseData.result.token )
 
           setIsAdmin(true)
           console.log("Admin")
           nav("/admin")
         }
           else{
-            console.log(responseData)
+            // console.log(responseData)
         nav("/Profile")
-        console.log("teeeeeeeeeeeeeeet");
-        toast("helllllllllllllo");
+        // console.log("teeeeeeeeeeeeeeet");
+        // toast("helllllllllllllo");
           }
         
         
@@ -60,7 +57,7 @@ function TestSignin() {
     }
 
     catch (error) {
-      // Handle error
+      toast(error)
       console.error(error);
     }
   };
@@ -76,9 +73,9 @@ function TestSignin() {
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb wbreadcrumb">
                     <li className="breadcrumbitem">
-                      <a className="text-white" href="#">
+                      <Link className="text-white" to="/">
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li className="breadcrumbitem active " aria-current="page" style={{color: "var(--lime-300)"}}>
                       SignIn
@@ -95,14 +92,6 @@ function TestSignin() {
           <div className="mb-5">
             <div className="row justify-content-center">
               <div className="col-auto">
-                <div className="d-flex align-items-center gap-3">
-                  <a href="#" className="w-form-btn">
-                    Freelancer
-                  </a>
-                  <a href="#" className="w-form-btn-outline">
-                    Client
-                  </a>
-                </div>
               </div>
             </div>
           </div>
@@ -111,7 +100,7 @@ function TestSignin() {
               <div className="col-lg-6 p-3 p-lg-5">
                 <div className="mb-40">
                   <h2 className="sectionTitle mb-2">Sign In</h2>
-                  <p className="sectionDesc">Welcome to Work Zone</p>
+                  <p className="sectionDesc">Welcome to Freelance hub</p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="formcontainer">
@@ -160,7 +149,11 @@ function TestSignin() {
                     </div>
                   </div>
                 </form>
-                <div className="mt-4"></div>
+                <div className="mt-4">
+                <p className="text-center formtext">
+                Don't have an account ?<Link to="/clientsignup" > Signup </Link>
+              </p>
+                </div>
               </div>
               <div className="col-lg-6">
                 <div className="login-img">

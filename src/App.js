@@ -5,7 +5,8 @@ import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 import TestSignin from "./pages/Signin/TestSignin";
-import TestSignup from "./pages/Signup/TestSignup";
+import FreelancerSignup from "./pages/Signup/freelancerSignup";
+
 import { Toaster } from "react-hot-toast";
 import Task from "./pages/Task/Task";
 import Services from "./pages/MServices/Services";
@@ -15,6 +16,8 @@ import Footer from "./components/Footer/Footer";
 import { AdminProvider } from "./Context/AdminContext";
 import AdminDashBoard from "./pages/AdminDashBoard/AdminDashBoard";
 import AdminProdected from "./components/AdminProdected/AdminProdected";
+import PostJob from "./pages/PostJob/PostJob";
+import ClientSignup from "./pages/Signup/clientSignup";
 
 function App() {
   useEffect(() => {
@@ -39,7 +42,10 @@ function App() {
           <Route path="job/:id" element={<Task />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/signin" element={<TestSignin />} />
-          <Route path="/signup" element={<TestSignup />} />
+          <Route path="/clientsignup" element={<ClientSignup />} />
+          <Route path="/freesignup" element={<FreelancerSignup />} />
+
+          <Route path="/postJob" element={<PostJob />} />
           {/* <AdminProdected> */}
           <Route path="/admin" element={
             <AdminProdected>
