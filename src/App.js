@@ -18,6 +18,7 @@ import AdminDashBoard from "./pages/AdminDashBoard/AdminDashBoard";
 import AdminProdected from "./components/AdminProdected/AdminProdected";
 import PostJob from "./pages/PostJob/PostJob";
 import ClientSignup from "./pages/Signup/clientSignup";
+import PostCategory from "./pages/PostCategory/PostCategory";
 
 function App() {
   useEffect(() => {
@@ -44,8 +45,9 @@ function App() {
           <Route path="/signin" element={<TestSignin />} />
           <Route path="/clientsignup" element={<ClientSignup />} />
           <Route path="/freesignup" element={<FreelancerSignup />} />
-
           <Route path="/postJob" element={<PostJob />} />
+          <Route path="/postCategory" element={<PostCategory />} />
+
           {/* <AdminProdected> */}
           <Route path="/admin" element={
             <AdminProdected>

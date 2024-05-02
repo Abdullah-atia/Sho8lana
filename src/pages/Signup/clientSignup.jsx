@@ -20,10 +20,11 @@ function ClientSignup() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:5140/api/Account/login", {
+      const response = await fetch("http://localhost:5140/api/Account/register/client", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          
         },
         body: JSON.stringify(data),
       });
@@ -38,7 +39,7 @@ function ClientSignup() {
 
     catch (error) {
       toast(error)
-      // console.error(error);
+      console.error(error);
     }
   };
   

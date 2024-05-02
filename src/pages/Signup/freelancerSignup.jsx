@@ -20,7 +20,7 @@ function FreelancerSignup() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:5140/api/Account/login", {
+      const response = await fetch("http://localhost:5140/api/Account/register/client", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -141,7 +141,7 @@ function FreelancerSignup() {
                     </label>
                     <input
                       type="password"
-                      id="email"
+                      id="password"
                       placeholder="****"
                       className="form-control shadow-none"
                       {...register("password", {
