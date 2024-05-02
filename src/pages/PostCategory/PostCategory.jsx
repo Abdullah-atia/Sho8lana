@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -42,10 +42,12 @@ function PostCategory() {
 
 
   const onSubmit = async (data) => {
+    console.log(data)
     const formData = new FormData();
     formData.append("Image", image);
     formData.append("Name", data.Name);
     console.log(formData);
+
 
 
     try {
@@ -57,14 +59,18 @@ function PostCategory() {
         },
         body: formData,
       });
-      // console.log(data);
       console.log(response);
 
-      // const responseData = response.json();
+ 
 
-      // if (re?.isSuccess === true) {
-      //   console.log("WOw");
-      // }
+
+      if (response.ok === true) {
+        nav("/service")
+      }
+      else{
+        toast.error(response.statusText)
+      }
+
     } catch (error) {
       toast(error);
       console.log(error);
@@ -80,7 +86,7 @@ function PostCategory() {
         backgroundColor: "var(--off-white)",
       }}
     >
-      < >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div
           className="d-flex flex-column gap-4 rounded "
           style={{ width: "990px", backgroundColor: "var(--white)" }}
@@ -98,6 +104,7 @@ function PostCategory() {
                     <span className="text-lime-300">*</span>
                   </label>
                   <input
+                    id="Name"
                     type="text"
                     className="form-control shadow-none"
                     placeholder="Title name here"
@@ -137,11 +144,11 @@ function PostCategory() {
               )}
             </div>
           </div>
-          <button onClick={onSubmit} type="submit" className="w-btn-secondary-lg">
+          <button  type="submit" className="w-btn-secondary-lg">
             Publish Category
           </button>
         </div>
-      </>
+      </form>
     </div>
   );
 }

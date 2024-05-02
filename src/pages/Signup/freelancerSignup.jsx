@@ -20,7 +20,7 @@ function FreelancerSignup() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:5140/api/Account/register/client", {
+      const response = await fetch("http://localhost:5140/api/Account/register/freelancer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
