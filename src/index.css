@@ -26,6 +26,9 @@ h1,h2,h3,h4,h5,h6{
     font-family: var(--main-font-family)
 
 }
+ul{
+    list-style: none;
+}
 .bgOffWhite {
     background-color: var(--off-white);
 }
@@ -930,4 +933,51 @@ a{
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+/* slider for dashboard */
+
+.dashboardSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    z-index: 20;
+    top: 0;
+    background-color: var(--white);
+    overflow-y: scroll;
+    height: calc(100vh - 80px);
+    scrollbar-width: none;
+}
+
+.sidebarNavLink.active {
+    background-color: var(--lime-300);
+    color: var(--white);
+}
+
+.sidebarNavLink {
+    display: flex;
+    padding: 15px 30px;
+    border-radius: 5px;
+    gap: 16px;
+    font-size: 18px;
+    align-items: center;
+    color: var(--dark-200);
+    font-size: 16px;
+}
+
+
+
+
+.offcanvas-body .btn-close {
+    background-color: var(--dark-50);
+    position: absolute;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.fa-bars::before {
+    content: "\f0c9";
 }

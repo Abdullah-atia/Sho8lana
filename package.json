@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.15.15",
     "@mui/lab": "^5.0.0-alpha.168",
     "@mui/material": "^5.15.15",
@@ -27,6 +29,7 @@
     "react-bootstrap-validation": "^0.1.11",
     "react-countup": "^6.5.3",
     "react-dom": "^18.2.0",
+    "react-fontawesome": "^1.7.1",
     "react-hook-form": "^7.51.3",
     "react-hot-toast": "^2.4.1",
     "react-id-swiper": "^4.0.0",
