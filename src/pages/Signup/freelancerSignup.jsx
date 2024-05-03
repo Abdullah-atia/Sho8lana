@@ -38,7 +38,6 @@ function FreelancerSignup() {
 
     catch (error) {
       toast(error)
-      // console.error(error);
     }
   };
   

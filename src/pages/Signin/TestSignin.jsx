@@ -30,7 +30,7 @@ function TestSignin() {
         },
         body: JSON.stringify(data),
       });
-      console.log(data);
+      // console.log(data);
       const responseData = await response.json();
       if (responseData?.isSuccess === true) {
         localStorage.setItem("autoToken", responseData.result.token )
@@ -43,10 +43,9 @@ function TestSignin() {
           nav("/admin")
         }
           else{
-            // console.log(responseData)
+            
         nav("/Profile")
-        // console.log("teeeeeeeeeeeeeeet");
-        // toast("helllllllllllllo");
+        
           }
         
         
