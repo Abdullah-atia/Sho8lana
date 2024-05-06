@@ -981,3 +981,79 @@ a{
 .fa-bars::before {
     content: "\f0c9";
 }
+
+.dashboardMain {
+    background-color: var(--off-white);
+    padding: 30px;
+    margin-left: 300px;
+}
+.dashboardHeaderBtns .dashboardHeaderBtn {
+    position: relative;
+    background-color: var(--off-white);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+.headerBtnBadge {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    border-radius: 50%;
+    color: var(--white);
+    background-color: var(--lime-300);
+    top: 0;
+}
+.dashboardHeaderBtn::after{
+    content: "" !important;
+   display: none !important;
+}
+
+
+
+.dashboardTable > thead > tr > th:first-of-type {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.dashboardTable > thead > tr > th:last-of-type {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.dashboardTable tbody tr td:first-of-type {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.dashboardTable tbody tr td:last-of-type {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.dashboardTable > thead > tr > th {
+    background-color: rgba(34, 190, 13, 0.2);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--dark-300);
+    padding: 20px 10px;
+    white-space: nowrap;
+    font-family: var(--main-font-family);
+}
+
+.dashboardTable tbody tr {
+    border-bottom: 10px solid var(--dark-50);
+}
+
+.dashboardTable tbody {
+    background-color: var(--white);
+    border-radius: 10px;
+}
+.dashboardTable tbody tr td {
+    padding: 10px;
+    white-space: normal;
+}
+
+@media (max-width: 1199.98px){
+    .dashboardMain {
+        margin-left: 0;
+    }
+
+}
+
