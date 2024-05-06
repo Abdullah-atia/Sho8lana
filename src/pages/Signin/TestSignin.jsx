@@ -46,8 +46,8 @@ function TestSignin() {
           nav("/admin")
         }
           else{
-            
-        nav("/Profile/:userId")
+            const user_id = localStorage.getItem('user_id')
+        nav(`/Profile/${user_id}`)
         
           }
         
