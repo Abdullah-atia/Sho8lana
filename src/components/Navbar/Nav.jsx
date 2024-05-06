@@ -1,25 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
 
 function Nav() {
+    const navigate = useNavigate();
+
+    const logout = (e) => {
+        e.preventDefault();
+        console.log('Logout');
+
+        localStorage.clear();
+        sessionStorage.clear();
+
+        navigate("/");
+    }
   return (
       <>
 <header className="headerPrimary">
   <div className="container">
     <nav className="navbar navbar-expand-xl justify-content-between">
-      <Link to ="index.html">
+      <Link to ="/">
         <img height={50} width={40} src="./logo.svg" alt="" />
       </Link>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav mx-auto">
           <li className="d-block d-xl-none">
             <div className="logo">
-              <Link to ="index.html">
+              <Link to ="/">
                 <img src="./logo.svg" alt="" />
               </Link>
             </div>
+             <button onClick={logout} >
+            
+              Logout
+            </button>
           </li>
           <li className="nav-item dropdown">
             <a
@@ -64,38 +79,38 @@ function Nav() {
               <div className="d-flex flex-column flex-xl-row">
                 <ul className='list-unstyled'>
                   <li>
-                    <Link to ="freelancers.html" className="dropdown-item">
+                    <Link to ="freelancers" className="dropdown-item">
                       <span>Freelancers</span>
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="freelancer-details.html"
+                    <Link
+                      to="freelancer-details.html"
                       className="dropdown-item"
                     >
                       <span>Freelancer Details</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
             </div>
           </li>
-          <li className="nav-item">
-            <Link classNamea="nav-link" href="about.html">
-              About Us
+            <li className="nav-item">
+            <Link className="nav-link" to="contact">
+              About us
             </Link>
           </li>
           <li className="nav-item dropdown">
-            <a
+            <Link
               className="nav-link dropdown-toggle"
-              href="#"
+              to="/"
               role="button"
               data-bs-toggle="dropdown"
               data-bs-auto-close="outside"
               aria-expanded="false"
             >
               Pages
-            </a>
+            </Link>
             <ul className="dropdown-menu">
               <li>
                 <Link to ="services.html" className="dropdown-item">
@@ -170,60 +185,40 @@ function Nav() {
             </ul>
           </li>
           <li className="nav-item dropdown">
-            <a
+            <Link
               className="nav-link dropdown-toggle"
-              href="#"
+              to="/"
               role="button"
               data-bs-toggle="dropdown"
               data-bs-auto-close="outside"
               aria-expanded="false"
             >
               Blog
-            </a>
+            </Link>
             <ul className="dropdown-menu">
               <li>
-                <Link to ="blogs.html" className="dropdown-item">
+                <Link to ="blogs" className="dropdown-item">
                   <span>Blog</span>
                 </Link>
               </li>
               <li>
-                <Link to ="blog-details.html" className="dropdown-item">
+                <Link to ="blog-details" className="dropdown-item">
                   <span>Blog Details</span>
                 </Link>
               </li>
             </ul>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="contact.html">
+            <Link className="nav-link" to="/contact">
               Contact
             </Link>
           </li>
         </ul>
-        <div className="d-flex align-items-center gap-4 mt-4">
-          <div className="d-flex d-lg-none">
-            <Link to ="signin.html" className="headerBtn">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={13}
-                height={17}
-                viewBox="0 0 13 17"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M6.5 7.55556C8.55134 7.55556 10.2143 5.86419 10.2143 3.77778C10.2143 1.69137 8.55134 0 6.5 0C4.44866 0 2.78571 1.69137 2.78571 3.77778C2.78571 5.86419 4.44866 7.55556 6.5 7.55556ZM6.5 17C10.0899 17 13 15.3086 13 13.2222C13 11.1358 10.0899 9.44444 6.5 9.44444C2.91015 9.44444 0 11.1358 0 13.2222C0 15.3086 2.91015 17 6.5 17Z"
-                  fill="white"
-                />
-              </svg>
-              Login
-            </Link>
-          </div>
-        </div>
+        
       </div>
       <div className="navbar-right d-flex align-items-center gap-4 ">
         <div className="align-items-center d-none d-lg-flex">
-          <Link to ="" className="headerBtn">
+          <Link to ="/signin" className="headerBtn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={13}
@@ -251,6 +246,11 @@ function Nav() {
           aria-label="Toggle navigation"
         >
           <span />
+        </button>
+      </div>
+      <div>
+        <button onClick={logout} className='wbtnsecondarylg fw-bold'>
+        logout
         </button>
       </div>
     </nav>

@@ -1,6 +1,6 @@
-import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
+// import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 // import "react-pro-sidebar/dist/css/styles.css";
-// import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 
 
 function AdminDashBoard() {

@@ -6,7 +6,6 @@ import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 import TestSignin from "./pages/Signin/TestSignin";
 import FreelancerSignup from "./pages/Signup/freelancerSignup";
-
 import { Toaster } from "react-hot-toast";
 import Task from "./pages/Task/Task";
 import Services from "./pages/MServices/Services";
@@ -20,6 +19,8 @@ import PostJob from "./pages/PostJob/PostJob";
 import ClientSignup from "./pages/Signup/clientSignup";
 import PostCategory from "./pages/PostCategory/PostCategory";
 import PostSkill from "./pages/PostCategory/PostSkill";
+import { QueryClient, QueryClientProvider } from "react-query";
+import EditProfile from "./pages/Profile/EditProfile";
 
 function App() {
   useEffect(() => {
@@ -32,24 +33,28 @@ function App() {
     });
     // AOS.refresh();
   }, []);
+  const queryClient = new QueryClient()
   return (
+    <>
+    <QueryClientProvider client={queryClient} >
     <AdminProvider>
       <BrowserRouter>
-        {/* <Nav /> */}
+        <Nav />
         <Toaster position="bottom-right" reverseOrder={false} />
         <Routes>
           <Route index element={<Home />} />
           <Route path="/job" element={<Home />} />
           <Route path="/service" element={<Services />} />
           <Route path="job/:id" element={<Task />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path="/Profile/:userId" element={<Profile />} />
+          <Route path="/EditProfile/:userId" element={<EditProfile />} />
+
           <Route path="/signin" element={<TestSignin />} />
           <Route path="/clientsignup" element={<ClientSignup />} />
           <Route path="/freesignup" element={<FreelancerSignup />} />
           <Route path="/postJob" element={<PostJob />} />
           <Route path="/postCategory" element={<PostCategory />} />
           <Route path="/postSkill" element={<PostSkill />} />
-
 
           {/* <AdminProdected> */}
           <Route path="/admin" element={
@@ -66,6 +71,8 @@ function App() {
         {/* <Footer /> */}
       </BrowserRouter>
     </AdminProvider>
+    </QueryClientProvider>
+    </>
   );
 }
 
