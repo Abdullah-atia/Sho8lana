@@ -53,15 +53,17 @@ function App() {
 
           {/* <AdminProdected> */}
           <Route path="/admin" element={
-            <AdminProdected>
+            
+
+            // <AdminProdected>
           <AdminDashBoard />
-            </AdminProdected>
+            // </AdminProdected>
           } />
 
           {/* </AdminProdected> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </AdminProvider>
   );
