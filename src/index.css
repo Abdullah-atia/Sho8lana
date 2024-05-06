@@ -981,3 +981,30 @@ a{
 .fa-bars::before {
     content: "\f0c9";
 }
+
+.dashboardMain {
+    background-color: var(--off-white);
+    padding: 30px;
+    margin-left: 300px;
+}
+.dashboardHeaderBtns .dashboardHeaderBtn {
+    position: relative;
+    background-color: var(--off-white);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+.headerBtnBadge {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    border-radius: 50%;
+    color: var(--white);
+    background-color: var(--lime-300);
+    top: 0;
+}
+.dashboardHeaderBtn::after{
+    content: "" !important;
+   display: none !important;
+}

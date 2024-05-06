@@ -1,5 +1,20 @@
+import { Link, useParams } from "react-router-dom";
+import {useUserData} from "../../hooks/useUserData";
+
 export default function Profile() {
+  const {userId} = useParams()
+  const {data, isLoading, isError, error } = useUserData(userId)
+  // console.log(data.data.result)
+
+  if(isLoading){
+        return <p>Loading...</p>
+    }
+    if(isError) {
+        return <h2>{error.message}</h2>;
+    }
+
   return(
+    
     <div className="bgOffWhite py110">
       <div className="container">
         <div className="row">
@@ -11,7 +26,7 @@ export default function Profile() {
               </div>
               <div className="d-flex flex-column justify-content-center align-items-center py-4">
                 <img
-                  src="/assets/images/1.png"
+                  src={data.data.result.imageUrl}
                   style={{ width: 110, height: 110 }}
                   className=" rounded-circle mb-4"
                   alt=""
@@ -20,7 +35,7 @@ export default function Profile() {
                   style={{ fontSize: 24 }}
                   className="fw-bold textDark300 mb-2"
                 >
-                  Sufankho Jhon
+                  {data.data.result.name}
                 </h3>
                 <p className="textDark200 mb-1">UiUx Designer</p>
                 <p>
@@ -72,7 +87,7 @@ export default function Profile() {
                   <p className="textDark300 fw600">English</p>
                 </li>
               </ul>
-              <a  className="wbtnsecondarylg w-100">
+              <Link to="/editProfile/:userId"  className="wbtnsecondarylg w-100">
                 Contact Me
                 <svg
                   width={14}
@@ -89,7 +104,7 @@ export default function Profile() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
             
             <div className=" p-4 rounded-4 bg-white border-bottom pb-4">
@@ -145,23 +160,12 @@ export default function Profile() {
 
                   </div>
 
-                  
-
-                 
-
-                  
-
-                  
               </div>
               
               <div className="d-flex flex-wrap gap-3">
-                <span className="singleSkill">UIUX Design</span>
-                <span className="singleSkill">Logo Design</span>
-                <span className="singleSkill">XD</span>
-                <span className="singleSkill">App Design</span>
-                <span className="singleSkill">Website Development</span>
-                <span className="singleSkill">Figma Design</span>
-                <span className="singleSkill">Flayer Design</span>
+                {data.data.result.skills.map((skill) =>{
+                  return <span className="singleSkill">skill</span>
+                })}
               </div>
             </div>
 

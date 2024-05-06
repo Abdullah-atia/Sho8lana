@@ -1,20 +1,12 @@
-import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
+// import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 // import "react-pro-sidebar/dist/css/styles.css";
-// import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 
 
 function AdminDashBoard() {
   return (
   <div className="d-flex">
-              <Sidebar  >
-                <Menu className="main">
-                  <MenuItem rootStyles = { {":hover": { backgroundColor: "var(--lime-300)"}}} > Dashboard </MenuItem>
-                  <MenuItem> Add Category </MenuItem>
-                  <MenuItem> Documentation </MenuItem>
-                  <MenuItem> logout </MenuItem>
-        
-                </Menu>
-              </Sidebar>
+              <Sidebar />
         {/* <Sidebar /> */}
       
       <div style={{ backgroundColor: "var(--off-white)" , width:"100%", padding: "0.4rem"}}>
