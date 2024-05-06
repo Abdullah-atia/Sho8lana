@@ -1,4 +1,3 @@
-
 function Sidebar() {
     return (
             <div>
@@ -327,4 +326,4 @@ function Sidebar() {
     )
 }
 
-export default Sidebar
+export default Sidebar;

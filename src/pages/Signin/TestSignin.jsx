@@ -34,6 +34,9 @@ function TestSignin() {
       const responseData = await response.json();
       if (responseData?.isSuccess === true) {
         localStorage.setItem("autoToken", responseData.result.token )
+        localStorage.setItem("user_id", responseData.result.Id)
+        localStorage.setItem("user_role", responseData.result.role)
+
         
         if (responseData.result.role === 'Admin'){
           localStorage.setItem("Admin",responseData.result.role )
@@ -43,8 +46,8 @@ function TestSignin() {
           nav("/admin")
         }
           else{
-            
-        nav("/Profile")
+            const user_id = localStorage.getItem('user_id')
+        nav(`/Profile/${user_id}`)
         
           }
         
