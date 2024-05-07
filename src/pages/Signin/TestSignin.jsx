@@ -65,9 +65,9 @@ function TestSignin() {
 
   return (
     <div>
-        <div className="headerLogin container">
-          <div className=" row">
-            <div className="col-auto">
+        <div className="headerLogin ">
+          <div className=" container">
+            <div className="col-auto ">
               <div className="position-relative z-2" data-aos="fade-up">
                 <h2 className="sectionTitleLight mb-2">Sign In</h2>
                 <nav aria-label="breadcrumb">
@@ -103,7 +103,7 @@ function TestSignin() {
                   <p className="sectionDesc">Welcome to Freelance hub</p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="formcontainer">
+                  <div className="form-container">
                     <div className="row gy-3">
                       <div className="forminput col-12">
                         <label htmlFor="name" className="formlabel">
