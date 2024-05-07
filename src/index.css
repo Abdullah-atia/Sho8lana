@@ -1057,3 +1057,58 @@ a{
 
 }
 
+.form-container .form-control {
+    border: 1px solid #edebe7;
+    border-radius: 30px;
+    padding: 16px;
+    height: 52px;
+}
+
+.form-control:focus,select:focus{
+    border-color: #edebe7 !important;
+}
+
+.profileInfoHeader {
+    padding: 20px 30px;
+    background-color: rgba(34, 190, 13, 0.2);
+    border-radius: 8px 8px 0 0;
+}
+
+.form-container .form-label {
+    font-size: 18px;
+    color: var(--dark-300);
+    line-height: 18px;
+    margin-bottom: 10px;
+}
+
+.profileInfoBody, .gig-info-body {
+    padding: 20px 30px 30px;
+    border-radius: 0 0 8px 8px;
+}
+
+.form-container .form-control {
+    border: 1px solid #edebe7;
+    border-radius: 30px;
+    padding: 16px;
+    height: 52px;
+}
+
+.wEditorWrapper {
+    border: 1px solid var(--dark-50);
+    border-radius: 30px;
+    padding: 20px;
+    width: 100%;
+    outline: 0;
+    resize: none;
+}
+.textLime300{
+    color: var(--lime-300);
+}
+
+.form-container .form-select {
+    border: 1px solid #edebe7;
+    border-radius: 30px;
+    font-size: 16px;
+    height: 52px;
+    padding: 0 16px;
+}
