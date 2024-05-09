@@ -1112,3 +1112,23 @@ a{
     height: 52px;
     padding: 0 16px;
 }
+
+@media (max-width: 767.98px)
+{
+    .heroOneImg {
+        max-width: 100%;
+    }
+
+}
+@media (max-width: 575.98px){
+    .heroFormWrapper .form-control {
+        border-left: 0;
+    }
+    .heroFormWrapper .form-select {
+        display: none;
+    }
+    .heroRating {
+        border-left: 0;
+    }
+}
+
