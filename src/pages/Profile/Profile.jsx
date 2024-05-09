@@ -26,7 +26,7 @@ export default function Profile() {
               </div>
               <div className="d-flex flex-column justify-content-center align-items-center py-4">
                 <img
-                  src={data.data.result.imageUrl}
+                  src={data?.data.result.imageUrl}
                   style={{ width: 110, height: 110 }}
                   className=" rounded-circle mb-4"
                   alt=""
@@ -35,7 +35,7 @@ export default function Profile() {
                   style={{ fontSize: 24 }}
                   className="fw-bold textDark300 mb-2"
                 >
-                  {data.data.result.name}
+                  {data?.data.result.name}
                 </h3>
                 <p className="textDark200 mb-1">UiUx Designer</p>
                 <p>
@@ -163,7 +163,7 @@ export default function Profile() {
               </div>
               
               <div className="d-flex flex-wrap gap-3">
-                {data.data.result.skills.map((skill) =>{
+                {data?.data.result.skills.map((skill) =>{
                   return <span className="singleSkill">skill</span>
                 })}
               </div>
