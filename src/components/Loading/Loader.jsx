@@ -1,14 +1,10 @@
-import React from 'react';
+import React from "react";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function Loader() {
   return (
-    <div
-
-    className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-    role="status">
-    <span
-      className="flex justify-center !absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-    >Loading...</span>
-  </div>
+    <div className="d-flex justify-content-center align-items-center min-vh-100">
+      <HashLoader color="#22be0d" speedMultiplier={2} />
+    </div>
   );
 }
