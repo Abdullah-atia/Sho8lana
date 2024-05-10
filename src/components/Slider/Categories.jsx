@@ -3,7 +3,14 @@ import "react-multi-carousel/lib/styles.css";
 import styles from './Slider.module.css'
 function Categories() {
     return (
-    <div>
+    <div className="container py110">
+      <div className="mb-4">
+        <h2 className={styles.subTitle}>Our Services</h2>
+        <p className={styles.desc}>Get some Inspirations from 86K+ skills</p>
+
+      </div>
+      
+          
       <Carousel
         // ref={carouselRef}
         additionalTransfrom={0}
@@ -47,7 +54,7 @@ function Categories() {
               max: 1024,
               min: 464,
             },
-            items: 2,
+            items: 3,
             partialVisibilityGutter: 30,
           },
         }}
@@ -59,7 +66,11 @@ function Categories() {
         slidesToSlide={2}
         swipeable
       >
-        <div className="" style={{width: "216px",  marginRight: "24px"}} >
+        
+        
+       
+        <div className="me-3 d-flex justify-content-center align-items-center text-center"  >
+
             <div className="featureCategoryCard bg-white">
               <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
               <h3  className={styles.fwSemibold}>
@@ -67,7 +78,60 @@ function Categories() {
               </h3>
               <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
             </div>
-          </div>
+        </div>
+        <div className="me-3 d-flex justify-content-center align-items-center text-center"  >
+
+            <div className="featureCategoryCard bg-white">
+              <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
+              <h3  className={styles.fwSemibold}>
+                <a className='featureCategoryLink' href="#">Design &amp; Creative</a>
+              </h3>
+              <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
+            </div>
+        </div>
+        <div className="me-3 d-flex justify-content-center align-items-center text-center"  >
+
+            <div className="featureCategoryCard bg-white">
+              <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
+              <h3  className={styles.fwSemibold}>
+                <a className='featureCategoryLink' href="#">Design &amp; Creative</a>
+              </h3>
+              <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
+            </div>
+        </div>
+        <div className="me-3 d-flex justify-content-center align-items-center text-center"  >
+
+            <div className="featureCategoryCard bg-white">
+              <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
+              <h3  className={styles.fwSemibold}>
+                <a className='featureCategoryLink' href="#">Design &amp; Creative</a>
+              </h3>
+              <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
+            </div>
+        </div>
+        <div className="me-3 d-flex justify-content-center align-items-center text-center"  >
+
+            <div className="featureCategoryCard bg-white">
+              <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
+              <h3  className={styles.fwSemibold}>
+                <a className='featureCategoryLink' href="#">Design &amp; Creative</a>
+              </h3>
+              <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
+            </div>
+        </div>
+        <div className="me-3 d-flex justify-content-center align-items-center text-center"  >
+
+            <div className="featureCategoryCard bg-white">
+              <img src="./assets/categories/1.svg" className="mb-4" style={{width: "70px", height: "75px", color: "var(--dark-200)"}} alt="" />
+              <h3  className={styles.fwSemibold}>
+                <a className='featureCategoryLink' href="#">Design &amp; Creative</a>
+              </h3>
+              <p className={`${styles.featureCategoryDesc} fs-6`}>3,560 Skills</p>
+            </div>
+        </div>
+       
+       
+       
 
       </Carousel>
     </div>

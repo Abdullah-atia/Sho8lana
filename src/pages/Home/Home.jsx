@@ -9,7 +9,7 @@ import styles from "./Home.module.css";
 import MainCard from "../../components/Cards/MainCard";
 import BusinessCard from "../../components/Cards/BusinessCard";
 import Header from "../../components/Header/Header";
-
+import Footer from '../../components/Footer/Footer'
 
 function Home() {
 
@@ -21,18 +21,19 @@ function Home() {
       <Header />
       
       {/* <Header2 /> */}
-      <div className={styles.second}>
+      <div  style={{backgroundColor :'var(--off-white)'}}>
         <Categories />
       </div>
-      <div className={styles.thired}>
+      <div className="container py110" >
         <ServicesSlider />
       </div>
-      <div>
+      <div className="container py110">
         <MainCard />
       </div>
-      <div style={{padding :"8rem"}}>
+      <div style={{marginTop :"100px"}}>
         <BusinessCard />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -251,7 +251,217 @@ function AdminDashBoard() {
               <Sidebar />
             </div>
 
-            <div className="dashboardMain min-vh-100">
+            {/* <div className="dashboardMain min-vh-100">
+            <div className="d-flex flex-column gap-4">
+            
+            <div className="d-flex align-items-center justify-content-between">
+              <div>
+                <h3 style={{ fontSize: 24 }} className=" fw-bold textDark300 mb-2">
+                  Profile Settings
+                </h3>
+                <ul className="d-flex align-items-center gap-2 p-0">
+                  <li className="textDark200 fs-6">Dashboard</li>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={5}
+                      height={11}
+                      viewBox="0 0 5 11"
+                      fill="none"
+                    >
+                      <path
+                        d="M1 10L4 5.5L1 1"
+                        stroke="#5B5B5B"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </li>
+                  <li className="textLime300 fs-6">Profile Settings</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div>
+              <div className="row justify-content-center">
+                <div className="col-xl-8">
+                  <form>
+                    <div className="d-flex flex-column gap-4">
+                      
+                      <div className="profile-info-card">
+                        
+                        <div className="profileInfoHeader">
+                          <h4 className="text-18 fw-semibold textDark300">
+                            Profile Info
+                          </h4>
+                        </div>
+                        <div className="profileInfoBody bg-white">
+                          <div className="row g-4">
+                            <div className="col-md-6">
+                              <div className="form-container">
+                                <label htmlFor="fname" className="form-label">
+                                  First Name<span className="textLime300">*</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control shadow-none"
+                                  placeholder="Mansa"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-container">
+                                <label htmlFor="lname" className="form-label">
+                                  Last Name<span className="textLime300">*</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control shadow-none"
+                                  placeholder="Musa"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12">
+                              <div className="form-container">
+                                <label htmlFor="email" className="form-label">
+                                  Email Address<span className="textLime300">*</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control shadow-none"
+                                  placeholder="example@email.com"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-12">
+                              <label htmlFor="description" className="form-label">
+                                Description<span className="textLime300">*</span>
+                              </label>
+                              <div>
+                                <textarea
+                                  className="wEditorWrapper"
+                                  name=""
+                                  id=""
+                                  defaultValue={""}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-container">
+                                <label htmlFor="category" className="form-label">
+                                  Town/City<span className="textLime300">*</span>
+                                </label>
+                                <select
+                                  id="city"
+                                  autoComplete="off"
+                                  className="form-select shadow-none"
+                                >
+                                  <option value={0}>New York</option>
+                                  <option value={1}>Berlin</option>
+                                  <option value={2}>Tokyo</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-container">
+                                <label htmlFor="state" className="form-label">
+                                  State<span className="textLime300">*</span>
+                                </label>
+                                <select
+                                  id="state"
+                                  autoComplete="off"
+                                  className="form-select shadow-none"
+                                >
+                                  <option value={0}>Los Angels</option>
+                                  <option value={1}>San Fransisco</option>
+                                  <option value={2}>Atoa</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="col-md-12">
+                              <div className="form-container">
+                                <label htmlFor="country" className="form-label">
+                                  Country<span className="textLime300">*</span>
+                                </label>
+                                <select
+                                  id="country"
+                                  autoComplete="off"
+                                  className="form-select shadow-none"
+                                >
+                                  <option value={0}>USA</option>
+                                  <option value={1}>UK</option>
+                                  <option value={2}>BD</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-container">
+                                <label htmlFor="gender" className="form-label">
+                                  Gender <span className="textLime300">*</span>
+                                </label>
+                                <select
+                                  id="gender"
+                                  autoComplete="off"
+                                  className="form-select shadow-none"
+                                >
+                                  <option value={0}>Male</option>
+                                  <option value={1}>Female</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-container">
+                                <label htmlFor="language" className="form-label">
+                                  Language<span className="textLime300">*</span>
+                                </label>
+                                <input
+                                  id="language"
+                                  type="text"
+                                  className="form-control shadow-none"
+                                  placeholder="English, Bangla"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                     
+                      <div className="d-flex align-items-center gap-3">
+                        <button className="wbtnsecondarylg">
+                          Save Now
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={14}
+                            height={10}
+                            viewBox="0 0 14 10"
+                            fill="none"
+                          >
+                            <path
+                              d="M9 9L13 5M13 5L9 1M13 5L1 5"
+                              stroke="white"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </button>
+                        <a href="#" className="text-danger text-decoration-underline">
+                          Cancel
+                        </a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+            </div> */}
+
+              <div className="dashboardMain min-vh-100">
               <div className="d-flex flex-column gap-4">
               <div className="d-flex gap-4 flex-column flex-md-row align-items-md-center justify-content-between">
                 <div>
@@ -808,12 +1018,14 @@ function AdminDashBoard() {
               </div>
               </div>
 
+              </div>
+              
 
-            </div>
+            
 
       
            
-    </div>
+  </div>
   );
 }
 
