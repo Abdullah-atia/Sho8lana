@@ -1,33 +1,25 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { TextField, Autocomplete } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { useQueryClient } from "react-query";
-import { useUpdateUser, useUserData } from "../../hooks/useUserData";
+import { useNavigate, useParams } from "react-router-dom";
+import { useUserData } from "../../hooks/useUserData";
 import toast from "react-hot-toast";
 import { useDropzone } from "react-dropzone";
-// import { request } from "../../utils/axios-utils";
 import useCategory from "../../hooks/useCategory";
 import useSkills from "../../hooks/useSkills";
 import Loader from "../../components/Loading/Loader";
+import { MdFileUpload } from "react-icons/md";
+import Sidebar from "../AdminDashBoard/Sidebar";
+import { useFormik } from "formik";
+import axios from "axios";
 
 function EditProfile() {
+  const token = localStorage.getItem("autoToken");
   const { userId } = useParams();
+  const navigate = useNavigate();
   const { data, isLoading, isError, error } = useUserData(userId);
-  const queryClient = useQueryClient();
-  const { mutate: updateUser } = useUpdateUser();
   const [image, setImage] = useState(null);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const { register, handleSubmit, getValues, setValue } = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      imageUrl: "",
-      phoneNumber: 0,
-      categoryId: 0,
-      skillsId: [],
-    },
-  });
+  const [imageName, setImageName] = useState("null");
+
   const userSkillsIds = data?.data.result.skills.map((skill) => skill.id);
 
   const { data: categoryData, isLoading: categoryLoading } = useCategory();
@@ -38,57 +30,69 @@ function EditProfile() {
     [isLoading, isError, categoryLoading, skillsLoading]
   );
 
-  useEffect(() => {
-    if (data && data.data && data.data.result) {
-      const { name, email, imageUrl, phoneNumber, categoryId, skills } =
-        data.data.result;
-      setValue("name", name);
-      setValue("email", email);
-      setValue("imageUrl", imageUrl);
-      setValue("phoneNumber", phoneNumber);
-      setValue("categoryId", categoryId);
-      setValue("skillsId", skills);
-    }
-  }, [data, setValue]);
-  //   console.log(getValues());
-
   const onDrop = async (acceptedFiles) => {
     const uploadedFile = acceptedFiles[0];
+    setImageName(uploadedFile.name);
     setImage(uploadedFile);
   };
-  const handleSkillChange = (selectedSkillIds) => {
-    setSelectedSkills(selectedSkillIds);
-  };
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: {
+      "image/jpeg": [],
+      "image/png": [],
+    },
+    maxFiles: 1,
+    maxSize: 1024 * 1024 * 2,
+  });
 
-  const onSubmit = async (data) => {
-    const newData = { ...data, image };
-    console.log(newData);
-
+  const updateUser = async (values) => {
     try {
-      const response = updateUser(userId, newData);
-      queryClient.invalidateQueries(["user", userId]);
-      console.log("update data", response);
+      const form_data = new FormData();
+      form_data.append("Name", values.Name);
+      form_data.append("Image", image);
+      form_data.append("PhoneNumber", values.PhoneNumber);
+      form_data.append("CategoryId", values.CategoryId);
+      form_data.append("SkillsId", [1,2]);
+      // form_data.append("SkillsId", 2);
+
+      const { data } = await axios.put(
+        `http://localhost:5140/api/Freelancer/${userId}`,
+        form_data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      toast.success(data);
+      console.log(data);
     } catch (error) {
-      toast.error(error.message);
+      toast(error.message);
     }
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-  };
+  let formik = useFormik({
+    initialValues: {
+      Name: "",
+      // Image: "",
+      PhoneNumber: "",
+      CategoryId: 0,
+      SkillsId: [],
+    },
+    onSubmit: updateUser,
+  });
+
   if (isLoading || categoryLoading || skillsLoading) {
     return <Loader />;
   }
   if (isError) {
     return toast.error(error.message);
   }
+
   return (
     <div>
+      <Sidebar />
       {pageLoaded && (
         <div className="dashboardMain min-vh-100">
           <div className="d-flex flex-column gap-4">
@@ -126,7 +130,7 @@ function EditProfile() {
             <div>
               <div className="row justify-content-center">
                 <div className="col-xl-8">
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={formik.handleSubmit}>
                     <div className="d-flex flex-column gap-4">
                       <div className="profile-info-card">
                         <div className="profileInfoHeader">
@@ -135,6 +139,40 @@ function EditProfile() {
                           </h4>
                         </div>
                         <div className="profileInfoBody bg-white">
+                          <div className="d-flex justify-content-center">
+                            <label htmlFor="Image" className="form-label">
+                              Image
+                              <span className="textLime300">*</span>
+                            </label>
+                            <div
+                              {...getRootProps({ className: "dropzone" })}
+                              style={{ width: "300px", height: "200px" }}
+                            >
+                              {image ? (
+                                <img
+                                  src={URL.createObjectURL(image)}
+                                  alt={imageName}
+                                  style={{
+                                    maxWidth: "100%",
+                                    maxHeight: "100%",
+                                  }}
+                                />
+                              ) : (
+                                <div className="d-flex flex-column justify-content-center align-items-center">
+                                  <MdFileUpload color="#1475cf" size={60} />
+                                  <input
+                                    {...getInputProps()}
+                                    name="Image"
+                                    id="Image"
+                                    // value={formik.values.Image}
+                                    // onChange={formik.handleChange}
+                                    // onBlur={formik.handleBlur}
+                                  />
+                                  <h1>{imageName}</h1>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                           <div className="row g-4">
                             <div className="col-md-12">
                               <div className="form-container">
@@ -144,13 +182,17 @@ function EditProfile() {
                                 </label>
                                 <input
                                   type="text"
-                                  {...register("name")}
+                                  id="Name"
+                                  value={formik.values.Name}
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                  name="Name"
                                   className="form-control shadow-none"
                                   placeholder="yourName"
                                 />
                               </div>
                             </div>
-                            <div className="col-12">
+                            {/* <div className="col-12">
                               <div className="form-container">
                                 <label htmlFor="email" className="form-label">
                                   Email Address
@@ -163,7 +205,7 @@ function EditProfile() {
                                   placeholder="example@email.com"
                                 />
                               </div>
-                            </div>
+                            </div> */}
                             <div className="col-12">
                               <div className="form-container">
                                 <label htmlFor="phone" className="form-label">
@@ -172,8 +214,11 @@ function EditProfile() {
                                 </label>
                                 <input
                                   type="text"
-                                  id="phone"
-                                  {...register("phoneNumber")}
+                                  id="PhoneNumber"
+                                  name="PhoneNumber"
+                                  value={formik.values.PhoneNumber}
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
                                   className="form-control shadow-none"
                                 />
                               </div>
@@ -189,8 +234,12 @@ function EditProfile() {
                                 </label>
                                 <select
                                   className="form-select shadow-none"
-                                  {...register("categoryId")}
-                                  defaultValue={getValues("categoryId")}
+                                  id="CategoryId"
+                                  name="CategoryId"
+                                  value={formik.values.CategoryId}
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                  // defaultValue={getValues("categoryId")}
                                 >
                                   {categoryData &&
                                     categoryData?.data?.result?.map(
@@ -214,9 +263,13 @@ function EditProfile() {
                                   <span className="textLime300">*</span>
                                 </label>
 
-                                <Autocomplete
+                                {/* <Autocomplete
                                   multiple
-                                  id="skills"
+                                  id="SkillsId"
+                                  name="SkillsId"
+                                  value={formik.values.SkillsId}
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
                                   options={skillsData?.data.result || []}
                                   getOptionLabel={(option) => option.name} // Show name
                                   getOptionValue={(option) => option.id} // Use id as value
@@ -228,7 +281,7 @@ function EditProfile() {
                                     const selectedSkills = newValue
                                       ? newValue.map((item) => item.id)
                                       : [];
-                                    setValue("skillsId", selectedSkills);
+                                    // setValue("skillsId", selectedSkills);
                                   }}
                                   renderInput={(params) => (
                                     <TextField
@@ -238,7 +291,7 @@ function EditProfile() {
                                       placeholder="Select Skills"
                                     />
                                   )}
-                                />
+                                /> */}
                               </div>
                             </div>
                           </div>
@@ -247,7 +300,8 @@ function EditProfile() {
                       <div className="d-flex align-items-center gap-3">
                         <button
                           className="wbtnsecondarylg"
-                          onClick={handleSubmit(onSubmit)}
+                          //   onClick={handleSubmit(onSubmit)}
+                          type="submit"
                         >
                           Save Now
                           <svg
@@ -266,12 +320,12 @@ function EditProfile() {
                             />
                           </svg>
                         </button>
-                        <a
-                          href="#"
+                        <button
+                          onClick={() => navigate(-1)}
                           className="text-danger text-decoration-underline"
                         >
                           Cancel
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </form>
