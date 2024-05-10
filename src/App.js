@@ -44,7 +44,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AdminProvider>
           <BrowserRouter>
-            {/* <Nav /> */}
+            <Nav />
             <Toaster position="bottom-right" reverseOrder={false} />
             <Suspense fallback={<Loader />}>
               <Routes>
