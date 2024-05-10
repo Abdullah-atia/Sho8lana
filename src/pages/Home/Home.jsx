@@ -21,16 +21,16 @@ function Home() {
       <Header />
       
       {/* <Header2 /> */}
-      <div className={styles.second}>
+      <div  style={{backgroundColor :'var(--off-white)'}}>
         <Categories />
       </div>
-      <div className={styles.thired}>
+      <div className="container py110" >
         <ServicesSlider />
       </div>
-      <div>
+      <div className="container py110">
         <MainCard />
       </div>
-      <div style={{padding :"8rem"}}>
+      <div style={{marginTop :"100px"}}>
         <BusinessCard />
       </div>
     </div>
