@@ -77,7 +77,7 @@ function Header() {
             </div>
             <div className="heroRating">
               <h3 className="text-white heroCounterTitle fw-bold">4.9</h3>
-              <p class="text-white">Rating</p>
+              <p className="text-white">Rating</p>
              
             </div>
           </div>

@@ -9,7 +9,7 @@ import styles from "./Home.module.css";
 import MainCard from "../../components/Cards/MainCard";
 import BusinessCard from "../../components/Cards/BusinessCard";
 import Header from "../../components/Header/Header";
-
+import Footer from '../../components/Footer/Footer'
 
 function Home() {
 
@@ -33,6 +33,7 @@ function Home() {
       <div style={{marginTop :"100px"}}>
         <BusinessCard />
       </div>
+      <Footer />
     </div>
   );
 }

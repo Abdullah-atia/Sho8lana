@@ -52,8 +52,10 @@ function EditProfile() {
       form_data.append("Image", image);
       form_data.append("PhoneNumber", values.PhoneNumber);
       form_data.append("CategoryId", values.CategoryId);
-      form_data.append("SkillsId", [1,2]);
-      // form_data.append("SkillsId", 2);
+      // form_data.append("SkillsId", [1, 2]);
+      form_data.append("SkillsId", 2);
+      form_data.append("SkillsId", 3);
+
 
       const { data } = await axios.put(
         `http://localhost:5140/api/Freelancer/${userId}`,
@@ -65,8 +67,12 @@ function EditProfile() {
           },
         }
       );
-      toast.success(data);
-      console.log(data);
+      toast.success("updated");
+      // console.log(data);
+      if(data.isSuccess === true)
+      {
+        navigate('/')
+      }
     } catch (error) {
       toast(error.message);
     }
@@ -268,7 +274,7 @@ function EditProfile() {
                                   id="SkillsId"
                                   name="SkillsId"
                                   value={formik.values.SkillsId}
-                                  onChange={formik.handleChange}
+                                  // onChange={formik.handleChange}
                                   onBlur={formik.handleBlur}
                                   options={skillsData?.data.result || []}
                                   getOptionLabel={(option) => option.name} // Show name
