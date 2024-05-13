@@ -3,12 +3,31 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { TextField, Autocomplete } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+
 
 function PostJob() {
   const token = localStorage.getItem("autoToken");
   const [cats, setCat] = useState([]);
   const [skills, setSkills] = useState([]);
   const [selectedSkills_id, setSelectedSkillsId] = useState([]);
+
+const schema = yup
+  .object()
+  .shape({
+    expectedDuration: yup.object().shape({
+      months: yup.number().required(),
+      days: yup
+        .number()
+        .min(1, "Days must be greater than or equal to 0")
+        .max(29, "Days must be less than or equal to 29")
+        .required(),
+    }),
+  })
+  .required();
+
   
   const nav = useNavigate();
   const {
@@ -28,6 +47,9 @@ function PostJob() {
         days: 0,
       },
     },
+    
+    resolver: yupResolver(schema),
+  
   });
 
   useEffect(() => {

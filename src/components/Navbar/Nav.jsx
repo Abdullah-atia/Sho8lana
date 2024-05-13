@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
@@ -8,8 +9,7 @@ function Nav() {
 
     const logout = (e) => {
         e.preventDefault();
-        console.log('Logout');
-
+        toast("Logout", { icon: "👏" })
         localStorage.clear();
         sessionStorage.clear();
 

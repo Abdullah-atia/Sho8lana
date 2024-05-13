@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { AdminContext } from "../../Context/AdminContext";
 // import { useAdmin } from "../../Context/AdminContext";
 import {  useNavigate, Link } from "react-router-dom";
+import { esAR } from "rsuite/esm/locales";
 
 
 function TestSignin() {
@@ -53,11 +54,14 @@ function TestSignin() {
         
         
       }
+      else {
+        toast.error("email or password is wrong")
+      }
       
     }
 
     catch (error) {
-      toast(error)
+      toast(error.message)
       console.error(error);
     }
   };
