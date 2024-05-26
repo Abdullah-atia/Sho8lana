@@ -21,6 +21,8 @@ import PostCategory from "./pages/PostCategory/PostCategory";
 import PostSkill from "./pages/PostCategory/PostSkill";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Loader from "./components/Loading/Loader";
+import Category from "./pages/Category/Category";
+import UpdateCategory from "./pages/Category/UpdateCategory";
 // import EditProfile from "./pages/Profile/EditProfile";
 // import Profile from "./pages/Profile/Profile";
 
@@ -54,7 +56,8 @@ function App() {
                 <Route path="job/:id" element={<Task />} />
                 <Route path="/Profile/:userId" element={<Profile />} />
                 <Route path="/EditProfile/:userId" element={<EditProfile />} />
-
+                <Route path="/allCategory" element= {<Category />} />
+                <Route path="/updateCategory/:id" element ={<UpdateCategory />} />
                 <Route path="/signin" element={<TestSignin />} />
                 <Route path="/clientsignup" element={<ClientSignup />} />
                 <Route path="/freesignup" element={<FreelancerSignup />} />
