@@ -83,7 +83,7 @@ function PostCategory() {
 
   return (
     <div>
-      <Sidebar active={"category"} />
+      <Sidebar active={"addcategory"} />
       <div
         className="d-flex justify-content-center align-items-center p-5"
         style={{
@@ -177,7 +177,6 @@ function PostCategory() {
                   )}
                 </div>
                 {errors?.Image && <span>{errors.Image.message}</span>}
-              
               </div>
             </div>
             <button type="submit" className="w-btn-secondary-lg">

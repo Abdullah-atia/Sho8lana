@@ -1,4 +1,5 @@
 function Services() {
+  
   return (
     <div className="py110 bg">
       <div className="container">
@@ -395,7 +396,7 @@ function Services() {
           </div>
         </div>
         {/* Content */}
-        <div className="tab-content" id="nav-tabContent">
+        {/* <div className="tab-content" id="nav-tabContent">
           <div
             className="tab-pane fade show active"
             id="nav-grid"
@@ -1788,7 +1789,9 @@ function Services() {
               </article>
             </div>
           </div>
-        </div>
+        </div> */}
+
+
         {/* Pagination */}
         <div className="row justify-content-center mt-3">
           <div className="col-auto">

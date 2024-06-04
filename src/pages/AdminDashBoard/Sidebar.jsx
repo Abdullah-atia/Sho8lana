@@ -35,7 +35,7 @@ function Sidebar({active}) {
           </li>
           <li className="sidebar-nav-item">
             <Link
-              to="/admin"
+              to="/allCategory"
               className={
                 active === "category"
                   ? "sidebarNavLink active"
@@ -50,7 +50,7 @@ function Sidebar({active}) {
             <Link
               to="/postCategory"
               className={
-                active === "category"
+                active === "addcategory"
                   ? "sidebarNavLink active"
                   : "sidebarNavLink"
               }
