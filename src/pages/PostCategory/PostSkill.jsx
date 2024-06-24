@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Sidebar from "../AdminDashBoard/Sidebar";
 
 function PostSkill() {
     const token = localStorage.getItem("autoToken")
@@ -44,46 +45,52 @@ function PostSkill() {
   };
 
     return (
-        <div style= {{ backgroundColor : "var(--off-white)" }}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <Sidebar active={"skill"} />
         <div
-          className="d-flex flex-column gap-4 rounded py110"
-          style={{ width: "990px", backgroundColor: "var(--white)" }}
+          style={{ backgroundColor: "var(--off-white)", minHeight: "100vh" }}
+          className="d-flex align-items-center justify-content-center"
         >
-          <div className="gig-info-header">
-            <h4 className="text-18 fw-semibold text-dark-300">Add Skill</h4>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div
+              className="d-flex flex-column gap-4 rounded "
+              style={{ width: "990px", backgroundColor: "var(--white)" }}
+            >
+              <div className="gig-info-header">
+                <h4 className="text-18 fw-semibold text-dark-300">Add Skill</h4>
+              </div>
 
-          <div className="gig-info-body bg-white ">
-            <div className="row g-4">
-              <div className="col-12">
-                <div className="form-container">
-                  <label htmlFor="title" className="form-label">
-                    Skill Name
-                    <span className="text-lime-300">*</span>
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    className="form-control shadow-none"
-                    placeholder="Title name here"
-                    name="name"
-                    {...register("name", {
-                      required: "Name is required",
-                    })}
-                  />
-                  {errors?.name && <span>{errors.name.message}</span>}
+              <div className="gig-info-body bg-white ">
+                <div className="row g-4">
+                  <div className="col-12">
+                    <div className="form-container">
+                      <label htmlFor="title" className="form-label">
+                        Skill Name
+                        <span className="text-lime-300">*</span>
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        className="form-control shadow-none"
+                        placeholder="Title name here"
+                        name="name"
+                        {...register("name", {
+                          required: "Name is required",
+                        })}
+                      />
+                      {errors?.name && <span>{errors.name.message}</span>}
+                    </div>
+                  </div>
                 </div>
+                <button type="submit" className="w-btn-secondary-lg mt-4">
+                  Add Skill
+                </button>
               </div>
             </div>
-            <button type="submit" className="w-btn-secondary-lg mt-4">
-                Add Skill
-            </button>
-          </div>
-          </div>
           </form>
         </div>
-    )
+      </div>
+    );
 }
 
 export default PostSkill
