@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loading/Loader";
+import { Link } from "react-router-dom";
 
-function Services() {
+function Projects() {
   const [project, setProject] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -138,9 +139,11 @@ function Services() {
                             </h3>
                           </div>
                         </div>
-                        <h3 className="serviceTitle fw-semibold">
-                          <a href="#">{item.title}</a>
-                        </h3>
+                        <Link to={`/ProjectDetails/${item.id}`}>
+                          <h3 className="serviceTitle fw-semibold">
+                            {item.title}
+                          </h3>
+                        </Link>
                         <div className="d-flex align-items-center serviceCardOwner">
                           <img className="serviceCardOwnerImg" alt="" />
                           <a href="#" className="serviceCardOwnerName">
@@ -152,7 +155,6 @@ function Services() {
                   </div>
                 </article>
               ))}
-              
             </div>
           </div>
           <div
@@ -226,4 +228,4 @@ function Dropdown({ title, children }) {
   );
 }
 
-export default Services;
+export default Projects;

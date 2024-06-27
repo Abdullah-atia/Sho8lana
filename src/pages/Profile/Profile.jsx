@@ -90,7 +90,7 @@ export default function Profile() {
                   <p className="textDark300 fw600">English</p>
                 </li>
               </ul>
-              <Link to="/editProfile/:userId" className="wbtnsecondarylg w-100">
+              <Link to={`/editProfile/${userId}`} className="wbtnsecondarylg w-100">
                 Contact Me
                 <svg
                   width={14}
@@ -639,7 +639,7 @@ function Client() {
                   <p className="textDark300 fw600">English</p>
                 </li>
               </ul>
-              <Link to="/editProfile/:userId" className="wbtnsecondarylg w-100">
+              <Link to={`/editProfile/${userId}`} className="wbtnsecondarylg w-100">
                 Contact Me
                 <svg
                   width={14}
