@@ -10,7 +10,7 @@ function AuthProvider({ children }) {
     if (savedToken) {
       setToken(savedToken);
     }
-  }, [setToken]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>

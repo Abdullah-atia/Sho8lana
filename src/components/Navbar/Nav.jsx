@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/Auth"; // Ensure this matches the export
@@ -6,6 +6,7 @@ import { AuthContext } from "../../Context/Auth"; // Ensure this matches the exp
 function Nav() {
   const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
 
   // useEffect(() => {
   //   const savedToken = localStorage.getItem("autoToken");
@@ -13,6 +14,22 @@ function Nav() {
   //     setToken(savedToken);
   //   }
   // }, [setToken]);
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset >= 250) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const logout = (e) => {
     e.preventDefault();
@@ -24,8 +41,10 @@ function Nav() {
   };
 
   return (
-    <>
-      <header className="headerPrimary">
+    // <>
+      <header
+        className={` ${scrolled ? "headerPrimary bg-danger" : "headerPrimary"}`}
+      >
         <div className="container">
           <nav className="navbar navbar-expand-xl justify-content-between">
             <Link to="/">
@@ -264,7 +283,7 @@ function Nav() {
           </nav>
         </div>
       </header>
-    </>
+    // </>
   );
 }
 
