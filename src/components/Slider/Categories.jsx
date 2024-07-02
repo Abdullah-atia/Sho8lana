@@ -78,7 +78,7 @@ function Categories() {
         slidesToSlide={2}
         swipeable
       >
-        {data.data.result.map((item) =>{
+        {data?.data.result.map((item) =>{
           return (
             <div className="me-3 d-flex justify-content-center align-items-center text-center" key={item.id}>
               <div className="featureCategoryCard bg-white">

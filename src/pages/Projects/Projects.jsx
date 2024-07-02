@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loading/Loader";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-function Services() {
+function Projects() {
   const [project, setProject] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [projectPerPage] = useState(10); 
   const [totalPages, setTotalPages] = useState(1); 
   const [error, setError] = useState(null);
+  const [clients, setClients] = useState("");
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -18,8 +22,20 @@ function Services() {
           `http://localhost:5140/api/Project`
         );
         const data = await response.json();
-        setProject(data.result);
-        setTotalPages(Math.ceil(data.totalCount / projectPerPage)); 
+        setProject(data?.result);
+        console.log(data?.result)
+                const clientIds = data.result.map(project => project.clientId);
+        const uniqueClientIds = [...new Set(clientIds)];
+        const clientDataPromises = uniqueClientIds.map(clientId =>
+          axios.get(`http://localhost:5140/api/client/${clientId}`).then(res => ({ [clientId]: res.data.result  }))
+        )
+         const clientDataArray = await Promise.all(clientDataPromises);
+         const clientData = clientDataArray.reduce(
+           (acc, client) => ({ ...acc, ...client }),
+           {}
+         );
+         console.log(clientData)
+         setClients(clientData);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -28,12 +44,9 @@ function Services() {
     };
     fetchPosts();
   }, [currentPage, projectPerPage]);
+  
+ 
 
-  const handlePageChange = (page) => {
-    if (page > 0 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
 
   if (loading) {
     return <Loader />;
@@ -46,72 +59,6 @@ function Services() {
   return (
     <div className="py110 bg">
       <div className="container">
-        <div className="row justify-content-between mb-40">
-          <div className="col-xl-auto">
-            <div className="d-flex flex-wrap gap-3">
-              {/* Category */}
-              <Dropdown title="All Categories">Dropdown items</Dropdown>
-              {/* Sub Category */}
-              <Dropdown title="Sub Categories">Dropdown items</Dropdown>
-              {/* Budget */}
-              <Dropdown title="Budget">
-                <div className="p-3 py-2">
-                  <input type="range" className="form-range shadow-none" />
-                  <div className="d-flex">
-                    <p className="text-dark-200">$15.00</p>-
-                    <p className="text-dark-200">$1800.00</p>
-                  </div>
-                </div>
-              </Dropdown>
-              {/* Rating */}
-              <Dropdown title="Rating">{/* Rating items */}</Dropdown>
-            </div>
-          </div>
-          <div className="col-xl-auto col-md-7 mt-4 mb-4 mt-xl-0">
-            <div className="d-inline-flex justify-content-lg-end gap-3 bg-white rounded-2 py-2 px-4 pe-2">
-              <div className="d-flex align-items-center gap-2">
-                <label className="flex-shrink-0">Sort By:</label>
-                <select className="select-dropdown border-0 bg-offWhite shadow-none">
-                  <option value={0}>Most Relevant</option>
-                  <option value={1}>Top Seller</option>
-                </select>
-              </div>
-              <nav>
-                <div
-                  className="freelancer-tab-nav d-flex gap-3 align-items-center"
-                  id="nav-tab"
-                  role="tablist"
-                >
-                  <button
-                    className="freelancer-tab-link active"
-                    id="nav-grid-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#nav-grid"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-grid"
-                    aria-selected="true"
-                  >
-                    Grid
-                  </button>
-                  <button
-                    className="freelancer-tab-link"
-                    id="nav-list-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#nav-list"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-list"
-                    aria-selected="false"
-                    tabIndex={-1}
-                  >
-                    List
-                  </button>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
@@ -128,7 +75,12 @@ function Services() {
                     <div className="serviceCard bg-white">
                       <div className="position-relative">
                         {/* <img src="./assets/service/1.png" height={180} className="viewCardImg w-100" alt="" /> */}
-                        <button className="serviceCardBtn">View</button>
+                        <Link
+                          to={`/ProjectDetails/${item.id}`}
+                          className="serviceCardBtn"
+                        >
+                          View
+                        </Link>
                       </div>
                       <div className="serviceCardContent">
                         <div className="d-flex align-items-center justify-content-between">
@@ -138,21 +90,39 @@ function Services() {
                             </h3>
                           </div>
                         </div>
-                        <h3 className="serviceTitle fw-semibold">
-                          <a href="#">{item.title}</a>
-                        </h3>
-                        <div className="d-flex align-items-center serviceCardOwner">
+                        <Link to={`/ProjectDetails/${item.id}`}>
+                          <h3 className="serviceTitle fw-semibold">
+                            {item.title}
+                          </h3>
+                        </Link>
+                        {/* <div className="d-flex align-items-center serviceCardOwner">
                           <img className="serviceCardOwnerImg" alt="" />
-                          <a href="#" className="serviceCardOwnerName">
+                          <Link to="/" className="serviceCardOwnerName">
                             Nankathan
-                          </a>
+                          </Link>
+                        </div> */}
+                        <div className="d-flex align-items-center serviceCardOwner">
+                          {clients[item.clientId] && (
+                            <>
+                              <img
+                                src={clients[item.clientId].imageUrl}
+                                className="serviceCardOwnerImg"
+                                alt={clients[item.clientId].name}
+                              />
+                              <Link
+                                to={`/profile/${clients[item.clientId].id}`}
+                                className="serviceCardOwnerName"
+                              >
+                                {clients[item.clientId].name}
+                              </Link>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
                 </article>
               ))}
-              
             </div>
           </div>
           <div
@@ -226,4 +196,4 @@ function Dropdown({ title, children }) {
   );
 }
 
-export default Services;
+export default Projects;

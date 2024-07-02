@@ -1,17 +1,30 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { MdAddToPhotos } from "react-icons/md";
 import { RiHome3Fill } from "react-icons/ri";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { IoBagRemoveSharp } from "react-icons/io5";
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../Context/Auth';
+import { useContext } from 'react';
 
 
 
 
 
 function Sidebar({active}) {
+  const navigate = useNavigate();
+  const { token, setToken } = useContext(AuthContext);
 
+  const logout = (e) => {
+    e.preventDefault();
+    toast("Logout", { icon: "👏" });
+    setToken(null);
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/");
+  };
     return (
       <div className="dashboardSidebar min-vh-100 d-none d-xl-block">
         <div className="p-4">
@@ -89,8 +102,10 @@ function Sidebar({active}) {
             <button
               className="sidebarNavLink"
               type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#logoutModal"
+              // data-bs-toggle="modal"
+              // data-bs-target="#logoutModal"
+              onClick={logout}
+              
             >
               <FaSignOutAlt style={{ width: "20px", height: "20px" }} />
               Logout

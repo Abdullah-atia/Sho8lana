@@ -69,7 +69,7 @@ function PostCategory() {
 
 
       if (response.ok === true) {
-        nav("/service")
+        nav("/Projects");
       }
       else{
         toast.error(response.statusText)
