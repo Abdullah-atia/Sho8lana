@@ -28,6 +28,10 @@ import ProjectProposal from "./pages/Projects/projectProposal";
 import PropasalForm from "./pages/ProjectProposal/PropasalForm";
 import ReplayProposal from "./pages/ProjectProposal/ReplayProposal";
 import AuthProvider from "./Context/Auth";
+import MyProject from "./pages/FreelancerDashBoard/MyProject";
+import JobForm from "./pages/FreelancerDashBoard/JobForm";
+import MyJobs from "./pages/FreelancerDashBoard/MyJobs";
+import JobProposalForm from "./pages/FreelancerDashBoard/JobProposalForm"
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const EditProfile = lazy(() => import("./pages/Profile/EditProfile"));
 
@@ -51,7 +55,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <AdminProvider>
             <BrowserRouter>
-              <Nav />
+              {/* <Nav /> */}
               <Toaster position="bottom-right" reverseOrder={false} />
               <Suspense fallback={<Loader />}>
                 <Routes>
@@ -62,6 +66,7 @@ function App() {
                     path="/myProjects/:userId"
                     element={<ClientProject />}
                   />
+                  <Route path="/myJobs" element={<MyJobs />} />
                   <Route
                     path="/ProjectProposal/:projectId"
                     element={<ProjectProposal />}
@@ -78,7 +83,13 @@ function App() {
                     path="/ReplayProposal/:proposalId"
                     element={<ReplayProposal />}
                   />
-                  <Route path="job/:id" element={<Task />} />
+                  <Route path="/myprojects" element={<MyProject />} />
+                  <Route path="/job/:projectId" element={<JobForm />} />
+                  <Route
+                    path="jobPtoposal/:jobId"
+                    element={<JobProposalForm />}
+                  />
+                  {/* <Route path="job/:id" element={<Task />} /> */}
                   <Route path="/Profile/:userId" element={<Profile />} />
                   <Route
                     path="/EditProfile/:userId"

@@ -1,60 +1,41 @@
-import { useEffect, useState } from "react";
-import Loader from "../../components/Loading/Loader";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
-function Projects() {
-  const [project, setProject] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [projectPerPage] = useState(10); 
-  const [totalPages, setTotalPages] = useState(1); 
-  const [error, setError] = useState(null);
-  const [clients, setClients] = useState("");
-
+function MyProject() {
+  const [projects, setProjects] = useState([]);
+  const token = localStorage.getItem("autoToken");
+  const userId = localStorage.getItem("user_id");
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          `http://localhost:5140/api/Project`
-        );
-        const data = await response.json();
-        setProject(data?.result);
-        console.log(data?.result)
-                const clientIds = data.result.map(project => project.clientId);
-        const uniqueClientIds = [...new Set(clientIds)];
-        const clientDataPromises = uniqueClientIds.map(clientId =>
-          axios.get(`http://localhost:5140/api/client/${clientId}`).then(res => ({ [clientId]: res.data.result  }))
-        )
-         const clientDataArray = await Promise.all(clientDataPromises);
-         const clientData = clientDataArray.reduce(
-           (acc, client) => ({ ...acc, ...client }),
-           {}
-         );
-         console.log(clientData)
-         setClients(clientData);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPosts();
-  }, [currentPage, projectPerPage]);
-  
- 
-
-
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    if (userId) {
+      fetch(`http://localhost:5140/api/Project/freelancer/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.isSuccess) {
+            return Promise.all(
+              data.result.map((projectId) =>
+                fetch(`http://localhost:5140/api/Project/${projectId}:int`, {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }).then((response) => response.json())
+              )
+            );
+          } else {
+            throw new Error("Failed to fetch project IDs");
+          }
+        })
+        .then((projectsData) => {
+          const projects = projectsData.map((data) => data.result);
+          setProjects(projects);
+        })
+        .catch((error) => console.error("Error fetching projects:", error));
+    }
+  }, [userId, token]);
 
   return (
     <div className="py110 bg">
@@ -69,7 +50,7 @@ function Projects() {
             tabIndex={0}
           >
             <div className="row row-cols-1 row-cols-xl-5 row-cols-lg-3 row-cols-md-2">
-              {project.map((item, index) => (
+              {projects.map((item, index) => (
                 <article className="col mb-4" key={index}>
                   <div className="swiperSlide">
                     <div className="serviceCard bg-white">
@@ -95,9 +76,15 @@ function Projects() {
                             {item.title}
                           </h3>
                         </Link>
-                       
+
                         <div className="d-flex align-items-center serviceCardOwner">
-                          {clients[item.clientId] && (
+                          <Link
+                            to={`/job/${item.id}`}
+                            className="wbtnsecondarylg"
+                          >
+                            Create SubProject
+                          </Link>
+                          {/* {clients[item.clientId] && (
                             <>
                               <img
                                 src={clients[item.clientId].imageUrl}
@@ -111,7 +98,7 @@ function Projects() {
                                 {clients[item.clientId].name}
                               </Link>
                             </>
-                          )}
+                          )} */}
                         </div>
                       </div>
                     </div>
@@ -130,26 +117,9 @@ function Projects() {
             {/* List View */}
           </div>
         </div>
-      
       </div>
     </div>
   );
 }
 
-function Dropdown({ title, children }) {
-  return (
-    <div className="custom-dropdown dropdown">
-      <button
-        className="custom-dropdown-toggle dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        {title}
-      </button>
-      <ul className="custom-dropdown-menu dropdown-menu">{children}</ul>
-    </div>
-  );
-}
-
-export default Projects;
+export default MyProject;
