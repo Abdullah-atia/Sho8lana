@@ -52,11 +52,11 @@ function ProjectProposal() {
           <p>Description: {prop.description}</p>
           <p>Price: ${prop.price}</p>
           <p>Deliver Date: {prop.deliverDate}</p>
-          <div>
+          {/* <div>
             <h3>Proposal Reply</h3>
             <p>Accepted: {prop.proposalReplay.isAccepted ? "Yes" : "No"}</p>
             <p>Note: {prop.proposalReplay.note}</p>
-          </div>
+          </div> */}
           <p>Freelancer ID: {prop.freelancerId}</p>
           <p>Work ID: {prop.workId}</p>
           <Link to={`/ReplayProposal/${prop.id}`} className="wbtnsecondarylg" style={{width: "200px"}}>

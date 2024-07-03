@@ -65,7 +65,7 @@ function JobForm() {
           >
             <div className="gig-info-header">
               <h4 className="text-18 fw-semibold text-dark-300">
-                Ceate SubProject
+                Create SubProject
               </h4>
             </div>
 

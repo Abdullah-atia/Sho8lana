@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/Auth"; // Ensure this matches the export
+import logo from "./../../Assest/logo.svg";
 
 function Nav() {
   const { token, setToken } = useContext(AuthContext);
@@ -48,14 +49,14 @@ function Nav() {
       <div className="container">
         <nav className="navbar navbar-expand-xl justify-content-between">
           <Link to="/">
-            <img height={50} width={40} src="./logo.svg" alt="Logo" />
+            <img height={60} width={60} src={logo} alt="Logo22" />
           </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="d-block d-xl-none">
                 <div className="logo">
                   <Link to="/">
-                    <img src="./logo.svg" alt="Logo" />
+                    <img src="./logo.svg" alt="Logo 11" />
                   </Link>
                 </div>
                 <button onClick={logout}>Logout</button>
