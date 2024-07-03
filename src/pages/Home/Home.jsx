@@ -30,7 +30,7 @@ function Home() {
       <div className="container py110">
         <MainCard />
       </div>
-      <div style={{marginTop :"100px"}}>
+      <div style={{marginTop :"100px", marginBottom: "100px"}}>
         <BusinessCard />
       </div>
       <Footer />

@@ -3,13 +3,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AdminContext } from "../../Context/AdminContext";
 // import { useAdmin } from "../../Context/AdminContext";
-import {  useNavigate, Link } from "react-router-dom";
-import { esAR } from "rsuite/esm/locales";
-
+import { useNavigate, Link } from "react-router-dom";
 
 function TestSignin() {
-  const {isAdmin, setIsAdmin}= useContext(AdminContext)
-  const nav = useNavigate()
+  const { isAdmin, setIsAdmin } = useContext(AdminContext);
+  const nav = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,69 +32,63 @@ function TestSignin() {
       // console.log(data);
       const responseData = await response.json();
       if (responseData?.isSuccess === true) {
-        localStorage.setItem("autoToken", responseData.result.token )
-        localStorage.setItem("user_id", responseData.result.Id)
-        localStorage.setItem("user_role", responseData.result.role)
+        localStorage.setItem("autoToken", responseData.result.token);
+        localStorage.setItem("user_id", responseData.result.Id);
+        localStorage.setItem("user_role", responseData.result.role);
 
-        
-        if (responseData.result.role === 'Admin'){
-          localStorage.setItem("Admin",responseData.result.role )
+        if (responseData.result.role === "Admin") {
+          localStorage.setItem("Admin", responseData.result.role);
 
-          setIsAdmin(true)
-          console.log("Admin")
-          nav("/admin")
+          setIsAdmin(true);
+          console.log("Admin");
+          window.location.replace("/admin");
+        } else {
+          const user_id = localStorage.getItem("user_id");
+          window.location.replace(`/Profile/${user_id}`);
+          // nav(`/Profile/${user_id}`, { replace: true }); // REPLACE, redirect
         }
-          else{
-            const user_id = localStorage.getItem('user_id')
-        nav(`/Profile/${user_id}`)
-        
-          }
-        
-        
+      } else {
+        toast.error("email or password is wrong");
       }
-      else {
-        toast.error("email or password is wrong")
-      }
-      
-    }
-
-    catch (error) {
-      toast(error.message)
+    } catch (error) {
+      toast(error.message);
       console.error(error);
     }
   };
-  
 
   return (
     <div>
-        <div className="headerLogin ">
-          <div className=" container">
-            <div className="col-auto ">
-              <div className="position-relative z-2" data-aos="fade-up">
-                <h2 className="sectionTitleLight mb-2">Sign In</h2>
-                <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb wbreadcrumb">
-                    <li className="breadcrumbitem">
-                      <Link className="text-white" to="/">
-                        Home
-                      </Link>
-                    </li>
-                    <li className="breadcrumbitem active " aria-current="page" style={{color: "var(--lime-300)"}}>
-                      SignIn
-                    </li>
-                  </ol>
-                </nav>
-              </div>
+      <div className="headerLogin ">
+        <div className=" container">
+          <div className="col-auto ">
+            <div className="position-relative z-2" data-aos="fade-up">
+              <h2 className="sectionTitleLight mb-2">Sign In</h2>
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb wbreadcrumb">
+                  <li className="breadcrumbitem">
+                    <Link className="text-white" to="/">
+                      Home
+                    </Link>
+                  </li>
+                  <li
+                    className="breadcrumbitem active "
+                    aria-current="page"
+                    style={{ color: "var(--lime-300)" }}
+                  >
+                    SignIn
+                  </li>
+                </ol>
+              </nav>
             </div>
           </div>
         </div>
-      
+      </div>
+
       <div className="py110 ">
         <div className="container">
           <div className="mb-5">
             <div className="row justify-content-center">
-              <div className="col-auto">
-              </div>
+              <div className="col-auto"></div>
             </div>
           </div>
           <div className="bg-white rounded-3 p-3">
@@ -147,16 +139,17 @@ function TestSignin() {
                       </div>
                     </div>
                     <div className="d-grid mt-4">
-                      <button type="submit"  className="wbtnsecondarylg" >
+                      <button type="submit" className="wbtnsecondarylg">
                         Login
                       </button>
                     </div>
                   </div>
                 </form>
                 <div className="mt-4">
-                <p className="text-center formtext">
-                Don't have an account ?<Link to="/clientsignup" > Signup </Link>
-              </p>
+                  <p className="text-center formtext">
+                    Don't have an account ?
+                    <Link to="/clientsignup"> Signup </Link>
+                  </p>
                 </div>
               </div>
               <div className="col-lg-6">

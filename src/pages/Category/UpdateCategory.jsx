@@ -73,30 +73,50 @@ function UpdateCategory() {
   };
 
   return (
-    <div>
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ width: "100%", height: "100vh", backgroundColor: "#f7f5f0" }}
+    >
       <form onSubmit={formik.handleSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
+        <div className="gig-info-body bg-white" style={{ width: "990px" }}>
+          <div className="row gap-4">
+            <div className="gig-info-header">
+              <h4 className="text-18 fw-semibold text-dark-300">Update Category</h4>
+            </div>
+            <div className="cal-12">
+              <div className="form-container">
+                <label className="form-label" htmlFor="name">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                  className="form-control shadow-none"
+                />
+              </div>
+            </div>
+            <div className="col-12">
+              <div className="form-container">
+                <label className="form-label" htmlFor="image">
+                  Image
+                </label>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  onChange={handleImageChange}
+                  className="form-control shadow-none"
+                />
+              </div>
+              <button className="wbtnsecondarylg mt-4" type="submit">
+                Update Category
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="image">Image</label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            onChange={handleImageChange}
-          />
-        </div>
-        <button className="wbtnsecondarylg" type="submit">
-          Update Category
-        </button>
       </form>
     </div>
   );

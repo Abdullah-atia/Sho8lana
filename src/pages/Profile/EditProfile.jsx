@@ -8,7 +8,7 @@ import useCategory from "../../hooks/useCategory";
 import useSkills from "../../hooks/useSkills";
 import Loader from "../../components/Loading/Loader";
 import { MdFileUpload } from "react-icons/md";
-import Sidebar from "../AdminDashBoard/Sidebar";
+import Sidebar from "./Sidebar";
 import { useFormik } from "formik";
 import axios from "axios";
 function EditProfile(){
@@ -43,9 +43,9 @@ function Freelancer() {
       console.log("image", image);
       formik.setValues({
         // Image : data.data.result.imageUrl || null,
-        Name: data.data.result.name || "",
-        PhoneNumber: data.data.result.phoneNumber || "",
-        CategoryId: data.data.result.categoryId || "",
+        Name: data?.data.result.name || "",
+        PhoneNumber: data?.data.result.phoneNumber || "",
+        CategoryId: data?.data.result.categoryId || "",
         SkillsId: [],
       });
     }
@@ -401,8 +401,8 @@ function Client() {
       console.log("image", image);
       formik.setValues({
         // Image : data.data.result.imageUrl || null,
-        Name: data.data.result.name || "",
-        PhoneNumber: data.data.result.phoneNumber || "",
+        Name: data?.data.result.name || "",
+        PhoneNumber: data?.data.result.phoneNumber || "",
       });
     }
   }, [data]);

@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/Auth";
 import { useContext } from "react";
 
-function Sidebar({ active }) {
+function FreeSidebar({ active }) {
   const navigate = useNavigate();
   const { token, setToken } = useContext(AuthContext);
   const userId = localStorage.getItem("user_id");
@@ -92,4 +92,4 @@ function Sidebar({ active }) {
   );
 }
 
-export default Sidebar;
+export default FreeSidebar;
