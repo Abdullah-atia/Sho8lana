@@ -9,13 +9,12 @@ import {
   Grid,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "../../components/Loading/Loader";
 
-function ProjectProposal() {
-  const { projectId } = useParams();
+function CommingProposal() {
+  const userId = localStorage.getItem("user_id");
   const token = localStorage.getItem("autoToken");
-
   const [proposal, setProposal] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +22,7 @@ function ProjectProposal() {
     const fetchProposalData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5140/api/ProjectProposal/${projectId}`,
+          `http://localhost:5140/api/JobProposal/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -40,12 +39,14 @@ function ProjectProposal() {
       }
     };
     fetchProposalData();
-  }, [projectId, token]);
+  }, [userId, token]);
 
   if (loading) {
-    return <div>
+    return (
+      <div>
         <Loader />
-    </div>;
+      </div>
+    );
   }
 
   if (!proposal) {
@@ -61,7 +62,8 @@ function ProjectProposal() {
           <Grid item key={proposal.id} xs={12} sm={6} md={4}>
             <Card sx={{ borderRadius: "16px" }}>
               <CardHeader
-                title={`Proposal ${proposal.id}`}
+                variant="h3"
+                title="Proposal"
                 titleTypographyProps={{ align: "center" }}
                 sx={{ backgroundColor: "rgba(34,190,13,0.2)" }}
               />
@@ -92,7 +94,7 @@ function ProjectProposal() {
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <Link
-                    to={`/ReplayProposal/${proposal.id}`}
+                    to={`/ReplayProposalJob/${proposal.id}`}
                     className="wbtnsecondarylg"
                     style={{ width: "200px" }}
                   >
@@ -107,4 +109,4 @@ function ProjectProposal() {
     </Container>
   );
 }
-export default ProjectProposal;
+export default CommingProposal;

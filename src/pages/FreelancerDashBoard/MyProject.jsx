@@ -18,7 +18,7 @@ function MyProject() {
           if (data.isSuccess) {
             return Promise.all(
               data.result.map((projectId) =>
-                fetch(`http://localhost:5140/api/Project/${projectId}:int`, {
+                fetch(`http://localhost:5140/api/Project/${projectId}`, {
                   headers: {
                     Authorization: `Bearer ${token}`,
                   },

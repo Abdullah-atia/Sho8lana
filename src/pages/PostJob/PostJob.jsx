@@ -126,7 +126,7 @@ const schema = yup
         >
           <div className="gig-info-card">
             <div className="gig-info-header">
-              <h4 className="text-18 fw-semibold text-dark-300">Job Info</h4>
+              <h4 className="text-18 fw-semibold text-dark-300">Create Project</h4>
             </div>
             <div className="gig-info-body bg-white">
               <div className="row g-4">

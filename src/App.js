@@ -32,6 +32,8 @@ import MyProject from "./pages/FreelancerDashBoard/MyProject";
 import JobForm from "./pages/FreelancerDashBoard/JobForm";
 import MyJobs from "./pages/FreelancerDashBoard/MyJobs";
 import JobProposalForm from "./pages/FreelancerDashBoard/JobProposalForm"
+import CommingProposal from "./pages/FreelancerDashBoard/CommingProposal";
+import ReplayJob from "./pages/FreelancerDashBoard/ReplayJob";
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const EditProfile = lazy(() => import("./pages/Profile/EditProfile"));
 
@@ -55,7 +57,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <AdminProvider>
             <BrowserRouter>
-              <Nav />
+              {/* <Nav /> */}
               <Toaster position="bottom-right" reverseOrder={false} />
               <Suspense fallback={<Loader />}>
                 <Routes>
@@ -86,8 +88,13 @@ function App() {
                   <Route path="/myprojects" element={<MyProject />} />
                   <Route path="/job/:projectId" element={<JobForm />} />
                   <Route
-                    path="jobPtoposal/:jobId"
+                    path="/jobPtoposal/:jobId"
                     element={<JobProposalForm />}
+                  />
+                  <Route path="ComingProposal" element={<CommingProposal />} />
+                  <Route
+                    path="/ReplayProposalJob/:proposalId"
+                    element={<ReplayJob />}
                   />
                   {/* <Route path="job/:id" element={<Task />} /> */}
                   <Route path="/Profile/:userId" element={<Profile />} />

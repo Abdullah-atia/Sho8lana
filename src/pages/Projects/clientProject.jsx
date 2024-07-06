@@ -26,7 +26,7 @@ function ClientProject() {
       try {
         const projectDetailsPromises = projectIds.map(async (projectId) => {
           const response = await fetch(
-            `http://localhost:5140/api/Project/${projectId}:int`,
+            `http://localhost:5140/api/Project/${projectId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
