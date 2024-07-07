@@ -31,9 +31,9 @@ import AuthProvider from "./Context/Auth";
 import MyProject from "./pages/FreelancerDashBoard/MyProject";
 import JobForm from "./pages/FreelancerDashBoard/JobForm";
 import MyJobs from "./pages/FreelancerDashBoard/MyJobs";
-import JobProposalForm from "./pages/FreelancerDashBoard/JobProposalForm"
-import CommingProposal from "./pages/FreelancerDashBoard/CommingProposal";
-import ReplayJob from "./pages/FreelancerDashBoard/ReplayJob";
+import JobProposalForm from "./pages/FreelancerDashBoard/JobProposalForm";
+import Client from "./pages/Profile/Client";
+import Freelancer from "./pages/Profile/Freelancer";
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const EditProfile = lazy(() => import("./pages/Profile/EditProfile"));
 
@@ -68,6 +68,9 @@ function App() {
                     path="/myProjects/:userId"
                     element={<ClientProject />}
                   />
+                  <Route path="/clientdetails/:userId" element={<Client />} />
+                  <Route path="/freelancerdetails/:userId" element={<Freelancer />} />
+
                   <Route path="/myJobs" element={<MyJobs />} />
                   <Route
                     path="/ProjectProposal/:projectId"
