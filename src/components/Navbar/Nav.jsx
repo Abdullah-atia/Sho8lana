@@ -44,7 +44,9 @@ function Nav() {
   return (
     // <>
     <header
-      className={` ${scrolled ? "headerPrimary bg-danger" : "headerPrimary"}`}
+      className={` ${
+        scrolled ? "headerPrimary backgroundscroll-navbar " : "headerPrimary"
+      }`}
     >
       <div className="container">
         <nav className="navbar navbar-expand-xl justify-content-between">
@@ -63,7 +65,11 @@ function Nav() {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className={` ${
+                    scrolled
+                      ? "nav-link text-white dropdown-toggle backgroundscroll-navbar "
+                      : "nav-link dropdown-toggle"
+                  }`}
                   to="/"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -91,7 +97,11 @@ function Nav() {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className={` ${
+                    scrolled
+                      ? "nav-link text-white dropdown-toggle backgroundscroll-navbar "
+                      : "nav-link dropdown-toggle"
+                  }`}
                   to="#"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -121,13 +131,24 @@ function Nav() {
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <Link
+                  className={` ${
+                    scrolled
+                      ? "nav-link text-white dropdown-toggle backgroundscroll-navbar "
+                      : "nav-link dropdown-toggle"
+                  }`}
+                  to="/about"
+                >
                   About us
                 </Link>
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className={` ${
+                    scrolled
+                      ? "nav-link text-white dropdown-toggle backgroundscroll-navbar "
+                      : "nav-link dropdown-toggle"
+                  }`}
                   to="#"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -211,7 +232,11 @@ function Nav() {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className={` ${
+                    scrolled
+                      ? "nav-link text-white dropdown-toggle backgroundscroll-navbar "
+                      : "nav-link dropdown-toggle"
+                  }`}
                   to="#"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -234,7 +259,14 @@ function Nav() {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contact">
+                <Link
+                  className={` ${
+                    scrolled
+                      ? "nav-link text-white dropdown-toggle backgroundscroll-navbar "
+                      : "nav-link dropdown-toggle"
+                  }`}
+                  to="/contact"
+                >
                   Contact
                 </Link>
               </li>
@@ -252,6 +284,7 @@ function Nav() {
               <div className="align-items-center d-none d-lg-flex">
                 <Link to="/signin" className="headerBtn">
                   <svg
+                  className="me-2"
                     xmlns="http://www.w3.org/2000/svg"
                     width={13}
                     height={17}
@@ -265,9 +298,17 @@ function Nav() {
                       fill="white"
                     ></path>
                   </svg>
-                  Login
+                  Signin
                 </Link>
               </div>
+
+              <div className="align-items-center d-none d-lg-flex">
+                <Link to="/Signup" className="headerBtn">
+                  
+                  Signup
+                </Link>
+              </div>
+
               <button
                 className="navbar-toggler d-block d-xl-none shadow-none border-0"
                 type="button"

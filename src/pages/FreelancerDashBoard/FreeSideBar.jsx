@@ -35,7 +35,7 @@ function FreeSidebar({ active }) {
           <Link
             to={`/myProjects/${userId}`}
             className={
-              active === "myProject"
+              active === "myprojects"
                 ? "sidebarNavLink active"
                 : "sidebarNavLink"
             }
@@ -46,7 +46,7 @@ function FreeSidebar({ active }) {
         </li>
         <li className="sidebar-nav-item">
           <Link
-            to="/proposal"
+            to="/ComingProposal"
             className={
               active === "proposal" ? "sidebarNavLink active" : "sidebarNavLink"
             }

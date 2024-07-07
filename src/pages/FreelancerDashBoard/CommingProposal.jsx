@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loading/Loader";
+import FreeSidebar from "./FreeSideBar";
 
 function CommingProposal() {
   const userId = localStorage.getItem("user_id");
@@ -54,6 +55,7 @@ function CommingProposal() {
   }
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
+      <FreeSidebar active="proposal" />
       <Typography variant="h4" component="h1" gutterBottom>
         Proposal Details
       </Typography>

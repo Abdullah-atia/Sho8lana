@@ -34,6 +34,8 @@ import MyJobs from "./pages/FreelancerDashBoard/MyJobs";
 import JobProposalForm from "./pages/FreelancerDashBoard/JobProposalForm";
 import Client from "./pages/Profile/Client";
 import Freelancer from "./pages/Profile/Freelancer";
+import ReplayJob from "./pages/FreelancerDashBoard/ReplayJob";
+import CommingProposal from "./pages/FreelancerDashBoard/CommingProposal";
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const EditProfile = lazy(() => import("./pages/Profile/EditProfile"));
 
@@ -97,6 +99,7 @@ function App() {
                   <Route path="ComingProposal" element={<CommingProposal />} />
                   <Route
                     path="/ReplayProposalJob/:proposalId"
+                              width={100}
                     element={<ReplayJob />}
                   />
                   {/* <Route path="job/:id" element={<Task />} /> */}

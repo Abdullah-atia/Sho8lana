@@ -1079,3 +1079,6 @@ select:focus {
   height: 52px;
   padding: 0 16px;
 }
+.backgroundscroll-navbar{
+  background-color: #13544ef0;
+}
