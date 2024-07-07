@@ -12,6 +12,9 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Loader from "../../components/Loading/Loader";
+import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
+
 
 export default function ProjectDetails() {
   const { projectId } = useParams();
@@ -139,7 +142,7 @@ export default function ProjectDetails() {
                   Client Info
                 </Typography>
                 <div className="d-flex align-items-center">
-                  <Avatar src="/placeholder-user.jpg" className="mr-3" />
+                  <Avatar src={client.imageUrl} className="mr-3" />
                   <div className="ps-2">
                     <Typography variant="body1" className="font-weight-bold">
                       {client.name || "Acme Inc."}
@@ -153,6 +156,7 @@ export default function ProjectDetails() {
               <Grid item xs={12} container justifyContent="space-between">
                 <Grid item xs={4}>
                   <Link to="/projects" className="wbtnsecondarylg">
+                    <MdOutlineArrowBackIosNew />
                     Back
                   </Link>
                 </Grid>
@@ -161,7 +165,7 @@ export default function ProjectDetails() {
                     to={`/PropasalForm/${projectId}`}
                     className="wbtnsecondarylg"
                   >
-                    Send Proposal
+                    Send Proposal <MdOutlineArrowForwardIos style={{fontWeight:"600"}} />
                   </Link>
                 </Grid>
               </Grid>

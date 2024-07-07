@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { request } from "../../utils/axios-utils";
 import { Link } from "react-router-dom";
+import FreeSidebar from "./FreeSideBar";
 
 function MyJobs() {
   const user_id = localStorage.getItem("user_id");
@@ -26,7 +27,8 @@ function MyJobs() {
 
   return (
     <div className="py110 bg">
-      <div className="container">
+      <FreeSidebar active="test" />
+      <div style={{ height: "78vh" }} className="container dashboardMain ">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div

@@ -66,7 +66,8 @@ function Category() {
                             <img
                               src={category.imageUrl}
                               alt={category.name}
-                              width={100}
+                              width={115}
+                              height={95}
                             />
                           </div>
                           <div className="textDark200">{category.name}</div>

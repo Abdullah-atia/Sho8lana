@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import FreeSidebar from "./FreeSideBar";
 
 function MyProject() {
   const [projects, setProjects] = useState([]);
@@ -39,7 +40,8 @@ function MyProject() {
 
   return (
     <div className="py110 bg">
-      <div className="container">
+      <FreeSidebar active={"test"} />
+      <div style={{height:"78vh"}} className=" dashboardMain container">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
