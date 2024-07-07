@@ -105,7 +105,7 @@ function Projects() {
                                 alt={clients[item.clientId].name}
                               />
                               <Link
-                                to={`/profile/${clients[item.clientId].id}`}
+                                to={`/clientdetails/${clients[item.clientId].id}`}
                                 className="serviceCardOwnerName"
                               >
                                 {clients[item.clientId].name}
