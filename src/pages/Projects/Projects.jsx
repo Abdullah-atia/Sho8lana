@@ -1,41 +1,42 @@
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loading/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { RiAddLargeFill } from "react-icons/ri";
 
 function Projects() {
   const [project, setProject] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectPerPage] = useState(10); 
-  const [totalPages, setTotalPages] = useState(1); 
+  const [projectPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState(null);
   const [clients, setClients] = useState("");
-
+  const navtigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(
-          `http://localhost:5140/api/Project`
-        );
+        const response = await fetch(`http://localhost:5140/api/Project`);
         const data = await response.json();
         setProject(data?.result);
-        console.log(data?.result)
-                const clientIds = data.result.map(project => project.clientId);
+        console.log(data?.result);
+        const clientIds = data.result.map((project) => project.clientId);
         const uniqueClientIds = [...new Set(clientIds)];
-        const clientDataPromises = uniqueClientIds.map(clientId =>
-          axios.get(`http://localhost:5140/api/client/${clientId}`).then(res => ({ [clientId]: res.data.result  }))
-        )
-         const clientDataArray = await Promise.all(clientDataPromises);
-         const clientData = clientDataArray.reduce(
-           (acc, client) => ({ ...acc, ...client }),
-           {}
-         );
-         console.log(clientData)
-         setClients(clientData);
+        const clientDataPromises = uniqueClientIds.map((clientId) =>
+          axios
+            .get(`http://localhost:5140/api/client/${clientId}`)
+            .then((res) => ({ [clientId]: res.data.result }))
+        );
+        const clientDataArray = await Promise.all(clientDataPromises);
+        const clientData = clientDataArray.reduce(
+          (acc, client) => ({ ...acc, ...client }),
+          {}
+        );
+        console.log(clientData);
+        setClients(clientData);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -44,9 +45,6 @@ function Projects() {
     };
     fetchPosts();
   }, [currentPage, projectPerPage]);
-  
- 
-
 
   if (loading) {
     return <Loader />;
@@ -57,7 +55,7 @@ function Projects() {
   }
 
   return (
-    <div className="py110 bg">
+    <div className="py110 bg h-100vh">
       <div className="container">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
@@ -95,7 +93,7 @@ function Projects() {
                             {item.title}
                           </h3>
                         </Link>
-                       
+
                         <div className="d-flex align-items-center serviceCardOwner">
                           {clients[item.clientId] && (
                             <>
@@ -105,7 +103,7 @@ function Projects() {
                                 alt={clients[item.clientId].name}
                               />
                               <Link
-                                to={`/clientdetails/${clients[item.clientId].id}`}
+                                to={`/client/${clients[item.clientId].id}`}
                                 className="serviceCardOwnerName"
                               >
                                 {clients[item.clientId].name}
@@ -130,8 +128,15 @@ function Projects() {
             {/* List View */}
           </div>
         </div>
-      
       </div>
+      <Link
+        style={{ position: "absolute", bottom: 16, right: 16 }}
+        className="wbtnsecondarylg"
+        // onClick={() => navtigate("/postProject")}
+        to="/postProject"
+      >
+        <RiAddLargeFill />
+      </Link>
     </div>
   );
 }

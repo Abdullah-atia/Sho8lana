@@ -2,9 +2,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 
-function JobForm() {
+function DeliveredJob() {
   const { projectId } = useParams();
-  console.log(projectId);
   const token = localStorage.getItem("autoToken");
   const nav = useNavigate();
   const {
@@ -14,29 +13,27 @@ function JobForm() {
     reset,
   } = useForm({
     defaultValues: {
-      description: "",
-      price: 0,
+      link: "",
     },
   });
 
   const onSubmit = async (data) => {
-      const payload = [data]
     try {
       const response = await fetch(
-        `http://localhost:5140/api/Job/${projectId}`,
+        `http://localhost:5140/api/DeliveredProducts/job/${projectId}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(data),
         }
       );
       console.log(response);
 
       if (response.ok) {
-        toast.success("SubProject Created successfully");
+        toast.success("Project Delivered successfully");
         nav("/Projects");
       } else {
         toast.error(response.statusText);
@@ -46,7 +43,6 @@ function JobForm() {
       console.log(error);
     }
   };
-
   return (
     <div>
       {/* <Sidebar active={"addcategory"} /> */}
@@ -65,54 +61,29 @@ function JobForm() {
           >
             <div className="gig-info-header">
               <h4 className="text-18 fw-semibold text-dark-300">
-                Create SubProject
+                Deliverey Job
               </h4>
             </div>
-
             <div className="gig-info-body bg-white ">
               <div className="row g-4">
                 <div className="col-12">
                   <div className="form-container">
-                    <label htmlFor="price" className="form-label">
-                      Price
-                      <span className="text-lime-300">*</span>
-                    </label>
-                    <input
-                      id="price"
-                      type="number"
-                      min="0"
-                      step="1"
-                      className="form-control shadow-none"
-                      placeholder="price"
-                      name="price"
-                      {...register("price", {
-                        required: "price is required",
-                        valueAsNumber: true,
-                      })}
-                    />
-                    {errors?.price && <span>{errors.price.message}</span>}
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="form-container">
-                    <label htmlFor="description" className="form-label">
-                      Description
+                    <label htmlFor="link" className="form-label">
+                      Link
                       <span className="text-lime-300">*</span>
                     </label>
                     <textarea
-                      id="description"
+                      id="link"
                       type="text"
                       style={{ height: "180px" }}
                       className="form-control shadow-none"
-                      placeholder="description"
-                      name="description"
-                      {...register("description", {
-                        required: "description is required",
+                      placeholder="link"
+                      name="link"
+                      {...register("link", {
+                        required: "link is required",
                       })}
                     />
-                    {errors?.description && (
-                      <span>{errors.description.message}</span>
-                    )}
+                    {errors?.link && <span>{errors.link.message}</span>}
                   </div>
                 </div>
               </div>
@@ -128,4 +99,4 @@ function JobForm() {
   );
 }
 
-export default JobForm;
+export default DeliveredJob;

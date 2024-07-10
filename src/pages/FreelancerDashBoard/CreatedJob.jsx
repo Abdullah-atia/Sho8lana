@@ -3,7 +3,7 @@ import { request } from "../../utils/axios-utils";
 import { Link } from "react-router-dom";
 import FreeSidebar from "./FreeSideBar";
 
-function MyJobs() {
+function CreatedJob() {
   const user_id = localStorage.getItem("user_id");
   const [jobs, setJobs] = useState([]);
 
@@ -29,7 +29,7 @@ function MyJobs() {
     <div className="py110 bg">
       <FreeSidebar active="test" />
       <div style={{ height: "78vh" }} className="container dashboardMain ">
-        {/* Content */}
+        
         <div className="tab-content" id="nav-tabContent">
           <div
             className="tab-pane fade show active"
@@ -60,18 +60,12 @@ function MyJobs() {
                             </h3>
                           </div>
                         </div>
-                        {/* <Link to={`/jobPtoposal/${item.id}`}> */}
+                        <Link to={`/ProjectDetails/${item.id}`}>
                           <h3 className="serviceTitle fw-semibold">
                             {item.description}
                           </h3>
-                        {/* </Link> */}
+                        </Link>
                       </div>
-                      <Link
-                        to={`/jobPtoposal/${item.id}`}
-                        className="wbtnsecondarylg"
-                      >
-                        send job Proposal
-                      </Link>
                     </div>
                   </div>
                 </article>
@@ -93,4 +87,4 @@ function MyJobs() {
   );
 }
 
-export default MyJobs;
+export default CreatedJob;

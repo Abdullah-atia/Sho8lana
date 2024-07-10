@@ -8,6 +8,7 @@ import { IoBagRemoveSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/Auth";
 import { useContext } from "react";
+import axios from "axios";
 
 function Sidebar({ active }) {
   const navigate = useNavigate();
@@ -21,6 +22,21 @@ function Sidebar({ active }) {
     localStorage.clear();
     sessionStorage.clear();
     navigate("/");
+  };
+  const deleteAccount = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.delete(`http://localhost:5140/api/Client/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Assuming token is required for authorization
+        },
+      });
+      toast("Account deleted successfully", { icon: "🗑️" });
+      logout(e); // Log out the user after account deletion
+    } catch (error) {
+      toast.error("Failed to delete account");
+      console.error("Failed to delete account", error);
+    }
   };
 
   return (
@@ -44,7 +60,7 @@ function Sidebar({ active }) {
             My Project
           </Link>
         </li>
-        <li className="sidebar-nav-item">
+        {/* <li className="sidebar-nav-item">
           <Link
             to="/proposal"
             className={
@@ -54,10 +70,21 @@ function Sidebar({ active }) {
             <BiSolidCategoryAlt style={{ width: "20px", height: "20px" }} />
             Proposal
           </Link>
+        </li> */}
+        <li className="sidebar-nav-item">
+          <Link
+            to="/postProject"
+            className={
+              active === "postProject" ? "sidebarNavLink active" : "sidebarNavLink"
+            }
+          >
+            <MdAddToPhotos style={{ width: "20px", height: "20px" }} />
+            Add Project
+          </Link>
         </li>
         <li className="sidebar-nav-item">
           <Link
-            to="/editProfile"
+            to={`/editProfile/${userId}`}
             className={
               active === "editProfile"
                 ? "sidebarNavLink active"
@@ -68,6 +95,7 @@ function Sidebar({ active }) {
             Edit Profile
           </Link>
         </li>
+
         <li className="sidebar-nav-item">
           <Link
             to="/deleteAccount"
@@ -76,6 +104,7 @@ function Sidebar({ active }) {
                 ? "sidebarNavLink active"
                 : "sidebarNavLink"
             }
+            onClick={deleteAccount}
           >
             <IoBagRemoveSharp style={{ width: "20px", height: "20px" }} />
             Delete My Account

@@ -1,8 +1,27 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-
-function ReplayProposal() {
+import {
+  Container,
+  CssBaseline,
+  TextField,
+  Button,
+  Typography,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  Box,
+} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#22be0d",
+    },
+  },
+});
+function ReplayJob() {
   const { proposalId } = useParams();
   const token = localStorage.getItem("autoToken");
   const nav = useNavigate();
@@ -21,7 +40,7 @@ function ReplayProposal() {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
-        `http://localhost:5140/api/ProjectProposal/${proposalId}`,
+        `http://localhost:5140/api/ProposalReplay/job/${proposalId}`,
         {
           method: "POST",
           headers: {
@@ -66,26 +85,36 @@ function ReplayProposal() {
           <div className="gig-info-body bg-white">
             <div className="row g-4">
               <div className="col-12">
-                <div className="form-container">
-                  <label htmlFor="isAccepted" className="form-label">
-                    Is Accepted
-                    <span className="text-lime-300">*</span>
-                  </label>
-                  <select
-                    id="isAccepted"
-                    className="form-control shadow-none"
-                    name="isAccepted"
-                    {...register("isAccepted", {
-                      required: "Please select an option",
-                    })}
-                  >
-                    <option value="true" >Accept</option>
-                    <option value="false">Refuse</option>
-                  </select>
-                  {errors?.isAccepted && (
-                    <span>{errors.isAccepted.message}</span>
-                  )}
-                </div>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit(onSubmit)}
+                  sx={{ mt: 1 }}
+                >
+                  Is Accepted *
+                  <FormControl fullWidth margin="normal">
+                    <InputLabel id="isAccepted-label">Is Accepted</InputLabel>
+                    <Select
+                      labelId="isAccepted-label"
+                      id="isAccepted"
+                      defaultValue="accept"
+                      label="Is Accepted"
+                      sx={{
+                        borderRadius: "30px",
+                      }}
+                      {...register("isAccepted", {
+                        required: "Please select an option",
+                      })}
+                    >
+                      <MenuItem value="true">Accept</MenuItem>
+                      <MenuItem value="false">Refuse</MenuItem>
+                    </Select>
+                    {errors?.isAccepted && (
+                      <Typography color="error">
+                        {errors.isAccepted.message}
+                      </Typography>
+                    )}
+                  </FormControl>
+                </Box>
               </div>
 
               <div className="col-12">
@@ -98,8 +127,8 @@ function ReplayProposal() {
                     id="note"
                     className="form-control shadow-none"
                     placeholder="Enter your note here"
+                    style={{ height: "180px" }}
                     name="note"
-                    style={{height:"180px"}}
                     {...register("note", {
                       required: "Note is required",
                     })}
@@ -119,4 +148,4 @@ function ReplayProposal() {
   );
 }
 
-export default ReplayProposal;
+export default ReplayJob;

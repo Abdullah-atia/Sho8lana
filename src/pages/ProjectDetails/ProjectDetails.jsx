@@ -1,10 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FaArrowRightLong } from "react-icons/fa6";
+import axios from "axios";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Loader from "../../components/Loading/Loader";
+import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
-function ProjectDetails() {
+
+export default function ProjectDetails() {
   const { projectId } = useParams();
   const [project, setProject] = useState(null);
   const [client, setClient] = useState("");
@@ -16,11 +28,11 @@ function ProjectDetails() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5140/api/Project/${projectId}:int`
+          `http://localhost:5140/api/Project/${projectId}`
         );
         const projectData = response.data.result;
         setProject(projectData);
-        console.log(projectData.clientId);
+        console.log("project", projectData);
 
         if (projectData.clientId) {
           fetchUser(projectData.clientId);
@@ -53,84 +65,114 @@ function ProjectDetails() {
     return <Loader />;
   }
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
-    <div
-      className="min-vh-100"
-      style={{ backgroundColor: "#f7f5f0", paddingTop: "100px" }}
-    >
-      <div className="container">
-        <div className="gig-info-header">
-          <h4 className="text-18 fw-semibold text-dark-300">
-            Project Information
-          </h4>
-        </div>
-        <div className="row justify-content-center">
-          <div className="col-xl-12">
-            <div className="bg-white p-4 rounded shadow-sm">
-              <h2
-                className="fw-bold textDark300 mb-2  mb-3"
-                style={{ fontSize: "24px" }}
-              >
-                Project Title:{project?.title}
-              </h2>
-
-              {error ? (
-                <p className="text-danger">
-                  Error fetching project details: {error.message}
-                </p>
-              ) : (
-                project && (
-                  <div>
-                    <p> <span style={{fontSize:"24px" , fontWeight:"bold"}}>Description</span>: {project.description}</p>
-                    <p>Start Date: {project.startDate}</p>
-                    <p>Expected Budget: {project.expectedBudget}</p>
-                    <p>
-                      Duration: {project.expectedDuration.days} days,{" "}
-                      {project.expectedDuration.months} months
-                    </p>
-                    <div>
-                      <h3>Skills:</h3>
-                      <ul>
-                        {project.skills.map((skill, index) => (
-                          <li key={index}>{skill.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <p>{project.description}</p>
+    <div style={{ backgroundColor: "#f7f5f0", minHeight: "100vh" }}>
+      <Container className="mt-4">
+        <Row>
+          <Col md={8} className="mx-auto mt-5">
+            <Grid
+              container
+              spacing={3}
+              sx={{
+                padding: "30px",
+                borderRadius: "16px",
+                backgroundColor: "white",
+              }}
+            >
+              <Grid item xs={12}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                  {project.title || "Website Redesign"}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                  {project.description ||
+                    "Redesign the company's website to improve user experience and increase conversions."}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1" className="font-weight-bold">
+                  Start Date
+                </Typography>
+                <Typography variant="body1">
+                  {project.startDate || "N/A"}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1" className="font-weight-bold">
+                  Expected Budget
+                </Typography>
+                <Typography variant="body1">
+                  {project.budget ? `$${project.budget}` : "N/A"}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1" className="font-weight-bold">
+                  Duration
+                </Typography>
+                <Typography variant="body1">
+                  {`${project.expectedDuration.months} Months / ${project.expectedDuration.days} Days` ||
+                    "N/A"}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1" className="font-weight-bold">
+                  Required Skills
+                </Typography>
+                <List>
+                  {project.skills ? (
+                    project.skills.map((skill, index) => (
+                      <ListItem key={index}>
+                        <p className="singleSkill">{skill.name}</p>
+                      </ListItem>
+                    ))
+                  ) : (
+                    <ListItem>None specified</ListItem>
+                  )}
+                </List>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography
+                  variant="subtitle1"
+                  className="font-weight-bold"
+                  sx={{ fontWeight: "600" }}
+                >
+                  Client Info
+                </Typography>
+                <div className="d-flex align-items-center">
+                  <Avatar src={client.imageUrl} className="mr-3" />
+                  <div className="ps-2">
+                    <Typography variant="body1" className="font-weight-bold">
+                      {client.name || "Acme Inc."}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      E-mail: {client.email || "example@example.com"}
+                    </Typography>
                   </div>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-
-        {client && (
-          <div className="row justify-content-center mt-4">
-            <div className="col-xl-12">
-              <div className="bg-white p-4 rounded shadow-sm">
-                <h4 className="fw-bold textDark300 mb-2">Client Information</h4>
-                <p>{client.name}</p>
-                {/* Render other client data as needed */}
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="row justify-content-center mt-4">
-          <div className="col-xl-12">
-            <button className="wbtnsecondarylg">
-              <Link
-                to={`/PropasalForm/${projectId}`}
-                className="text-white p-1"
-              >
-                Send Proposal <FaArrowRightLong />
-              </Link>
-            </button>
-          </div>
-        </div>
-      </div>
+                </div>
+              </Grid>
+              <Grid item xs={12} container justifyContent="space-between">
+                <Grid item xs={4}>
+                  <Link to="/projects" className="wbtnsecondarylg">
+                    <MdOutlineArrowBackIosNew />
+                    Back
+                  </Link>
+                </Grid>
+                <Grid item xs={4}>
+                  <Link
+                    to={`/PropasalForm/${projectId}`}
+                    className="wbtnsecondarylg"
+                  >
+                    Send Proposal <MdOutlineArrowForwardIos style={{fontWeight:"600"}} />
+                  </Link>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
-
-export default ProjectDetails;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import FreeSidebar from "./FreeSideBar";
 
 function MyProject() {
   const [projects, setProjects] = useState([]);
@@ -18,7 +19,7 @@ function MyProject() {
           if (data.isSuccess) {
             return Promise.all(
               data.result.map((projectId) =>
-                fetch(`http://localhost:5140/api/Project/${projectId}:int`, {
+                fetch(`http://localhost:5140/api/Project/${projectId}`, {
                   headers: {
                     Authorization: `Bearer ${token}`,
                   },
@@ -39,7 +40,8 @@ function MyProject() {
 
   return (
     <div className="py110 bg">
-      <div className="container">
+      <FreeSidebar active={"test"} />
+      <div style={{ height: "78vh" }} className=" dashboardMain container">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
@@ -84,6 +86,7 @@ function MyProject() {
                           >
                             Create SubProject
                           </Link>
+
                           {/* {clients[item.clientId] && (
                             <>
                               <img
@@ -99,6 +102,14 @@ function MyProject() {
                               </Link>
                             </>
                           )} */}
+                        </div>
+                        <div className="d-flex align-items-center serviceCardOwner">
+                          <Link
+                            to={`/CreatdJobByProject/${item.id}`}
+                            className="wbtnsecondarylg"
+                          >
+                            View Created SubProjects
+                          </Link>
                         </div>
                       </div>
                     </div>

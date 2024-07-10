@@ -1,31 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/Auth"; // Ensure this matches the export
+import { AuthContext } from "../../Context/Auth";
+import logo from "../../Assest/logo.svg";
+import { useUserData } from "../../hooks/useUserData";
+import { IoWalletOutline, IoSearch } from "react-icons/io5"; // Import IoSearch icon
+import { ImCoinEuro } from "react-icons/im";
 
-function Nav() {
+const Nav = () => {
   const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // State to hold search query
+  const userId = localStorage.getItem("user_id");
+  const { data } = useUserData(userId);
 
-  // useEffect(() => {
-  //   const savedToken = localStorage.getItem("autoToken");
-  //   if (savedToken) {
-  //     setToken(savedToken);
-  //   }
-  // }, [setToken]);
-
-  const handleScroll = () => {
-    const offset = window.scrollY;
-    if (offset >= 250) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset >= 250);
+    };
 
+    window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -40,233 +36,164 @@ function Nav() {
     navigate("/");
   };
 
+  const handleSearch = () => {
+    // Navigate to search results page with searchQuery as data
+    if (searchQuery.trim() !== "") {
+      navigate(`/search-results/${searchQuery}`);
+    } else {
+      // Handle case where search query is empty
+      toast.error("Please enter a search term.");
+    }
+  };
+
+  const navItems = [
+    { label: "ALL Project", path: "/projects" },
+    { label: "My Dashboard", path: `/Editprofile/${userId}` },
+  ];
+
   return (
-    // <>
     <header
-      className={` ${scrolled ? "headerPrimary bg-danger" : "headerPrimary"}`}
+      className={`headerPrimary ${scrolled ? "backgroundscroll-navbar" : ""}`}
     >
       <div className="container">
         <nav className="navbar navbar-expand-xl justify-content-between">
           <Link to="/">
-            <img height={50} width={40} src="./logo.svg" alt="Logo" />
+            <img height={60} width={60} src={logo} alt="Logo" />
           </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="d-block d-xl-none">
                 <div className="logo">
                   <Link to="/">
-                    <img src="./logo.svg" alt="Logo" />
+                    <img src={logo} alt="Logo" />
                   </Link>
                 </div>
                 <button onClick={logout}>Logout</button>
               </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="/"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                >
-                  Home
-                </Link>
-                <div className="dropdown-menu">
-                  <div className="d-flex flex-column flex-xl-row">
-                    <ul className="list-unstyled">
-                      <li>
-                        <Link to="/" className="dropdown-item">
-                          <span>Home Main</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/home-two" className="dropdown-item">
-                          <span>Home Two</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                >
-                  Freelancer
-                </Link>
-                <div className="dropdown-menu">
-                  <div className="d-flex flex-column flex-xl-row">
-                    <ul className="list-unstyled">
-                      <li>
-                        <Link to="/freelancers" className="dropdown-item">
-                          <span>Freelancers</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/freelancer-details"
-                          className="dropdown-item"
-                        >
-                          <span>Freelancer Details</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/about">
-                  About us
-                </Link>
-              </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                >
-                  Pages
-                </Link>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to="/services" className="dropdown-item">
-                      <span>Services</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/service-details" className="dropdown-item">
-                      <span>Service Details</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/job-posts" className="dropdown-item">
-                      <span>Job Post</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/job-details" className="dropdown-item">
-                      <span>Job Details</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/seller-dashboard" className="dropdown-item">
-                      <span>Seller Dashboard</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/buyer-dashboard" className="dropdown-item">
-                      <span>Buyer Dashboard</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/buyer-details" className="dropdown-item">
-                      <span>Buyer Details</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/terms-conditions" className="dropdown-item">
-                      <span>Terms and Policy</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/faqs" className="dropdown-item">
-                      <span>Faq</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/privacy-policy" className="dropdown-item">
-                      <span>Privacy and Policy</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/pricing" className="dropdown-item">
-                      <span>Pricing</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/404" className="dropdown-item">
-                      <span>404 Page</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/signin" className="dropdown-item">
-                      <span>Signin Page</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/signup" className="dropdown-item">
-                      <span>Signup Page</span>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                >
-                  Blog
-                </Link>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to="/blogs" className="dropdown-item">
-                      <span>Blog</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/blog-details" className="dropdown-item">
-                      <span>Blog Details</span>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/contact">
-                  Contact
-                </Link>
-              </li>
+              {navItems.map((item, index) => (
+                <li key={index} className="nav-item dropdown">
+                  <Link
+                    className={`nav-link dropdown-toggle ${
+                      scrolled ? "text-white backgroundscroll-navbar" : ""
+                    }`}
+                    to={item.path}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {token ? (
-            <div>
+            <div className="d-flex justify-content-center align-items-center me-3 pe-2 text-nowrap">
+              <div className="position-relative me-3">
+                <input
+                  type="text"
+                  className="form-control shadow-none me-3 search-bar" // Apply custom class for styling
+                  style={{
+                    borderRadius: "999px",
+                    border: "solid 0.2px #13544e ",
+                    height: "57px",
+                    paddingLeft: "50px", // Adjust padding for search icon
+                  }}
+                  placeholder=" Search..." // Placeholder text for search bar
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <IoSearch
+                  className="position-absolute top-50 translate-middle-y ms-1"
+                  style={{
+                    left: "2px",
+                    fontSize: "35px",
+                    borderRadius: "50%",
+                    padding : "5px",
+                    color: "#FFF",
+                    backgroundColor: "#13544e",
+                  }}
+                  onClick={handleSearch}
+                />
+              </div>
+              <div>
+                {data && data.data && data.data.result && (
+                  <Link to={`/profile/${userId}`}>
+                    <div
+                      className="d-flex justify-content-center align-items-center me-3 pe-2"
+                      style={{
+                        border: "solid 0.5px #13544e ",
+                        borderRadius: "99999px",
+                        padding: "4px",
+                        gap: "10px",
+                        color: "#13544e",
+                        backgroundColor: "#fff",
+                      }}
+                    >
+                      <img
+                        src={data.data.result.imageUrl}
+                        alt="User Avatar"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <p className="m-0">{data.data.result.name},</p>
+                      <p className="m-0">
+                        <ImCoinEuro style={{ width: "50px", height: "30px" }} />
+                        {data.data.result.balance}
+                      </p>
+                    </div>
+                  </Link>
+                )}
+              </div>
               <button onClick={logout} className="wbtnsecondarylg fw-bold">
                 Logout
               </button>
             </div>
           ) : (
             <div className="navbar-right d-flex align-items-center gap-4">
-              <div className="align-items-center d-none d-lg-flex">
-                <Link to="/signin" className="headerBtn">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={13}
-                    height={17}
-                    viewBox="0 0 13 17"
-                    fill="none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6.5 7.55556C8.55134 7.55556 10.2143 5.86419 10.2143 3.77778C10.2143 1.69137 8.55134 0 6.5 0C4.44866 0 2.78571 1.69137 2.78571 3.77778C2.78571 5.86419 4.44866 7.55556 6.5 7.55556ZM6.5 17C10.0899 17 13 15.3086 13 13.2222C13 11.1358 10.0899 9.44444 6.5 9.44444C2.91015 9.44444 0 11.1358 0 13.2222C0 15.3086 2.91015 17 6.5 17Z"
-                      fill="white"
-                    ></path>
-                  </svg>
-                  Login
-                </Link>
-              </div>
+              <Link
+                to="/signin"
+                className="headerBtn d-none d-lg-flex align-items-center"
+              >
+                <svg
+                  className="me-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={13}
+                  height={17}
+                  viewBox="0 0 13 17"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M6.5 7.55556C8.55134 7.55556 10.2143 5.86419 10.2143 3.77778C10.2143 1.69137 8.55134 0 6.5 0C4.44866 0 2.78571 1.69137 2.78571 3.77778C2.78571 5.86419 4.44866 7.55556 6.5 7.55556ZM6.5 17C10.0899 17 13 15.3086 13 13.2222C13 11.1358 10.0899 9.44444 6.5 9.44444C2.91015 9.44444 0 11.1358 0 13.2222C0 15.3086 2.91015 17 6.5 17Z"
+                    fill="white"
+                  ></path>
+                </svg>
+                Signin
+              </Link>
+              <Link
+                to="/clientsignup"
+                className="headerBtn d-none d-lg-flex align-items-center"
+              >
+                <svg
+                  className="me-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={13}
+                  height={17}
+                  viewBox="0 0 13 17"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M6.5 7.55556C8.55134 7.55556 10.2143 5.86419 10.2143 3.77778C10.2143 1.69137 8.55134 0 6.5 0C4.44866 0 2.78571 1.69137 2.78571 3.77778C2.78571 5.86419 4.44866 7.55556 6.5 7.55556ZM6.5 17C10.0899 17 13 15.3086 13 13.2222C13 11.1358 10.0899 9.44444 6.5 9.44444C2.91015 9.44444 0 11.1358 0 13.2222C0 15.3086 2.91015 17 6.5 17Z"
+                    fill="white"
+                  ></path>
+                </svg>
+                Signup
+              </Link>
               <button
                 className="navbar-toggler d-block d-xl-none shadow-none border-0"
                 type="button"
@@ -283,8 +210,7 @@ function Nav() {
         </nav>
       </div>
     </header>
-    // </>
   );
-}
+};
 
 export default Nav;

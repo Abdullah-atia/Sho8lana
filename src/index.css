@@ -465,20 +465,20 @@ svg {
   -webkit-transform: translate3d(0, -9px, 0) scale3d(1, 1, 1);
   transform: translate3d(0, -9px, 0) scale3d(1, 1, 1);
 }
-.navbar-toggler::after {
+/* .navbar-toggler::after {
   -webkit-transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
   transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
-}
+} */
 .navbar-toggler[aria-expanded="true"]::before {
   transform: rotate3d(0, 0, 1, 45deg);
 }
-.navbar-toggler[aria-expanded="true"]::after {
+/* .navbar-toggler[aria-expanded="true"]::after {
   transform: rotate3d(0, 0, 1, -45deg);
-}
+} */
 .navbar-toggler[aria-expanded="true"] span {
   opacity: 0;
 }
-.navbar-toggler::after,
+/* .navbar-toggler::after,
 .navbar-toggler::before {
   content: "";
   position: absolute;
@@ -490,7 +490,7 @@ svg {
   transition: transform 0.25s;
   transform-origin: 50% 50%;
   background: var(--dark-300);
-}
+} */
 .navbar-collapse {
   flex-basis: 100%;
   flex-grow: 1;
@@ -793,6 +793,8 @@ a {
 
 .bg {
   background-color: #f7f5f0;
+      height: 100vh;
+
 }
 
 .gig-info-header,
@@ -1078,4 +1080,7 @@ select:focus {
   font-size: 16px;
   height: 52px;
   padding: 0 16px;
+}
+.backgroundscroll-navbar{
+  background-color: #13544ef0;
 }

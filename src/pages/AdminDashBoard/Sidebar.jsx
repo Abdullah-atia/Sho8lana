@@ -8,6 +8,8 @@ import { IoBagRemoveSharp } from "react-icons/io5";
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Context/Auth';
 import { useContext } from 'react';
+import { BsPersonFill } from "react-icons/bs";
+
 
 
 
@@ -61,6 +63,17 @@ function Sidebar({active}) {
           </li>
           <li className="sidebar-nav-item">
             <Link
+              to="/viewallusers"
+              className={
+                active === "users" ? "sidebarNavLink active" : "sidebarNavLink"
+              }
+            >
+              <BsPersonFill style={{ width: "20px", height: "20px" }} />
+              All users
+            </Link>
+          </li>
+          <li className="sidebar-nav-item">
+            <Link
               to="/postCategory"
               className={
                 active === "addcategory"
@@ -105,7 +118,6 @@ function Sidebar({active}) {
               // data-bs-toggle="modal"
               // data-bs-target="#logoutModal"
               onClick={logout}
-              
             >
               <FaSignOutAlt style={{ width: "20px", height: "20px" }} />
               Logout
