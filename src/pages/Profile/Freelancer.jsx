@@ -1,11 +1,70 @@
 import { Link, useParams } from "react-router-dom";
 import { useUserData } from "../../hooks/useUserData";
 import Loader from "../../components/Loading/Loader";
+import ShareOnSocial from "react-share-on-social";
+import { FaRegShareSquare } from "react-icons/fa";
+import logo from "./../../Assest/logo.svg"
+import { useEffect, useState } from "react";
+
+
 
 export default function Freelancer() {
-  const { userId } = useParams();
-  const { data, isLoading, isError, error } = useUserData(userId);
-  // console.log(data.data.result)
+    const { userId } = useParams();
+    const [data, setData] = useState(null);
+    const [category, setCategory] = useState("")
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState(null);
+    const url = window.location.to;
+
+    useEffect(() => {
+      const fetchData = async () => {
+        setIsLoading(true);
+        setIsError(false);
+
+        try {
+          const response = await fetch(
+            `http://localhost:5140/api/Freelancer/${userId}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const result = await response.json();
+          setData(result?.result);
+          console.log("result", result);
+        } catch (error) {
+          setIsError(true);
+          setError(error);
+        }
+
+        setIsLoading(false);
+      };
+      const fetchCategory = async () => {
+        setIsLoading(true);
+        setIsError(false);
+
+        try {
+          const response = await fetch(
+            `http://localhost:5140/api/Category/${data.categoryId}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const result = await response.json();
+          setCategory(result?.result);
+          console.log("category", result);
+        } catch (error) {
+          setIsError(true);
+          setError(error);
+        }
+        
+        setIsLoading(false);
+      };
+      fetchCategory()
+      fetchData();
+    }, [userId]);
+
+    console.log("data", data);
 
   if (isLoading) {
     return <Loader />;
@@ -26,7 +85,7 @@ export default function Freelancer() {
               </div>
               <div className="d-flex flex-column justify-content-center align-items-center py-4">
                 <img
-                  src={data?.data.result.imageUrl}
+                  src={data?.imageUrl}
                   style={{ width: 110, height: 110 }}
                   className=" rounded-circle mb-4"
                   alt=""
@@ -35,9 +94,9 @@ export default function Freelancer() {
                   style={{ fontSize: 24 }}
                   className="fw-bold textDark300 mb-2"
                 >
-                  {data?.data.result.name}
+                  {data?.name}
                 </h3>
-                <p className="textDark200 mb-1">UiUx Designer</p>
+                <p className="textDark200 mb-1">{category.name}</p>
                 <p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,27 +146,19 @@ export default function Freelancer() {
                   <p className="textDark300 fw600">English</p>
                 </li>
               </ul>
-              <Link
-                to={`/editProfile/${userId}`}
-                className="wbtnsecondarylg w-100"
+              <ShareOnSocial
+                textToShare={url}
+                link={url}
+                linkTitle={data?.name}
+                // linkMetaDesc="Stop going through the agony of choosing clothes that fit the weather and your mood."
+                linkFavicon={logo}
+                noReferer
               >
-                Contact Me
-                <svg
-                  width={14}
-                  height={10}
-                  viewBox="0 0 14 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 9L13 5M13 5L9 1M13 5L1 5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
+                <button className="wbtnsecondarylg w-100">
+                  Share Profile
+                  <FaRegShareSquare />
+                </button>
+              </ShareOnSocial>
             </div>
 
             <div className=" p-4 rounded-4 bg-white border-bottom pb-4">
@@ -173,7 +224,7 @@ export default function Freelancer() {
               </div>
 
               <div className="d-flex flex-wrap gap-3">
-                {data?.data.result.skills?.map((skill) => {
+                {data?.skills?.map((skill) => {
                   return (
                     <span key={skill.id} className="singleSkill">
                       {skill.name}
@@ -354,7 +405,9 @@ export default function Freelancer() {
                             </div>
                           </div>
                           <h3 className="serviceTitle fw-semibold">
-                            <a href="">Nas Digital Agency Website Design</a>
+                            <Link to="#">
+                              Nas Digital Agency Website Design
+                            </Link>
                           </h3>
                           <div className="d-flex align-items-center serviceCardOwner">
                             <img
@@ -362,9 +415,9 @@ export default function Freelancer() {
                               className="serviceCardOwnerImg"
                               alt=""
                             />
-                            <a href="#" className="serviceCardOwnerName">
+                            <Link to="#" className="serviceCardOwnerName">
                               Nankathan
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -416,7 +469,7 @@ export default function Freelancer() {
                             </div>
                           </div>
                           <h3 className="serviceTitle fw-semibold">
-                            <a href="">Nas Digital Agency Website Design</a>
+                            <Link to="">Nas Digital Agency Website Design</Link>
                           </h3>
                           <div className="d-flex align-items-center serviceCardOwner">
                             <img
@@ -424,9 +477,9 @@ export default function Freelancer() {
                               className="serviceCardOwnerImg"
                               alt=""
                             />
-                            <a href="#" className="serviceCardOwnerName">
+                            <Link to="#" className="serviceCardOwnerName">
                               Nankathan
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -478,7 +531,7 @@ export default function Freelancer() {
                             </div>
                           </div>
                           <h3 className="serviceTitle fw-semibold">
-                            <a href="">Nas Digital Agency Website Design</a>
+                            <Link to="">Nas Digital Agency Website Design</Link>
                           </h3>
                           <div className="d-flex align-items-center serviceCardOwner">
                             <img
@@ -486,9 +539,9 @@ export default function Freelancer() {
                               className="serviceCardOwnerImg"
                               alt=""
                             />
-                            <a href="#" className="serviceCardOwnerName">
+                            <Link to="#" className="serviceCardOwnerName">
                               Nankathan
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -513,10 +566,7 @@ export default function Freelancer() {
                           alt=""
                         />
                         <div className="portfolioCardOverlay">
-                          <a
-                            href="assets/img/freelancer/p-xl.jpeg"
-                            className="portfolioCardIcon gallery"
-                          >
+                          <Link to="#" className="portfolioCardIcon gallery">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width={39}
@@ -541,13 +591,13 @@ export default function Freelancer() {
                                 fill="white"
                               />
                             </svg>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </article>
                   </div>
                   <div className="d-flex justify-content-center mt-5">
-                    <a href="#" className="wbtnsecondarylg">
+                    <Link to="#" className="wbtnsecondarylg">
                       See More Works
                       <svg
                         width={14}
@@ -564,7 +614,7 @@ export default function Freelancer() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

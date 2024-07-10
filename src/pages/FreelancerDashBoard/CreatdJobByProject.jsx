@@ -1,35 +1,34 @@
 import { useEffect, useState } from "react";
 import { request } from "../../utils/axios-utils";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FreeSidebar from "./FreeSideBar";
 
-function MyJobs() {
-  const user_id = localStorage.getItem("user_id");
+function CreatdJobByProject() {
+  const {projectId} = useParams();
   const [jobs, setJobs] = useState([]);
 
-  function fetchProjects() {
-    return request({ url: `/Job/${user_id}` });
+  function fetchJobs() {
+    return request({ url: `/Job/${projectId}` });
   }
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetchProjects();
-        console.log(response.data.result);
-        setJobs(response.data.result); // Uncommented this line
+        const response = await fetchJobs();
+        console.log(response);
+        setJobs(response.data.result);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     }
 
     fetchData();
-  }, [user_id]);
+  }, [projectId]);
 
   return (
     <div className="py110 bg">
       <FreeSidebar active="test" />
       <div style={{ height: "78vh" }} className="container dashboardMain ">
-        {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
             className="tab-pane fade show active"
@@ -60,18 +59,12 @@ function MyJobs() {
                             </h3>
                           </div>
                         </div>
-                        {/* <Link to={`/jobPtoposal/${item.id}`}> */}
+                        <Link to={`/ProjectDetails/${item.id}`}>
                           <h3 className="serviceTitle fw-semibold">
                             {item.description}
                           </h3>
-                        {/* </Link> */}
+                        </Link>
                       </div>
-                      <Link
-                        to={`/jobPtoposal/${item.id}`}
-                        className="wbtnsecondarylg"
-                      >
-                        send job Proposal
-                      </Link>
                     </div>
                   </div>
                 </article>
@@ -93,4 +86,4 @@ function MyJobs() {
   );
 }
 
-export default MyJobs;
+export default CreatdJobByProject;

@@ -41,7 +41,7 @@ function MyProject() {
   return (
     <div className="py110 bg">
       <FreeSidebar active={"test"} />
-      <div style={{height:"78vh"}} className=" dashboardMain container">
+      <div style={{ height: "78vh" }} className=" dashboardMain container">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
@@ -86,6 +86,7 @@ function MyProject() {
                           >
                             Create SubProject
                           </Link>
+
                           {/* {clients[item.clientId] && (
                             <>
                               <img
@@ -101,6 +102,14 @@ function MyProject() {
                               </Link>
                             </>
                           )} */}
+                        </div>
+                        <div className="d-flex align-items-center serviceCardOwner">
+                          <Link
+                            to={`/CreatdJobByProject/${item.id}`}
+                            className="wbtnsecondarylg"
+                          >
+                            View Created SubProjects
+                          </Link>
                         </div>
                       </div>
                     </div>

@@ -73,6 +73,17 @@ function Sidebar({ active }) {
         </li> */}
         <li className="sidebar-nav-item">
           <Link
+            to="/postProject"
+            className={
+              active === "postProject" ? "sidebarNavLink active" : "sidebarNavLink"
+            }
+          >
+            <MdAddToPhotos style={{ width: "20px", height: "20px" }} />
+            Add Project
+          </Link>
+        </li>
+        <li className="sidebar-nav-item">
+          <Link
             to={`/editProfile/${userId}`}
             className={
               active === "editProfile"
@@ -84,6 +95,7 @@ function Sidebar({ active }) {
             Edit Profile
           </Link>
         </li>
+
         <li className="sidebar-nav-item">
           <Link
             to="/deleteAccount"

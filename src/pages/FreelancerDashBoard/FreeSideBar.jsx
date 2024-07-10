@@ -8,6 +8,11 @@ import { IoBagRemoveSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/Auth";
 import { useContext } from "react";
+import axios from "axios";
+import { MdDeleteForever } from "react-icons/md";
+import { SiTask } from "react-icons/si";
+
+
 
 function FreeSidebar({ active }) {
   const navigate = useNavigate();
@@ -22,7 +27,21 @@ function FreeSidebar({ active }) {
     sessionStorage.clear();
     navigate("/");
   };
-
+  const deleteAccount = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.delete(`http://localhost:5140/api/Freelancer/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Assuming token is required for authorization
+        },
+      });
+      toast("Account deleted successfully", { icon: "🗑️" });
+      logout(e); // Log out the user after account deletion
+    } catch (error) {
+      toast.error("Failed to delete account");
+      console.error("Failed to delete account", error);
+    }
+  };
   return (
     <div className="dashboardSidebar min-vh-100 d-none d-xl-block">
       <div className="p-4">
@@ -33,7 +52,7 @@ function FreeSidebar({ active }) {
       <ul className="sidebar-nav p-3 overflow-y-auto">
         <li className="sidebar-nav-item">
           <Link
-            to={`/myProjects/${userId}`}
+            to="/myProjects"
             className={
               active === "myprojects"
                 ? "sidebarNavLink active"
@@ -42,6 +61,28 @@ function FreeSidebar({ active }) {
           >
             <RiHome3Fill style={{ width: "20px", height: "20px" }} />
             My Project
+          </Link>
+        </li>
+        <li className="sidebar-nav-item">
+          <Link
+            to="/uploadcv"
+            className={
+              active === "uploadcv" ? "sidebarNavLink active" : "sidebarNavLink"
+            }
+          >
+            <RiHome3Fill style={{ width: "20px", height: "20px" }} />
+            Upload My CV
+          </Link>
+        </li>
+        <li className="sidebar-nav-item">
+          <Link
+            to="/myJobs"
+            className={
+              active === "myJobs" ? "sidebarNavLink active" : "sidebarNavLink"
+            }
+          >
+            <SiTask style={{ width: "20px", height: "20px" }} />
+            My Jobs
           </Link>
         </li>
         <li className="sidebar-nav-item">
@@ -57,7 +98,7 @@ function FreeSidebar({ active }) {
         </li>
         <li className="sidebar-nav-item">
           <Link
-            to="/editProfile"
+            to={`/editProfile/${userId}`}
             className={
               active === "editProfile"
                 ? "sidebarNavLink active"
@@ -69,17 +110,18 @@ function FreeSidebar({ active }) {
           </Link>
         </li>
         <li className="sidebar-nav-item">
-          <Link
-            to="/deleteAccount"
+          <button
+            // to="/deleteAccount"
+            onClick={deleteAccount}
             className={
               active === "deleteAccount"
                 ? "sidebarNavLink active"
                 : "sidebarNavLink"
             }
           >
-            <IoBagRemoveSharp style={{ width: "20px", height: "20px" }} />
+            <MdDeleteForever style={{ width: "20px", height: "20px" }} />
             Delete My Account
-          </Link>
+          </button>
         </li>
         <li className="sidebar-nav-item">
           <button className="sidebarNavLink" type="button" onClick={logout}>

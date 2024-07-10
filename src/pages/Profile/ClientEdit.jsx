@@ -1,4 +1,4 @@
-import { Sidebar } from "flowbite-react";
+// import { Sidebar } from "flowbite-react";
 import toast from "react-hot-toast";
 import { MdFileUpload } from "react-icons/md";
 import Loader from "../../components/Loading/Loader";
@@ -8,6 +8,7 @@ import { useDropzone } from "react-dropzone";
 import { useEffect, useMemo, useState } from "react";
 import { useUserData } from "../../hooks/useUserData";
 import { useNavigate, useParams } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 export default function Client() {
   const token = localStorage.getItem("autoToken");

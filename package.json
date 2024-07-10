@@ -45,6 +45,7 @@
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
+    "react-share-on-social": "^1.0.12",
     "react-spinners": "^0.13.8",
     "reactstrap": "^9.2.2",
     "rsuite": "^5.60.0",

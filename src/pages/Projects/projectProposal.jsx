@@ -96,7 +96,7 @@ function ProjectProposal() {
                     className="wbtnsecondarylg"
                     style={{ width: "200px" }}
                   >
-                    Replay Proposal
+                    Reply Proposal
                   </Link>
                 </Box>
               </CardContent>
