@@ -5,7 +5,12 @@ import ShareOnSocial from "react-share-on-social";
 import { FaRegShareSquare } from "react-icons/fa";
 import logo from "./../../Assest/logo.svg"
 import { useEffect, useState } from "react";
-
+import img1 from "./../../Assest/Images/Service/How-Product-Planning-is-Important-For-the-Start-of-Your-Business-1024x712.jpg";
+import img2 from "./../../Assest/Images/Service/Project-2.png";
+import img3 from "./../../Assest/Images/Service/Screenshot 2023-03-24 at 11.33.18 AM.webp";
+import img4 from "./../../Assest/Images/Service/Screenshot 2023-03-24 at 11.40.26 AM.webp";
+import img5 from "./../../Assest/Images/Service/attachment_112542414.jpeg";
+import img6 from "./../../Assest/Images/Service/image5-2.jpg";
 
 
 export default function Freelancer() {
@@ -362,7 +367,7 @@ export default function Freelancer() {
                       <div className="serviceCard bg-white">
                         <div className="position-relative">
                           <img
-                            src="../../../public/Images/cta-bg.png"
+                            src={img2}
                             height={180}
                             className="viewCardImg w-100"
                             alt=""
@@ -411,7 +416,7 @@ export default function Freelancer() {
                           </h3>
                           <div className="d-flex align-items-center serviceCardOwner">
                             <img
-                              src=""
+                              src={img3}
                               className="serviceCardOwnerImg"
                               alt=""
                             />
@@ -426,7 +431,7 @@ export default function Freelancer() {
                       <div className="serviceCard bg-white">
                         <div className="position-relative">
                           <img
-                            src="../../../public/Images/cta-bg.png"
+                            src={img4}
                             height={180}
                             className="viewCardImg w-100"
                             alt=""
@@ -473,9 +478,9 @@ export default function Freelancer() {
                           </h3>
                           <div className="d-flex align-items-center serviceCardOwner">
                             <img
-                              src=""
+                              src={img1}
                               className="serviceCardOwnerImg"
-                              alt=""
+                              alt="img1"
                             />
                             <Link to="#" className="serviceCardOwnerName">
                               Nankathan
@@ -488,7 +493,7 @@ export default function Freelancer() {
                       <div className="serviceCard bg-white">
                         <div className="position-relative">
                           <img
-                            src="../../../public/Images/cta-bg.png"
+                            src={img5}
                             height={180}
                             className="viewCardImg w-100"
                             alt=""
@@ -535,7 +540,7 @@ export default function Freelancer() {
                           </h3>
                           <div className="d-flex align-items-center serviceCardOwner">
                             <img
-                              src=""
+                              src={img1}
                               className="serviceCardOwnerImg"
                               alt=""
                             />
@@ -561,7 +566,7 @@ export default function Freelancer() {
                     <article className="col-xl-4 col-md-6">
                       <div className="bg-white p-2 portfolioCard">
                         <img
-                          src="/assets/images/1.png"
+                          src={img6}
                           className="img-fluid w-100"
                           alt=""
                         />

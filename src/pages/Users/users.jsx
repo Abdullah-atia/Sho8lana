@@ -5,25 +5,12 @@ import Sidebar from "../AdminDashBoard/Sidebar";
 import axios from "axios";
 
 function Users() {
- const [clients, setClients] = useState([]);
- const [freelancers, setFreelancers] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [freelancers, setFreelancers] = useState([]);
 
- const [loading, setLoading] = useState(true); // Add loading state
- const [error, setError] = useState(null);
-const token = localStorage.getItem("autoToken")
-//   const handleDelete = async (id) => {
-//     if (window.confirm("Are you sure you want to delete this category?")) {
-//       setDeleting(true);
-//       try {
-//         await request({ url: `/Category/${id}`, method: "Delete" });
-//         refetch(); // Refetch categories after deletion
-//       } catch (error) {
-//         console.error("Error deleting category:", error);
-//       } finally {
-//         setDeleting(false);
-//       }
-//     }
-//   };
+  const [loading, setLoading] = useState(true); // Add loading state
+  const [error, setError] = useState(null);
+  const token = localStorage.getItem("autoToken");
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -60,7 +47,7 @@ const token = localStorage.getItem("autoToken")
         setLoading(false); // Set loading to false when done
       }
     };
-    fetchFreelancers()
+    fetchFreelancers();
     fetchClients();
   }, [token]);
   if (loading) {
@@ -105,7 +92,12 @@ const token = localStorage.getItem("autoToken")
                               height={95}
                             />
                           </div>
-                          <div className="textDark200">{item.name}</div>
+                          <Link
+                            to={`/clientdetails/${item.id}`}
+                            className="textDark200"
+                          >
+                            {item.name}
+                          </Link>
                         </div>
                       </td>
                       <td className="textDark200">
@@ -171,7 +163,13 @@ const token = localStorage.getItem("autoToken")
                               height={95}
                             />
                           </div>
-                          <div className="textDark200">{item.name}</div>
+
+                          <Link
+                            to={`/freelancerdetails/${item.id}`}
+                            className="textDark200"
+                          >
+                            {item.name}
+                          </Link>
                         </div>
                       </td>
                       <td className="textDark200">

@@ -96,7 +96,7 @@ function TestSignin() {
               <div className="col-lg-6 p-3 p-lg-5">
                 <div className="mb-40">
                   <h2 className="sectionTitle mb-2">Sign In</h2>
-                  <p className="sectionDesc">Welcome to Freelance hub</p>
+                  <p className="sectionDesc">Welcome to Sho8lana</p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="form-container">

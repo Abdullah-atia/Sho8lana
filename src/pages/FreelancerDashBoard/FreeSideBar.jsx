@@ -12,8 +12,6 @@ import axios from "axios";
 import { MdDeleteForever } from "react-icons/md";
 import { SiTask } from "react-icons/si";
 
-
-
 function FreeSidebar({ active }) {
   const navigate = useNavigate();
   const { token, setToken } = useContext(AuthContext);

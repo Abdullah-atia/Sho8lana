@@ -52,16 +52,17 @@ function ProjectProposal() {
     return <div>No proposal data available.</div>;
   }
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
+    <Container maxWidth="lg" sx={{ py: 8, mt: 5 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Proposal Details
       </Typography>
       <Grid container spacing={4}>
-        {proposal.map((proposal) => (
+        {proposal.map((proposal, index) => (
           <Grid item key={proposal.id} xs={12} sm={6} md={4}>
             <Card sx={{ borderRadius: "16px" }}>
               <CardHeader
-                title={`Proposal ${proposal.id}`}
+                title={`Proposal ${index +1}`}
+                // title="Proposal"
                 titleTypographyProps={{ align: "center" }}
                 sx={{ backgroundColor: "rgba(34,190,13,0.2)" }}
               />

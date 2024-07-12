@@ -27,7 +27,7 @@ function MyJobs() {
 
   return (
     <div className="py110 bg">
-      <FreeSidebar active="test" />
+      <FreeSidebar active="myJobs" />
       <div style={{ height: "78vh" }} className="container dashboardMain ">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">

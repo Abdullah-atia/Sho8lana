@@ -6,14 +6,24 @@ import logo from "../../Assest/logo.svg";
 import { useUserData } from "../../hooks/useUserData";
 import { IoWalletOutline, IoSearch } from "react-icons/io5"; // Import IoSearch icon
 import { ImCoinEuro } from "react-icons/im";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const Nav = () => {
   const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState(""); // State to hold search query
+  const [searchOpen, setSearchOpen] = useState(false); // State to manage search modal
   const userId = localStorage.getItem("user_id");
   const { data } = useUserData(userId);
+  const userRole = localStorage.getItem("user_role");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,16 +49,26 @@ const Nav = () => {
   const handleSearch = () => {
     // Navigate to search results page with searchQuery as data
     if (searchQuery.trim() !== "") {
-      navigate(`/search-results/${searchQuery}`);
+      navigate(`/search?q=${searchQuery}`);
+      setSearchOpen(false); // Close the modal after search
     } else {
       // Handle case where search query is empty
       toast.error("Please enter a search term.");
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const navItems = [
     { label: "ALL Project", path: "/projects" },
-    { label: "My Dashboard", path: `/Editprofile/${userId}` },
+    {
+      label: "My Dashboard",
+      path: userRole === "Admin" ? "/admin" : `/Editprofile/${userId}`,
+    },
   ];
 
   return (
@@ -70,48 +90,36 @@ const Nav = () => {
                 </div>
                 <button onClick={logout}>Logout</button>
               </li>
-              {navItems.map((item, index) => (
-                <li key={index} className="nav-item dropdown">
-                  <Link
-                    className={`nav-link dropdown-toggle ${
-                      scrolled ? "text-white backgroundscroll-navbar" : ""
-                    }`}
-                    to={item.path}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {token &&
+                navItems.map((item, index) => (
+                  <li key={index} className="nav-item dropdown">
+                    <Link
+                      className={`nav-link dropdown-toggle ${
+                        scrolled ? "text-white backgroundscroll-navbar" : ""
+                      }`}
+                      to={item.path}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
 
           {token ? (
             <div className="d-flex justify-content-center align-items-center me-3 pe-2 text-nowrap">
-              <div className="position-relative me-3">
-                <input
-                  type="text"
-                  className="form-control shadow-none me-3 search-bar" // Apply custom class for styling
-                  style={{
-                    borderRadius: "999px",
-                    border: "solid 0.2px #13544e ",
-                    height: "57px",
-                    paddingLeft: "50px", // Adjust padding for search icon
-                  }}
-                  placeholder=" Search..." // Placeholder text for search bar
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+              <div>
                 <IoSearch
-                  className="position-absolute top-50 translate-middle-y ms-1"
+                  className="me-3"
                   style={{
-                    left: "2px",
                     fontSize: "35px",
                     borderRadius: "50%",
-                    padding : "5px",
+                    padding: "5px",
                     color: "#FFF",
                     backgroundColor: "#13544e",
+                    cursor: "pointer",
                   }}
-                  onClick={handleSearch}
+                  onClick={() => setSearchOpen(true)}
                 />
               </div>
               <div>
@@ -209,6 +217,62 @@ const Nav = () => {
           )}
         </nav>
       </div>
+
+      <Dialog
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>
+          Search
+          <IconButton
+            aria-label="close"
+            onClick={() => setSearchOpen(false)}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Box sx={{ position: "relative" }}>
+              <Input
+                type="search"
+                placeholder="Search..."
+                fullWidth
+                sx={{
+                  paddingLeft: 5,
+                  paddingRight: 2,
+                  paddingY: 1,
+                  borderRadius: 1,
+                  bgcolor: "background.paper",
+                }}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              <IconButton
+                aria-label="search"
+                onClick={handleSearch}
+                sx={{
+                  position: "absolute",
+                  right: 8,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
+              >
+                <IoSearch />
+              </IconButton>
+            </Box>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };

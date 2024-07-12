@@ -54,7 +54,7 @@ function CommingProposal() {
     return <div>No proposal data available.</div>;
   }
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
+    <Container maxWidth="lg" sx={{ py: 8, mt: 5 }}>
       <FreeSidebar active="proposal" />
       <Typography variant="h4" component="h1" gutterBottom>
         Proposal Details
