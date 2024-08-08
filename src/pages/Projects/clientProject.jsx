@@ -106,9 +106,9 @@ function ClientProject() {
                       {project?.result.description}
                     </span>
                   </p>
-                  <button className="wbtnsecondarylg">
+                  <Link to={`/ProjectProposal/${project?.result.id}`} className="wbtnsecondarylg">
                     View Proposals
-                  </button>
+                  </Link>
                   {/* Render other project details as needed */}
                 </div>
               ))}

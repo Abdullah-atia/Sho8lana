@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import FreeSidebar from "./FreeSideBar";
 import { useDropzone } from "react-dropzone";
+import axios from "axios";
+import Loader from "../../components/Loading/Loader";
 
 function UploadCv() {
   const [file, setFile] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
+  const [uploadError, setUploadError] = useState(null);
+  const [uploadSuccess, setUploadSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [responseData, setResponseData] = useState(null);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "application/pdf",
@@ -23,10 +29,48 @@ function UploadCv() {
     };
   }, [fileUrl]);
 
+  const handleUpload = async (event) => {
+    event.preventDefault();
+    if (!file) {
+      setUploadError("Please select a file to upload");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setLoading(true);
+    setUploadError(null);
+    setUploadSuccess(null);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5140/api/CV",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setResponseData(response.data);
+      setUploadSuccess("File uploaded successfully");
+      console.log(response.data);
+    } catch (error) {
+      setUploadError("File upload failed");
+      console.error("Error uploading file:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className="py110 bg">
       <FreeSidebar active="test" />
-      <div style={{ height: "78vh" }} className="container dashboardMain">
+      <div className="container dashboardMain" style={{ height: "78vh", marginLeft: "400px" }}>
         <div className="tab-content" id="nav-tabContent">
           <div
             className="tab-pane fade show active"
@@ -36,11 +80,12 @@ function UploadCv() {
             tabIndex={0}
           >
             <div className="row row-cols-1 row-cols-xl-5 row-cols-lg-3 row-cols-md-2">
-              <form>
+              <form onSubmit={handleUpload}>
                 <div
-                  className="d-flex flex-column gap-4 rounded"
+                  className="d-flex flex-column gap-4 rounded m-5"
                   style={{
                     width: "990px",
+                    maxWidth: "1024px",
                     backgroundColor: "var(--white)",
                   }}
                 >
@@ -90,11 +135,73 @@ function UploadCv() {
                     </div>
                   )}
 
-                  <button type="submit" className="w-btn-secondary-lg">
-                    Upload
+                  {uploadError && (
+                    <div className="alert alert-danger" role="alert">
+                      {uploadError}
+                    </div>
+                  )}
+                  {uploadSuccess && (
+                    <div className="alert alert-success" role="alert">
+                      {uploadSuccess}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="w-btn-secondary-lg"
+                    disabled={loading}
+                  >
+                    {loading ? "Uploading..." : "Upload"}
                   </button>
                 </div>
               </form>
+
+              {responseData && (
+                <div
+                  className="d-flex flex-column gap-4 rounded m-5"
+                  style={{
+                    width: "990px",
+                    maxWidth: "1024px",
+                    marginTop: "20px",
+                    backgroundColor: "var(--white)",
+                    padding: "20px",
+                  }}
+                >
+                  <h4 className="text-18 fw-semibold text-dark-300">
+                    CV Details
+                  </h4>
+                  <p>
+                    <strong>Name:</strong> {responseData.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {responseData.email}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {responseData.phone}
+                  </p>
+                  <p>
+                    <strong>Skills:</strong> {responseData.skills.join(", ")}
+                  </p>
+                  <p>
+                    <strong>Education:</strong>
+                  </p>
+                  <ul>
+                    {responseData.education.map((edu, index) => (
+                      <li key={index}>{edu.name}</li>
+                    ))}
+                  </ul>
+                  <p>
+                    <strong>Experience:</strong>
+                  </p>
+                  <ul>
+                    {responseData.experience.map((exp, index) => (
+                      <li key={index}>
+                        {exp.title} at {exp.organization}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           <div

@@ -105,7 +105,7 @@ function App() {
                   <Route path="/myprojects" element={<MyProject />} />
                   <Route path="/job/:projectId" element={<JobForm />} />
                   <Route
-                    path="/jobPtoposal/:jobId"
+                    path="/jobProposal/:jobId"
                     element={<JobProposalForm />}
                   />
                   <Route
@@ -132,7 +132,7 @@ function App() {
                   <Route path="/freelancer/:userId" element={<Freelancer />} />
 
                   <Route path="/client/:userId" element={<Client />} />
-                  <Route path='/search/' element={<Search />} />
+                  <Route path="/search/" element={<Search />} />
                   <Route
                     path="/EditProfile/:userId"
                     element={<EditProfile />}
@@ -144,7 +144,10 @@ function App() {
                   />
                   <Route path="/viewallusers" element={<Users />} />
                   <Route path="/allSkills" element={<Skills />} />
-                  <Route path="/updateSkill/:skillId" element={<UpdateSkill />} />
+                  <Route
+                    path="/updateSkill/:skillId"
+                    element={<UpdateSkill />}
+                  />
 
                   <Route path="/signin" element={<TestSignin />} />
                   <Route path="/clientsignup" element={<ClientSignup />} />

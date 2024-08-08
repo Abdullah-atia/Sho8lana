@@ -2,7 +2,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Typography,
   Box,
   Container,
@@ -16,7 +15,7 @@ import FreeSidebar from "./FreeSideBar";
 function CommingProposal() {
   const userId = localStorage.getItem("user_id");
   const token = localStorage.getItem("autoToken");
-  const [proposal, setProposal] = useState(null);
+  const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,8 +30,21 @@ function CommingProposal() {
           }
         );
         const data = await response.json();
-        console.log("ProjectProposal", data?.result);
-        setProposal(data?.result);
+        const proposalsWithFreelancers = await Promise.all(
+          data?.result?.map(async (proposal) => {
+            const freelancerResponse = await fetch(
+              `http://localhost:5140/api/Freelancer/${proposal.freelancerId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            const freelancerData = await freelancerResponse.json();
+            return { ...proposal, freelancer: freelancerData?.result };
+          })
+        );
+        setProposals(proposalsWithFreelancers);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching proposal data:", error);
@@ -50,9 +62,10 @@ function CommingProposal() {
     );
   }
 
-  if (!proposal) {
+  if (!proposals.length) {
     return <div>No proposal data available.</div>;
   }
+
   return (
     <Container maxWidth="lg" sx={{ py: 8, mt: 5 }}>
       <FreeSidebar active="proposal" />
@@ -60,7 +73,7 @@ function CommingProposal() {
         Proposal Details
       </Typography>
       <Grid container spacing={4}>
-        {proposal.map((proposal) => (
+        {proposals.map((proposal) => (
           <Grid item key={proposal.id} xs={12} sm={6} md={4}>
             <Card sx={{ borderRadius: "16px" }}>
               <CardHeader
@@ -86,10 +99,30 @@ function CommingProposal() {
                   <Typography color="text.secondary">Deliver By:</Typography>
                   <Typography>{proposal.deliverDate}</Typography>
                 </Box>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Typography color="text.secondary">Freelancer ID:</Typography>
-                  <Typography>{proposal.freelancerId}</Typography>
-                </Box>
+                {proposal.freelancer ? (
+                  <Link
+                    to={`/freelancer/${proposal.freelancer.id}`}
+                    style={{ color: "#888" }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <img
+                        src={proposal.freelancer.imageUrl}
+                        style={{ width: "50px", borderRadius: "50%" }}
+                        alt={proposal.freelancer.name}
+                      />
+                      <Typography color="text.secondary"></Typography>
+                      <Typography>{proposal.freelancer.name}</Typography>
+                    </Box>
+                  </Link>
+                ) : (
+                  <Typography>Loading freelancer data...</Typography>
+                )}
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography color="text.secondary">Work ID:</Typography>
                   <Typography>{proposal.workId}</Typography>
@@ -111,4 +144,5 @@ function CommingProposal() {
     </Container>
   );
 }
+
 export default CommingProposal;

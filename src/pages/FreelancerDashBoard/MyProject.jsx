@@ -41,7 +41,7 @@ function MyProject() {
   return (
     <div className="py110 bg">
       <FreeSidebar active="myprojects" />
-      <div style={{ height: "78vh" }} className=" dashboardMain container">
+      <div style={{ height: "78vh", marginLeft: "400px" }} className="dashboardMain container">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
