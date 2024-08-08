@@ -57,7 +57,7 @@ function ClientProject() {
       <div className="dashboardMain min-vh-100">
         <div className="mt-4">
           <div className="gig-info-header mt-5">
-            <h2 >Projects</h2>
+            <h2>Projects</h2>
           </div>
           <div className="container mt-3">
             <div className="row row-cols-1 row-cols-xl-5 row-cols-lg-3 row-cols-md-2">
@@ -75,7 +75,7 @@ function ClientProject() {
                         fontWeight: "bold",
                       }}
                     >
-                      Name : 
+                      Name :
                       <span
                         style={{
                           color: "#5b5b5b",
@@ -95,12 +95,20 @@ function ClientProject() {
                     }}
                   >
                     Description :
-                     <span style={{
-                          color: "#5b5b5b",
-                          fontSize: "18px",
-                          fontWeight: "normal",
-                        }}> {project?.result.description}</span>
+                    <span
+                      style={{
+                        color: "#5b5b5b",
+                        fontSize: "18px",
+                        fontWeight: "normal",
+                      }}
+                    >
+                      {" "}
+                      {project?.result.description}
+                    </span>
                   </p>
+                  <Link to={`/ProjectProposal/${project?.result.id}`} className="wbtnsecondarylg">
+                    View Proposals
+                  </Link>
                   {/* Render other project details as needed */}
                 </div>
               ))}

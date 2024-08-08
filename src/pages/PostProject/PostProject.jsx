@@ -138,7 +138,7 @@ function PostProject() {
                   <div className="col-12">
                     <div className="form-container">
                       <label htmlFor="title" className="form-label">
-                        Job Title
+                        Project Title
                         <span className="text-lime-300">*</span>
                       </label>
                       <input
@@ -161,6 +161,7 @@ function PostProject() {
                         type="text"
                         id="description"
                         className="form-control shadow-none"
+                        style={{height: "180px"}}
                         placeholder="Description name here"
                         {...register("description", {
                           required: "Description is required",

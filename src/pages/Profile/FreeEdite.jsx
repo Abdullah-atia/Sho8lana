@@ -116,7 +116,7 @@ export default function Freelancer() {
     <div>
       <FreeSidebar active="editProfile" />
       {pageLoaded && (
-        <div className="dashboardMain min-vh-100">
+        <div className="dashboardMain min-vh-100 mt-5">
           <div className="d-flex flex-column gap-4">
             <div className="d-flex align-items-center justify-content-between">
               <div>

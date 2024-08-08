@@ -4,6 +4,12 @@ import axios from "axios";
 import { request } from "../../utils/axios-utils";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Loader from "../../components/Loading/Loader";
+import users from "./../../Assest/admin/users.png"
+import skills from "./../../Assest/admin/skills.png";
+import Categories from "./../../Assest/admin/category.png";
+import task from "./../../Assest/admin/project.png";
+
+
 
 function AdminDashBoard() {
   const [projects, setProjects] = useState([]);
@@ -66,84 +72,101 @@ function AdminDashBoard() {
             <div className="col-xl-3 col-md-6 mb-4">
               <div className="p-4 d-flex align-items-center dashobard-widget justify-content-between bg-white rounded-4">
                 <div>
-                  <h3 style={{ fontSize: 40 }} className=" fw-bold textDark300">
-                    $52
+                  <h3 style={{ fontSize: 32 }} className=" fw-bold textDark300">
+                    4 project
                   </h3>
                   <p style={{ fontSize: 18 }} className=" textDark200">
-                    Total Balance
+                    Total PRoject
                   </p>
                 </div>
                 <div
                   style={{
-                    backgroundColor: "var(--green-300)",
+                    // backgroundColor: "var(--green-300)",
                     borderRadius: 8,
                     padding: 10,
                   }}
                 >
-                  <img src="./Images/icon-1.png" alt="" />
+                  <img
+                    style={{ width: "85px", height: "70px" }}
+                    src={task}
+                    alt="projects"
+                  />
                 </div>
               </div>
             </div>
             <div className="col-xl-3 col-md-6 mb-4">
               <div className="p-4 d-flex align-items-center dashobard-widget justify-content-between bg-white rounded-4">
                 <div>
-                  <h3 style={{ fontSize: 40 }} className=" fw-bold textDark300">
-                    $52
+                  <h3 style={{ fontSize: 32 }} className=" fw-bold textDark300">
+                    30 user
                   </h3>
                   <p style={{ fontSize: 18 }} className=" textDark200">
-                    Total Balance
+                    Total User
                   </p>
                 </div>
                 <div
                   style={{
-                    backgroundColor: "var(--green-300)",
+                    // backgroundColor: "var(--green-300)",
                     borderRadius: 8,
                     padding: 10,
                   }}
                 >
-                  <img src="./Images/icon-1.png" alt="" />
+                  <img
+                    src={users}
+                    style={{ width: "85px", height: "70px" }}
+                    alt="users"
+                  />
                 </div>
               </div>
             </div>
             <div className="col-xl-3 col-md-6 mb-4">
               <div className="p-4 d-flex align-items-center dashobard-widget justify-content-between bg-white rounded-4">
                 <div>
-                  <h3 style={{ fontSize: 40 }} className=" fw-bold textDark300">
-                    $52
+                  <h3 style={{ fontSize: 32 }} className=" fw-bold textDark300">
+                    25 Category
                   </h3>
                   <p style={{ fontSize: 18 }} className=" textDark200">
-                    Total Balance
+                    Total Category
                   </p>
                 </div>
                 <div
                   style={{
-                    backgroundColor: "var(--green-300)",
+                    // backgroundColor: "var(--green-300)",
                     borderRadius: 8,
                     padding: 10,
                   }}
                 >
-                  <img src="./Images/icon-1.png" alt="" />
+                  <img
+                    style={{ width: "75px", height: "74px" }}
+                    src={Categories}
+                    alt="Categories"
+                  />
                 </div>
               </div>
             </div>
             <div className="col-xl-3 col-md-6 mb-4">
               <div className="p-4 d-flex align-items-center dashobard-widget justify-content-between bg-white rounded-4">
                 <div>
-                  <h3 style={{ fontSize: 40 }} className=" fw-bold textDark300">
-                    $52
+                  <h3 style={{ fontSize: 32 }} className=" fw-bold textDark300">
+                    40 Skill
                   </h3>
                   <p style={{ fontSize: 18 }} className=" textDark200">
-                    Total Balance
+                    Total skill
                   </p>
                 </div>
                 <div
                   style={{
-                    backgroundColor: "var(--green-300)",
+                    // backgroundColor: "white",
+
                     borderRadius: 8,
                     padding: 10,
                   }}
                 >
-                  <img src="./Images/icon-1.png" alt="" />
+                  <img
+                    style={{ width: "100px", height: "75px" }}
+                    src={skills}
+                    alt="skills"
+                  />
                 </div>
               </div>
             </div>
@@ -151,7 +174,7 @@ function AdminDashBoard() {
           {/* Content */}
           <div>
             <h3 style={{ fontSize: 24 }} className="fw-bold textDark300 mb-2">
-              Latest Jobs
+              All Projects
             </h3>
             {/* Table */}
             <div className="overflow-x-auto">

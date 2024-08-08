@@ -27,8 +27,8 @@ function MyJobs() {
 
   return (
     <div className="py110 bg">
-      <FreeSidebar active="test" />
-      <div style={{ height: "78vh" }} className="container dashboardMain ">
+      <FreeSidebar active="myJobs" />
+      <div style={{ height: "78vh", marginLeft: "400px"  }} className="container dashboardMain ">
         {/* Content */}
         <div className="tab-content" id="nav-tabContent">
           <div
@@ -67,7 +67,7 @@ function MyJobs() {
                         {/* </Link> */}
                       </div>
                       <Link
-                        to={`/jobPtoposal/${item.id}`}
+                        to={`/jobProposal/${item.id}`}
                         className="wbtnsecondarylg"
                       >
                         send job Proposal

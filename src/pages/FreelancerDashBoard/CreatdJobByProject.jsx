@@ -59,7 +59,7 @@ function CreatdJobByProject() {
                             </h3>
                           </div>
                         </div>
-                        <Link to={`/ProjectDetails/${item.id}`}>
+                        <Link to={`/jobProposal/${item.id}`}>
                           <h3 className="serviceTitle fw-semibold">
                             {item.description}
                           </h3>

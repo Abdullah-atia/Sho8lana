@@ -41,6 +41,9 @@ import DeliveredJob from "./pages/FreelancerDashBoard/DeliveredJob";
 import Users from "./pages/Users/users";
 import UploadCv from "./pages/FreelancerDashBoard/UploadCv";
 import CreatdJobByProject from "./pages/FreelancerDashBoard/CreatdJobByProject";
+import Skills from "./pages/Skills/Skills";
+import UpdateSkill from "./pages/Skills/UpdateSkill";
+import Search from "./pages/Search/Search";
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const EditProfile = lazy(() => import("./pages/Profile/EditProfile"));
 
@@ -102,7 +105,7 @@ function App() {
                   <Route path="/myprojects" element={<MyProject />} />
                   <Route path="/job/:projectId" element={<JobForm />} />
                   <Route
-                    path="/jobPtoposal/:jobId"
+                    path="/jobProposal/:jobId"
                     element={<JobProposalForm />}
                   />
                   <Route
@@ -120,13 +123,16 @@ function App() {
                     width={100}
                     element={<ReplayJob />}
                   />
-                  <Route path="/CreatdJobByProject/:projectId" element = {<CreatdJobByProject />} />
+                  <Route
+                    path="/CreatdJobByProject/:projectId"
+                    element={<CreatdJobByProject />}
+                  />
                   {/* <Route path="job/:id" element={<Task />} /> */}
                   <Route path="/profile/:userId" element={<Profile />} />
                   <Route path="/freelancer/:userId" element={<Freelancer />} />
 
                   <Route path="/client/:userId" element={<Client />} />
-
+                  <Route path="/search/" element={<Search />} />
                   <Route
                     path="/EditProfile/:userId"
                     element={<EditProfile />}
@@ -137,6 +143,12 @@ function App() {
                     element={<UpdateCategory />}
                   />
                   <Route path="/viewallusers" element={<Users />} />
+                  <Route path="/allSkills" element={<Skills />} />
+                  <Route
+                    path="/updateSkill/:skillId"
+                    element={<UpdateSkill />}
+                  />
+
                   <Route path="/signin" element={<TestSignin />} />
                   <Route path="/clientsignup" element={<ClientSignup />} />
                   <Route path="/freesignup" element={<FreelancerSignup />} />

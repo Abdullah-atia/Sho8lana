@@ -2,7 +2,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Typography,
   Box,
   Container,
@@ -16,7 +15,7 @@ function ProjectProposal() {
   const { projectId } = useParams();
   const token = localStorage.getItem("autoToken");
 
-  const [proposal, setProposal] = useState(null);
+  const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,8 +30,21 @@ function ProjectProposal() {
           }
         );
         const data = await response.json();
-        console.log("ProjectProposal", data?.result);
-        setProposal(data?.result);
+        const proposalsWithFreelancers = await Promise.all(
+          data?.result?.map(async (proposal) => {
+            const freelancerResponse = await fetch(
+              `http://localhost:5140/api/Freelancer/${proposal.freelancerId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            const freelancerData = await freelancerResponse.json();
+            return { ...proposal, freelancer: freelancerData?.result };
+          })
+        );
+        setProposals(proposalsWithFreelancers);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching proposal data:", error);
@@ -43,25 +55,28 @@ function ProjectProposal() {
   }, [projectId, token]);
 
   if (loading) {
-    return <div>
+    return (
+      <div>
         <Loader />
-    </div>;
+      </div>
+    );
   }
 
-  if (!proposal) {
+  if (!proposals.length) {
     return <div>No proposal data available.</div>;
   }
+
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
+    <Container maxWidth="lg" sx={{ py: 8, mt: 5 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Proposal Details
       </Typography>
       <Grid container spacing={4}>
-        {proposal.map((proposal) => (
+        {proposals.map((proposal, index) => (
           <Grid item key={proposal.id} xs={12} sm={6} md={4}>
             <Card sx={{ borderRadius: "16px" }}>
               <CardHeader
-                title={`Proposal ${proposal.id}`}
+                title={`Proposal ${index + 1}`}
                 titleTypographyProps={{ align: "center" }}
                 sx={{ backgroundColor: "rgba(34,190,13,0.2)" }}
               />
@@ -82,10 +97,30 @@ function ProjectProposal() {
                   <Typography color="text.secondary">Deliver By:</Typography>
                   <Typography>{proposal.deliverDate}</Typography>
                 </Box>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Typography color="text.secondary">Freelancer ID:</Typography>
-                  <Typography>{proposal.freelancerId}</Typography>
-                </Box>
+                {proposal.freelancer ? (
+                  <Link
+                    to={`/freelancer/${proposal.freelancer.id}`}
+                    style={{ color: "#888" }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <img
+                        src={proposal.freelancer.imageUrl}
+                        style={{ width: "50px", borderRadius: "50%" }}
+                        alt={proposal.freelancer.name}
+                      />
+                      <Typography color="text.secondary"></Typography>
+                      <Typography>{proposal.freelancer.name}</Typography>
+                    </Box>
+                  </Link>
+                ) : (
+                  <Typography>Loading freelancer data...</Typography>
+                )}
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography color="text.secondary">Work ID:</Typography>
                   <Typography>{proposal.workId}</Typography>
@@ -107,4 +142,5 @@ function ProjectProposal() {
     </Container>
   );
 }
+
 export default ProjectProposal;

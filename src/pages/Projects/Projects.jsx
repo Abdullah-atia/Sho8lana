@@ -13,6 +13,7 @@ function Projects() {
   const [error, setError] = useState(null);
   const [clients, setClients] = useState("");
   const navtigate = useNavigate();
+  const userType = localStorage.getItem("user_role");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -45,6 +46,9 @@ function Projects() {
     };
     fetchPosts();
   }, [currentPage, projectPerPage]);
+  const truncateTitle = (title) => {
+    return title.length >= 20 ? title.substring(0, 20) + "..." : title;
+  };
 
   if (loading) {
     return <Loader />;
@@ -90,7 +94,7 @@ function Projects() {
                         </div>
                         <Link to={`/ProjectDetails/${item.id}`}>
                           <h3 className="serviceTitle fw-semibold">
-                            {item.title}
+                            {truncateTitle(item.title)}
                           </h3>
                         </Link>
 
@@ -129,14 +133,16 @@ function Projects() {
           </div>
         </div>
       </div>
-      <Link
-        style={{ position: "absolute", bottom: 16, right: 16 }}
-        className="wbtnsecondarylg"
-        // onClick={() => navtigate("/postProject")}
-        to="/postProject"
-      >
-        <RiAddLargeFill />
-      </Link>
+      {userType === "Client" && (
+        <Link
+          style={{ position: "absolute", bottom: 16, right: 16 }}
+          className="wbtnsecondarylg"
+          // onClick={() => navtigate("/postProject")}
+          to="/postProject"
+        >
+          <RiAddLargeFill />
+        </Link>
+      )}
     </div>
   );
 }
